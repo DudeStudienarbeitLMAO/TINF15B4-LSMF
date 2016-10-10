@@ -1,2 +1,2 @@
 # TINF15B4-LSMF
-Project for softwareengineering lecture
+This git contains the project for our lecture in softwareengineering . 
