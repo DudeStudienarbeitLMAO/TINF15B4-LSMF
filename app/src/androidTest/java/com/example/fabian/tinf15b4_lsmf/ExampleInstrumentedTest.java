@@ -22,5 +22,6 @@ public class ExampleInstrumentedTest {
         Context appContext = InstrumentationRegistry.getTargetContext();
 
         assertEquals("com.example.fabian.tinf15b4_lsmf", appContext.getPackageName());
+
     }
 }
