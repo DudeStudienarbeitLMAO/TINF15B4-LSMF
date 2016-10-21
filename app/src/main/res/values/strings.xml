@@ -1,5 +1,7 @@
 <resources>
-    <string name="app_name">TINF15B4-LSMF</string>
-    <string name="hello">Hello World</string>
-    <string name="button">Button</string>
+    <string name="app_name">SilverScreen</string>
+    <string name="recommended">Recommended</string>
+    <string name="viewed">Viewed</string>
+
+
 </resources>

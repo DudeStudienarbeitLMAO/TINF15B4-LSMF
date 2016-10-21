@@ -4,30 +4,26 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.example.fabian.tinf15b4_lsmf.MainActivity">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello"
-        android:id="@+id/text"
+    <android.support.design.widget.TabLayout
+        android:background="@color/colorPrimary"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:id="@+id/tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
 
-    <Button
-        android:text="@string/button"
-        android:layout_width="wrap_content"
+
+        >
+
+    </android.support.design.widget.TabLayout>
+    <android.support.v4.view.ViewPager
+        android:layout_below="@id/tab_layout"
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/button"
-        android:layout_marginLeft="41dp"
-        android:layout_marginStart="41dp"
-        android:layout_alignBaseline="@+id/text"
-        android:layout_alignBottom="@+id/text"
-        android:layout_toRightOf="@+id/text"
-        android:layout_toEndOf="@+id/text" />
+
+        />
+
+
 </RelativeLayout>
