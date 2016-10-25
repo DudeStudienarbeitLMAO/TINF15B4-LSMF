@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:title=""
+        android:id="@+id/menu_overflow"
+        android:icon="@mipmap/ic_more_vert_white_48dp"
+        android:orderInCategory="11111"
+        app:showAsAction="always">
+        <menu>
+            <item
+                android:id="@+id/show_about"
+                app:showAsAction="never"
+                android:title="@string/about"/>
+
+        </menu>
+    </item>
+</menu>

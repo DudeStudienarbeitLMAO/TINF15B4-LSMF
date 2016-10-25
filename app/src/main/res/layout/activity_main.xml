@@ -11,8 +11,13 @@
         android:layout_alignParentTop="true"
         android:id="@+id/tab_layout"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-
+        android:layout_height="wrap_content"
+        app:tabMaxWidth="0dp"
+        app:tabGravity="fill"
+        app:tabMode="fixed"
+        app:tabIndicatorColor="@android:color/white"
+        app:tabTextColor="#ffffff"
+        app:tabSelectedTextColor="#ffffff"
 
         >
 
@@ -22,6 +27,7 @@
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:tabGravity="fill"
 
         />
 
