@@ -2,6 +2,7 @@
     <string name="app_name">SilverScreen</string>
     <string name="recommended">Recommended</string>
     <string name="viewed">Viewed</string>
-
+    <string name="about">About</string>
+    <string name="about_text">Copyright SilverScreen Team: \n Luca Bohr, Simon Gerhardt, Marcel Borrmann, Fabian Blatz \n\n Movie Data provided by the TMDb API</string>
 
 </resources>
