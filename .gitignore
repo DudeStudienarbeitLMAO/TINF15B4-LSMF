@@ -7,3 +7,16 @@
 /build
 /captures
 .externalNativeBuild
+
+# binaries
+*.ipa
+*.app
+*.apk
+
+# Calabash / Cucumber
+rerun/
+reports/
+screenshots/
+screenshot*.png
+test-servers/
+
