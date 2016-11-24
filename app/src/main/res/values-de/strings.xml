@@ -1,8 +1,19 @@
 <resources>
+    <!--- Ressources Main Screen -->
     <string name="app_name">SilverScreen</string>
     <string name="recommended">Empfohlen</string>
     <string name="viewed">Gesehen</string>
+
+    <!--- Ressources About Screen -->
     <string name="about">Info</string>
     <string name="about_text">Copyright SilverScreen Team: \n Luca Bohr, Simon Gerhardt, Marcel Borrmann, Fabian Blatz \n\n Filminformationen bereitgestellt durch TMDb API</string>
+
+
+    <!--- Ressources Login Screen -->
+    <string name="email">Email</string>
+    <string name="password">Passwort</string>
+    <string name="login">Anmelden</string>
+    <string name="noaccount">Noch keinen Account? Erstellen Sie einen ></string>
+
 
 </resources>
