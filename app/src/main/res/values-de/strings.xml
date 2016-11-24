@@ -20,4 +20,9 @@
     <string name="passwordconfirm">Passwort bestätigen</string>
     <string name="createaccount">Account erstellen</string>
     <string name="alreadymember"><u>Schon Mitglied? Jetzt einloggen </u></string>
+    <string name="notenoughchars">Mindestens 6 Zeichen</string>
+    <string name="invalidemail">Ungültige Email-Adresse</string>
+    <string name="invalidconfirm">Passwörter stimmen nicht überein</string>
+    <string name="registerfailed">Registrierung fehlgeschlagen</string>
+    <string name="registersuccess">Registrierung erfolgreich</string>
 </resources>
