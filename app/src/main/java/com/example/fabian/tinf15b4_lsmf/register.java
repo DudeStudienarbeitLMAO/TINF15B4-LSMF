@@ -1,21 +1,21 @@
 package com.example.fabian.tinf15b4_lsmf;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.content.Intent;
-import android.app.Activity;
-public class login extends AppCompatActivity {
+
+public class register extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_register);
     }
 
-    public void navToRegister(View view)
+    public void navToLogin(View view)
     {
-        Intent i = new Intent(getApplicationContext(), register.class);
+        Intent i = new Intent(getApplicationContext(), login.class);
         startActivity(i);
 
     }

@@ -13,8 +13,11 @@
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="login">Login</string>
-    <string name="noaccount">No account yet? Create one ></string>
+    <string name="noaccount"><u>No account yet? Create one </u></string>
 
-
-
+    <!--- Ressources Register Screen -->
+    <string name="username">Username</string>
+    <string name="passwordconfirm">Confirm Password</string>
+    <string name="createaccount">Create Account</string>
+    <string name="alreadymember"><u>Already a member? Login</u></string>
 </resources>

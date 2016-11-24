@@ -13,7 +13,11 @@
     <string name="email">Email</string>
     <string name="password">Passwort</string>
     <string name="login">Anmelden</string>
-    <string name="noaccount">Noch keinen Account? Erstellen Sie einen ></string>
+    <string name="noaccount"><u>Noch keinen Account? Erstellen Sie einen </u></string>
 
-
+    <!--- Ressources Register Screen -->
+    <string name="username">Benutzername</string>
+    <string name="passwordconfirm">Passwort bestätigen</string>
+    <string name="createaccount">Account erstellen</string>
+    <string name="alreadymember"><u>Schon Mitglied? Jetzt einloggen </u></string>
 </resources>
