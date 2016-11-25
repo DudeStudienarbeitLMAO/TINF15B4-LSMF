@@ -4,13 +4,16 @@ import java.util.ArrayList;
 
 public class Ssapi {
 
-    public static boolean testConnection(){
-        // TODO
+    public static boolean testConnection(User user){
+
         return false;
     }
 
-    public static boolean addMovie(Movie movie){
-        // TODO
+    public static boolean addMovie(User user, Movie movie){
+        user.addMovie(movie);
+
+        // webrequest an db
+
         return false;
     }
 
@@ -19,13 +22,13 @@ public class Ssapi {
         return false;
     }
 
-    public static ArrayList<Movie> fetchMovielist(){
+    public static ArrayList<Movie> fetchMovielist(User user){
         // TODO
         return null;
     }
 
-    public static boolean resetPassword(){
-        //TODO
+    public static boolean resetPassword(String email){
+
         return false;
     }
 }

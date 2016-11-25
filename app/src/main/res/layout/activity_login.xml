@@ -36,7 +36,7 @@ android:paddingTop="@dimen/activity_vertical_margin"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp">
-        <EditText android:id="@+id/input_email"
+        <EditText android:id="@+id/input_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
@@ -56,6 +56,15 @@ android:paddingTop="@dimen/activity_vertical_margin"
             android:hint="@string/password"/>
     </android.support.design.widget.TextInputLayout>
 
+    <CheckBox
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/cb_remember"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/savepassword"
+        />
+
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/btn_login"
         android:layout_width="fill_parent"
@@ -74,6 +83,18 @@ android:paddingTop="@dimen/activity_vertical_margin"
         android:textSize="16dip"
         android:onClick="navToRegister"
         android:textColor="@color/colorPrimaryDark"/>
+
+
+    <TextView android:id="@+id/link_resetpw"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:text="@string/resetpw"
+        android:gravity="center"
+        android:textSize="16dip"
+        android:onClick="navToRegister"
+        android:textColor="@color/colorPrimaryDark"
+        android:visibility="invisible"/>
 
 </LinearLayout>
 </ScrollView>

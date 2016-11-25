@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
 import android.app.ProgressDialog;
-
+import  	android.content.Context;
 public class register extends AppCompatActivity {
 
     EditText txt_username;
@@ -15,6 +15,8 @@ public class register extends AppCompatActivity {
     EditText txt_password;
     EditText txt_passwordconfirm;
     AppCompatButton btn_register;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,7 @@ public class register extends AppCompatActivity {
                 btnregisterclick();
             }
         });
+
     }
 
     public void navToLogin(View view) {
@@ -49,6 +52,7 @@ public class register extends AppCompatActivity {
 
         btn_register.setEnabled(false);
 
+        final ProgressDialog ringProgressDialog = ProgressDialog.show(register.this, this.getResources().getString(R.string.pleasewait), this.getResources().getString(R.string.sendregister), true);
 
         String name = txt_username.getText().toString();
         String email = txt_email.getText().toString();
@@ -58,6 +62,7 @@ public class register extends AppCompatActivity {
         Toast.makeText(this, getResources().getString(R.string.registersuccess), Toast.LENGTH_LONG).show();
 
         btn_register.setEnabled(true);
+        ringProgressDialog.dismiss();
 
     }
 
@@ -77,7 +82,6 @@ public class register extends AppCompatActivity {
             txt_email.setError(getResources().getString(R.string.invalidemail));
             return false;
         }
-
         if (password.isEmpty() || password.length() < 6) {
             txt_password.setError(getResources().getString(R.string.notenoughchars));
             return false;

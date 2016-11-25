@@ -14,6 +14,9 @@
     <string name="password">Password</string>
     <string name="login">Login</string>
     <string name="noaccount"><u>No account yet? Create one </u></string>
+    <string name="resetpw">Reset Password</string>
+     <string name="loginfail">Login failed</string>
+    <string name="savepassword">Save Password</string>
 
     <!--- Ressources Register Screen -->
     <string name="username">Username</string>
@@ -25,4 +28,6 @@
     <string name="invalidconfirm">Passwords do not match</string>
     <string name="registerfailed">Registration failed</string>
     <string name="registersuccess">Registration successful</string>
+    <string name="pleasewait">Please wait</string>
+    <string name="sendregister">Submitting Registration ...</string>
 </resources>
