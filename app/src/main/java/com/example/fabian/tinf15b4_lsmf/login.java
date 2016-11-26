@@ -7,8 +7,8 @@ import android.view.View;
 import android.content.Intent;
 import android.app.Activity;
 import android.widget.*;
-
-import java.security.MessageDigest;
+import android.util.Base64;
+import java.security.*;
 
 public class login extends AppCompatActivity {
 
@@ -51,6 +51,7 @@ public class login extends AppCompatActivity {
     {
         Intent i = new Intent(getApplicationContext(), register.class);
         startActivity(i);
+        finish();
 
     }
 
@@ -61,7 +62,8 @@ public class login extends AppCompatActivity {
         String password = txt_password.getText().toString();
 
         // implement hashing
-        String hash = password;
+        String hash = encryptPasswordSHA512(password);
+
 
         User user = new User(username, hash, "");
 
@@ -71,6 +73,9 @@ public class login extends AppCompatActivity {
 
         }else{
 
+            Intent i = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(i);
+            finish();
             // redirect to main activity
         }
 
@@ -86,4 +91,24 @@ public class login extends AppCompatActivity {
     }
 
 
+    public static String encryptPasswordSHA512(String password) {
+        MessageDigest md=null;
+
+        try {
+             md = MessageDigest.getInstance("SHA-512");
+        }catch (Exception ex){
+
+        }
+        md.update(password.getBytes());
+
+        byte byteData[] = md.digest();
+
+//Convert "byteData" to hex String:
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < byteData.length; i++) {
+            sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
+        }
+
+        return sb.toString();
+    }
 }

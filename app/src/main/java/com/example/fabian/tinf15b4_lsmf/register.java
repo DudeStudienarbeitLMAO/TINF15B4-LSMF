@@ -41,6 +41,7 @@ public class register extends AppCompatActivity {
     public void navToLogin(View view) {
         Intent i = new Intent(getApplicationContext(), login.class);
         startActivity(i);
+        finish();
     }
 
     public void btnregisterclick() {

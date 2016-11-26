@@ -6,7 +6,7 @@ public class Ssapi {
 
     public static boolean testConnection(User user){
 
-        return false;
+        return true;
     }
 
     public static boolean addMovie(User user, Movie movie){
