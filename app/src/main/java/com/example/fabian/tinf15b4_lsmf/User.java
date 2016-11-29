@@ -40,4 +40,12 @@ public class User {
     public  void setEMail(String EMail) {
         this.EMail = EMail;
     }
+
+    public String getPasswordHash() {
+        return PasswordHash;
+    }
+
+    public void setPasswordHash(String passwordHash) {
+        PasswordHash = passwordHash;
+    }
 }
