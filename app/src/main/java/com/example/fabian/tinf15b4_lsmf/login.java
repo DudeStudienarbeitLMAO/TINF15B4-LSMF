@@ -18,6 +18,8 @@ public class login extends AppCompatActivity {
 
     int failedLoginAttempts = 0;
 
+    Ssapi Ssapi = new Ssapi();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
