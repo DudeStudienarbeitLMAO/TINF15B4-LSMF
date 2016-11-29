@@ -1,8 +1,33 @@
 <resources>
+    <!--- Ressources Main Screen -->
     <string name="app_name">SilverScreen</string>
     <string name="recommended">Recommended</string>
     <string name="viewed">Viewed</string>
+
+
     <string name="about">About</string>
     <string name="about_text">Copyright SilverScreen Team: \n Luca Bohr, Simon Gerhardt, Marcel Borrmann, Fabian Blatz \n\n Movie Data provided by the TMDb API</string>
 
+
+    <!--- Ressources Login Screen -->
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="noaccount"><u>No account yet? Create one </u></string>
+    <string name="resetpw">Reset Password</string>
+     <string name="loginfail">Login failed</string>
+    <string name="savepassword">Save Password</string>
+
+    <!--- Ressources Register Screen -->
+    <string name="username">Username</string>
+    <string name="passwordconfirm">Confirm Password</string>
+    <string name="createaccount">Create Account</string>
+    <string name="alreadymember"><u>Already a member? Login</u></string>
+    <string name="notenoughchars">At least 6 characters</string>
+    <string name="invalidemail">Invalid email address</string>
+    <string name="invalidconfirm">Passwords do not match</string>
+    <string name="registerfailed">Registration failed</string>
+    <string name="registersuccess">Registration successful</string>
+    <string name="pleasewait">Please wait</string>
+    <string name="sendregister">Submitting Registration ...</string>
 </resources>

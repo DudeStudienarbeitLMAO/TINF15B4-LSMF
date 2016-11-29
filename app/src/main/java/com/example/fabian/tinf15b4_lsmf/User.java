@@ -4,31 +4,40 @@ import java.util.ArrayList;
 
 public class User {
 
-    private static ArrayList<Movie> MovieList;
-    private static int UserID;
-    private static String EMail;
+    private  ArrayList<Movie> MovieList;
+    private  String UserName;
+    private  String PasswordHash;
+    private  String EMail;
 
-    public static ArrayList<Movie> getMovieList() {
+    public User(String userName, String passwordHash, String email){
+        this.UserName = userName;
+        this.PasswordHash = passwordHash;
+        this.EMail = email;
+    }
+
+    public  ArrayList<Movie> getMovieList() {
         return MovieList;
     }
 
-    public static void setMovieList(ArrayList<Movie> movieList) {
+    public  void setMovieList(ArrayList<Movie> movieList) {
         MovieList = movieList;
     }
 
-    public static int getUserID() {
-        return UserID;
+    public void addMovie(Movie movie){ MovieList.add(movie);}
+
+    public  String getUserName() {
+        return UserName;
     }
 
-    public static void setUserID(int userID) {
-        UserID = userID;
+    public  void setUserName(String userName) {
+        this.UserName = userName;
     }
 
-    public static String getEMail() {
+    public  String getEMail() {
         return EMail;
     }
 
-    public static void setEMail(String EMail) {
-        User.EMail = EMail;
+    public  void setEMail(String EMail) {
+        this.EMail = EMail;
     }
 }
