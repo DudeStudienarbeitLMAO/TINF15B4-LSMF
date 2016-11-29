@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.*;
 import java.net.*;
 import java.io.*;
+
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class Ssapi {
@@ -17,16 +19,16 @@ public class Ssapi {
         StrictMode.setThreadPolicy(policy);
     }
 
-    private  String baseaddress = "https://cduc.su/SSAPI.php?";
+    private  String baseaddress = "https://cduc.su/";
     private  HashMap<Integer, String> statusCodes  = new HashMap<Integer, String>();
     public String statusMessage = "";
     public Ssapi(){
-        JSONObject jsonObject = null;
+        JSONArray jsonArray = null;
         switch (Locale.getDefault().getDisplayLanguage()){
             case "de":
 
                 try {
-                    jsonObject = new JSONObject(sendWebRequest(baseaddress + "statuscode.php/language=de"));
+                    jsonArray = new JSONArray(sendWebRequest(baseaddress + "statuscode.php?language=de"));
 
                 }catch(Exception ex){}
                 break;
@@ -34,21 +36,29 @@ public class Ssapi {
                 break;
             default:
                 try {
-                    jsonObject = new JSONObject(sendWebRequest(baseaddress + "statuscode.php/language=de"));
+                    jsonArray = new JSONArray(sendWebRequest(baseaddress + "statuscode.php?language=de"));
 
-                }catch(Exception ex){}
+                }catch(Exception ex){
+                    ex.printStackTrace();
+                }
                 break;
         }
+
         try {
-            Iterator<?> keys = jsonObject.keys();
 
-            while (keys.hasNext()) {
-                int key = Integer.parseInt((String) keys.next());
-                String value = (String) jsonObject.get(String.valueOf(key));
-
-                statusCodes.put(key, value);
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject currentObject = jsonArray.getJSONObject(i);
+                Iterator<?> keys = currentObject.keys();
+                while (keys.hasNext()) {
+                    int key = Integer.parseInt((String) keys.next());
+                    String value = (String) currentObject.get(String.valueOf(key));
+                    statusCodes.put(key, value);
+                }
             }
-        }catch(Exception ex){}
+
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
     }
 
     public boolean testConnection(User user){
