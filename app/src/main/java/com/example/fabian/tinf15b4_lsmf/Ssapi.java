@@ -62,8 +62,24 @@ public class Ssapi {
     }
 
     public boolean testConnection(User user){
-
-        return true;
+        String methodaddress = String.format("SSAPI.php?method=isAuthorized&user=%s&password=%s", user.getUserName(), user.getPasswordHash());
+        String response = "";
+        boolean testSuccess = false;
+        response = sendWebRequest(baseaddress + methodaddress);
+        int statuscode = Integer.parseInt(response.substring(1,4));
+        switch (statuscode){
+            case 200 :
+                testSuccess = true;
+                break;
+            case 400 :
+            case 410 :
+            case 401 :
+            case 402 :
+            default:
+                testSuccess = false;
+                break;
+        }
+        return testSuccess;
     }
 
     public boolean addMovie(User user, Movie movie){
@@ -75,8 +91,17 @@ public class Ssapi {
     }
 
     public boolean registerUser(User user){
-        // TODO
-        return false;
+        JSONArray jsa = null;
+        int code=0;
+        try {
+            jsa = new JSONArray(sendWebRequest("https://cduc.su/SSAPI.php?method=register&user=" + user.getUserName() + "&password=" + user.getPasswordHash() + "&params=[%22" + user.getEMail() + "%22]"));
+            code =  Integer.parseInt(jsa.get(0).toString());
+            statusMessage = statusCodes.get(code);
+
+
+
+        }catch(Exception ex){}
+        return (code==201);
     }
 
     public ArrayList<Movie> fetchMovielist(User user){

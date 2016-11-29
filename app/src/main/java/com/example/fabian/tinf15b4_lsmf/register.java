@@ -45,7 +45,7 @@ public class register extends AppCompatActivity {
     }
 
     public void btnregisterclick() {
-
+        Ssapi ssAPI = new Ssapi();
         if (!isValidData()) {
             Toast.makeText(getBaseContext(), getResources().getString(R.string.registerfailed), Toast.LENGTH_LONG).show();
             return;
@@ -59,13 +59,16 @@ public class register extends AppCompatActivity {
         String email = txt_email.getText().toString();
         String password = txt_password.getText().toString();
 
+        User newUser = new User(name, login.encryptPasswordSHA512(password), email);
+        ssAPI.registerUser(newUser);
 
-        Toast.makeText(this, getResources().getString(R.string.registersuccess), Toast.LENGTH_LONG).show();
+        Toast.makeText(this, ssAPI.statusMessage, Toast.LENGTH_LONG).show();
 
         btn_register.setEnabled(true);
         ringProgressDialog.dismiss();
 
     }
+
 
 
     public boolean isValidData() {
