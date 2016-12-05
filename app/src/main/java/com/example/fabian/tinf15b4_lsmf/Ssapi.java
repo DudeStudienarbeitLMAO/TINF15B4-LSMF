@@ -9,6 +9,7 @@ import java.net.*;
 import java.io.*;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Ssapi {
@@ -24,15 +25,21 @@ public class Ssapi {
     public String statusMessage = "";
     public Ssapi(){
         JSONArray jsonArray = null;
+        System.out.println(Locale.getDefault().getDisplayLanguage());
         switch (Locale.getDefault().getDisplayLanguage()){
-            case "de":
+            case "Deutsch":
 
                 try {
                     jsonArray = new JSONArray(sendWebRequest(baseaddress + "statuscode.php?language=de"));
 
                 }catch(Exception ex){}
                 break;
-            case "en":
+            case "English":
+                try {
+                    jsonArray = new JSONArray(sendWebRequest(baseaddress + "statuscode.php?language=en"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 break;
             default:
                 try {
@@ -66,6 +73,7 @@ public class Ssapi {
         String response = "";
         boolean testSuccess = false;
         response = sendWebRequest(baseaddress + methodaddress);
+        if(response.isEmpty()){return false;}
         int statuscode = Integer.parseInt(response.substring(1,4));
         switch (statuscode){
             case 200 :
@@ -79,6 +87,7 @@ public class Ssapi {
                 testSuccess = false;
                 break;
         }
+        statusMessage = statusCodes.get(statuscode);
         return testSuccess;
     }
 
@@ -95,6 +104,7 @@ public class Ssapi {
         int code=0;
         try {
             jsa = new JSONArray(sendWebRequest("https://cduc.su/SSAPI.php?method=register&user=" + user.getUserName() + "&password=" + user.getPasswordHash() + "&params=[%22" + user.getEMail() + "%22]"));
+            if(jsa==null){return false;}
             code =  Integer.parseInt(jsa.get(0).toString());
             statusMessage = statusCodes.get(code);
 
