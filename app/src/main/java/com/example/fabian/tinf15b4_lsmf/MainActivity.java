@@ -69,7 +69,10 @@ public class MainActivity extends AppCompatActivity {
                 Intent i = new Intent(getApplicationContext(), activity_about.class);
                 startActivity(i);
                 return true;
-
+            case R.id.show_settings:
+                Intent r = new Intent(getApplicationContext(), SettingsActivity.class);
+                startActivity(r);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

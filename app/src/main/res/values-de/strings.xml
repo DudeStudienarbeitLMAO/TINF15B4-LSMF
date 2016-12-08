@@ -30,4 +30,7 @@
     <string name="registersuccess">Registrierung erfolgreich</string>
     <string name="pleasewait">Bitte warten</string>
     <string name="sendregister">Registrierung abschicken ...</string>
+
+    <string name="setttings">Einstellungen</string>
+
 </resources>

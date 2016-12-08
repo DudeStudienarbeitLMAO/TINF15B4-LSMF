@@ -12,7 +12,10 @@
                 android:id="@+id/show_about"
                 app:showAsAction="never"
                 android:title="@string/about"/>
-
+            <item
+                android:id="@+id/show_settings"
+                app:showAsAction="never"
+                android:title="@string/setttings"/>
         </menu>
     </item>
 </menu>
