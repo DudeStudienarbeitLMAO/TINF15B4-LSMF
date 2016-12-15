@@ -14,7 +14,7 @@ public class login extends AppCompatActivity {
 
     EditText txt_name, txt_password;
     AppCompatButton btn_login;
-    TextView lbl_reset;
+    TextView lbl_reset, lbl_help;
 
     int failedLoginAttempts = 0;
 
@@ -26,7 +26,7 @@ public class login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         txt_name = (EditText) findViewById(R.id.input_username);
-
+        lbl_help = (TextView) findViewById(R.id.link_help);
         txt_password = (EditText) findViewById(R.id.input_password);
 
         btn_login  = (AppCompatButton) findViewById(R.id.btn_login);
@@ -44,6 +44,15 @@ public class login extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 resetPassword();
+            }
+        });
+
+
+        lbl_help.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent k = new Intent(getApplicationContext(), help.class);
+                startActivity(k);
             }
         });
 
