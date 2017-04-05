@@ -6,6 +6,22 @@ public class Movie {
     private int movieID;
     private ArrayList<Integer> genreIDs;
     private ArrayList<Integer> actorIDs;
+    private String title;
+    private String posterURL;
+    private String genre;
+    private String description;
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
+    private double rating;
+
+    public Movie(){}
 
     public Movie(int movieID, ArrayList<Integer> genreIDs, ArrayList<Integer> actorIDs) {
         this.movieID = movieID;
@@ -35,5 +51,37 @@ public class Movie {
 
     public void setActorIDs(ArrayList<Integer> actorIDs) {
         this.actorIDs = actorIDs;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getPosterURL() {
+        return posterURL;
+    }
+
+    public void setPosterURL(String posterURL) {
+        this.posterURL = posterURL;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public double getRating() {
+        return rating;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
     }
 }

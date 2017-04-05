@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/movieImage"
+        android:layout_width="100dp"
+        android:layout_height="75dp"
+        android:layout_alignParentLeft="true"
+        android:src="@mipmap/ic_launcher"
+        />
+
+
+
+    <TextView
+        android:id="@+id/movieTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hitler did nothing wrong"
+        android:layout_marginTop="20dp"
+
+        android:layout_toRightOf="@+id/movieImage"
+
+         />
+
+    <TextView
+        android:id="@+id/movieGenre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dank"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@id/movieImage"
+       android:layout_below="@+id/movieTitle"/>
+
+    <TextView
+        android:id="@+id/movieRating"
+        android:layout_width="wrap_content"
+        android:layout_height="75dp"
+        android:layout_toRightOf="@+id/movieTitle"
+        android:layout_alignParentRight="true"
+        android:text="10/0"
+        android:gravity="center"
+        />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#000"
+            android:layout_below="@+id/movieImage"
+            ></View>
+
+
+
+</RelativeLayout>
