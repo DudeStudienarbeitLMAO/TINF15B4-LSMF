@@ -3,6 +3,9 @@ package com.example.fabian.tinf15b4_lsmf.activities;
 
 
 import com.example.fabian.tinf15b4_lsmf.*;
+import com.example.fabian.tinf15b4_lsmf.adapters.PagerAdapter;
+import com.example.fabian.tinf15b4_lsmf.modells.User;
+
 import android.os.Bundle;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -17,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     ViewPager pager;
     TabLayout tabLayout;
 
-
+    User loggedInUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayUseLogoEnabled(true);
 
 
+        loggedInUser = (User) getIntent().getSerializableExtra("currentUser");
 
     }
 

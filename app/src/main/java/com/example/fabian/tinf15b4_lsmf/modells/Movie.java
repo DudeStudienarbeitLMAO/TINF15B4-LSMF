@@ -1,4 +1,4 @@
-package com.example.fabian.tinf15b4_lsmf;
+package com.example.fabian.tinf15b4_lsmf.modells;
 
 import java.util.ArrayList;
 

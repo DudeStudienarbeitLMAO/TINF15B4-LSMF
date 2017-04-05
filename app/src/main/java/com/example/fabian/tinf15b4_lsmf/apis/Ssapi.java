@@ -1,6 +1,10 @@
-package com.example.fabian.tinf15b4_lsmf;
+package com.example.fabian.tinf15b4_lsmf.apis;
 
 import android.os.StrictMode;
+
+import com.example.fabian.tinf15b4_lsmf.modells.Movie;
+import com.example.fabian.tinf15b4_lsmf.modells.SSLTool;
+import com.example.fabian.tinf15b4_lsmf.modells.User;
 
 import java.util.ArrayList;
 import java.util.HashMap;

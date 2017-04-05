@@ -8,8 +8,8 @@ import android.content.Intent;
 import android.widget.*;
 
 import com.example.fabian.tinf15b4_lsmf.R;
-import com.example.fabian.tinf15b4_lsmf.Ssapi;
-import com.example.fabian.tinf15b4_lsmf.User;
+import com.example.fabian.tinf15b4_lsmf.apis.Ssapi;
+import com.example.fabian.tinf15b4_lsmf.modells.User;
 
 import java.security.*;
 
@@ -21,7 +21,7 @@ public class login extends AppCompatActivity {
 
     int failedLoginAttempts = 0;
 
-    com.example.fabian.tinf15b4_lsmf.Ssapi Ssapi = new Ssapi();
+    com.example.fabian.tinf15b4_lsmf.apis.Ssapi Ssapi = new Ssapi();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +88,7 @@ public class login extends AppCompatActivity {
         }else{
 
             Intent i = new Intent(getApplicationContext(), MainActivity.class);
+            i.putExtra("currentUser", user);
             startActivity(i);
             finish();
             // redirect to main activity

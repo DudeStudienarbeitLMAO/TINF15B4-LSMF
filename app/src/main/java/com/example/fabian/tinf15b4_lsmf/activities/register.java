@@ -9,8 +9,8 @@ import android.widget.*;
 import android.app.ProgressDialog;
 
 import com.example.fabian.tinf15b4_lsmf.R;
-import com.example.fabian.tinf15b4_lsmf.Ssapi;
-import com.example.fabian.tinf15b4_lsmf.User;
+import com.example.fabian.tinf15b4_lsmf.apis.Ssapi;
+import com.example.fabian.tinf15b4_lsmf.modells.User;
 
 public class register extends AppCompatActivity {
 

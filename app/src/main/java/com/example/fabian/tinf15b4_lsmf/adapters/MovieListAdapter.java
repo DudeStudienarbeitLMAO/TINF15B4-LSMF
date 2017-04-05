@@ -1,20 +1,19 @@
-package com.example.fabian.tinf15b4_lsmf;
+package com.example.fabian.tinf15b4_lsmf.adapters;
 
 import android.content.Context;
-import android.database.DataSetObserver;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.ListAdapter;
 import android.widget.TextView;
 
+import com.example.fabian.tinf15b4_lsmf.ImageLoadTask;
+import com.example.fabian.tinf15b4_lsmf.modells.Movie;
+import com.example.fabian.tinf15b4_lsmf.R;
+
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by fabian on 4/5/17.

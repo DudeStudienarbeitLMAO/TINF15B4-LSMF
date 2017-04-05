@@ -7,7 +7,7 @@
         android:layout_width="100dp"
         android:layout_height="75dp"
         android:layout_alignParentLeft="true"
-        android:src="@mipmap/ic_movie_black_24dp"
+        android:src="@mipmap/ic_movie_black_24px"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         />
@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:text="Hitler did nothing wrong"
         android:layout_marginTop="15dp"
-
+        android:textColor="#000"
         android:layout_toRightOf="@+id/movieImage"
 
          />
@@ -32,22 +32,24 @@
         android:text="Dank"
         android:layout_marginTop="5dp"
         android:layout_toRightOf="@id/movieImage"
+        android:textColor="#acacac"
        android:layout_below="@+id/movieTitle"/>
 
     <TextView
         android:id="@+id/movieRating"
         android:layout_width="wrap_content"
         android:layout_height="75dp"
-        android:layout_toRightOf="@+id/movieTitle"
+        android:layout_marginRight="20dp"
         android:layout_alignParentRight="true"
         android:text="10/0"
+        android:textColor="#000"
         android:gravity="center"
         />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
-            android:background="#000"
+            android:background="#acacac"
             android:layout_below="@+id/movieImage"
             ></View>
 

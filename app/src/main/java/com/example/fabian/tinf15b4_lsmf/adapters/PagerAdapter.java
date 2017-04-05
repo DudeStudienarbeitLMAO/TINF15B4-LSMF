@@ -1,4 +1,4 @@
-package com.example.fabian.tinf15b4_lsmf;
+package com.example.fabian.tinf15b4_lsmf.adapters;
 
 /**
  * Created by Fabian on 21.10.2016.
@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import com.example.fabian.tinf15b4_lsmf.R;
 import com.example.fabian.tinf15b4_lsmf.fragments.Fragment_Recommended;
 import com.example.fabian.tinf15b4_lsmf.fragments.Fragment_Viewed;
 
