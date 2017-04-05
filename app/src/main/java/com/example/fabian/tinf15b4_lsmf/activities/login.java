@@ -1,13 +1,16 @@
-package com.example.fabian.tinf15b4_lsmf;
+package com.example.fabian.tinf15b4_lsmf.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
 import android.view.View;
 import android.content.Intent;
-import android.app.Activity;
 import android.widget.*;
-import android.util.Base64;
+
+import com.example.fabian.tinf15b4_lsmf.R;
+import com.example.fabian.tinf15b4_lsmf.Ssapi;
+import com.example.fabian.tinf15b4_lsmf.User;
+
 import java.security.*;
 
 public class login extends AppCompatActivity {
@@ -18,7 +21,7 @@ public class login extends AppCompatActivity {
 
     int failedLoginAttempts = 0;
 
-    Ssapi Ssapi = new Ssapi();
+    com.example.fabian.tinf15b4_lsmf.Ssapi Ssapi = new Ssapi();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

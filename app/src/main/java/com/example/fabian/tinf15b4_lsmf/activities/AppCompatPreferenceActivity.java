@@ -1,4 +1,4 @@
-package com.example.fabian.tinf15b4_lsmf;
+package com.example.fabian.tinf15b4_lsmf.activities;
 
 import android.content.res.Configuration;
 import android.os.Bundle;

@@ -7,7 +7,7 @@ android:layout_height="fill_parent"
 android:fitsSystemWindows="true"
 xmlns:tools="http://schemas.android.com/tools"
 android:id="@+id/activity_register"
-tools:context="com.example.fabian.tinf15b4_lsmf.register">
+tools:context="com.example.fabian.tinf15b4_lsmf.activities.register">
 
 <LinearLayout
     android:orientation="vertical"

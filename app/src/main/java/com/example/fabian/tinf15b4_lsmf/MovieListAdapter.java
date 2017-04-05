@@ -22,9 +22,11 @@ import java.util.List;
 
 public class MovieListAdapter extends ArrayAdapter {
 
+    Context context1;
     ArrayList<Movie> movies = new ArrayList<Movie>();
     public MovieListAdapter(Context context, int resource) {
         super(context, resource);
+        context1 = context;
     }
 
 
@@ -48,17 +50,17 @@ public class MovieListAdapter extends ArrayAdapter {
     @Nullable
     @Override
     public Object getItem(int position) {
+
         return this.movies.get(position);
     }
 
-    @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
         View row = convertView;
         DataHandler handler;
         if(convertView==null){
-            LayoutInflater inflater = (LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater inflater = (LayoutInflater) context1.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             row = inflater.inflate(R.layout.listviewrow, parent, false);
             handler = new DataHandler();
             handler.movieImage = (ImageView) row.findViewById(R.id.movieImage);
@@ -76,7 +78,8 @@ public class MovieListAdapter extends ArrayAdapter {
         handler.movieTitle.setText(dataProvider.getTitle());
         handler.movieGenre.setText(dataProvider.getGenre());
         handler.movieRating.setText(dataProvider.getRating() + "/10");
-
+        if(dataProvider.getPosterURL() != null)
+            new ImageLoadTask(dataProvider.getPosterURL(), handler.movieImage).execute();
         return row;
     }
 }

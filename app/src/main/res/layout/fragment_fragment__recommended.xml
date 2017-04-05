@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.fabian.tinf15b4_lsmf.Fragment_Recommended">
+    tools:context="com.example.fabian.tinf15b4_lsmf.fragments.Fragment_Recommended">
 
 
    <ListView

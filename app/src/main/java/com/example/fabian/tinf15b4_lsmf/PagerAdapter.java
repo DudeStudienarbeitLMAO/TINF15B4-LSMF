@@ -9,6 +9,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import com.example.fabian.tinf15b4_lsmf.fragments.Fragment_Recommended;
+import com.example.fabian.tinf15b4_lsmf.fragments.Fragment_Viewed;
+
 
 public class PagerAdapter extends FragmentStatePagerAdapter{
     Context context;
