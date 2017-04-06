@@ -9,7 +9,7 @@
 
     android:fillViewport="false"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.fabian.tinf15b4_lsmf.activity_about"
+    tools:context="com.example.fabian.tinf15b4_lsmf.activities.activity_about"
     tools:showIn="@layout/activity_about">
 
     <LinearLayout

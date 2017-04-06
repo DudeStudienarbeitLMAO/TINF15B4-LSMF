@@ -1,4 +1,4 @@
-package com.example.fabian.tinf15b4_lsmf;
+package com.example.fabian.tinf15b4_lsmf.activities;
 
 
 import android.annotation.TargetApi;
@@ -19,6 +19,8 @@ import android.preference.PreferenceManager;
 import android.preference.RingtonePreference;
 import android.text.TextUtils;
 import android.view.MenuItem;
+
+import com.example.fabian.tinf15b4_lsmf.R;
 
 import java.util.List;
 

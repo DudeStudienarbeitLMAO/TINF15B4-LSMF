@@ -1,21 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <item
         android:title=""
-        android:id="@+id/menu_overflow"
-        android:icon="@mipmap/ic_more_vert_white_48dp"
-        android:orderInCategory="11111"
-        app:showAsAction="always">
-        <menu>
+        android:id="@+id/addViewedMovie"
+        android:icon="@mipmap/ic_add_to_queue_black_24px"
+
+        app:showAsAction="always"/>
+
+    <item
+                android:id="@+id/show_settings"
+                app:showAsAction="never"
+                android:title="@string/setttings"/>
+            <item
+                android:id="@+id/show_help"
+                app:showAsAction="never"
+                android:title="@string/help"/>
             <item
                 android:id="@+id/show_about"
                 app:showAsAction="never"
                 android:title="@string/about"/>
-            <item
-                android:id="@+id/show_settings"
-                app:showAsAction="never"
-                android:title="@string/setttings"/>
-        </menu>
-    </item>
+
+
+
+
 </menu>

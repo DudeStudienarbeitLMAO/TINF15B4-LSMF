@@ -1,8 +1,9 @@
-package com.example.fabian.tinf15b4_lsmf;
+package com.example.fabian.tinf15b4_lsmf.modells;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class User {
+public class User implements Serializable{
 
     private  ArrayList<Movie> MovieList;
     private  String UserName;

@@ -1,30 +1,17 @@
-package com.example.fabian.tinf15b4_lsmf;
+package com.example.fabian.tinf15b4_lsmf.activities;
 
 
 
-import java.util.Locale;
 import com.example.fabian.tinf15b4_lsmf.*;
+import com.example.fabian.tinf15b4_lsmf.adapters.PagerAdapter;
+import com.example.fabian.tinf15b4_lsmf.modells.User;
+
 import android.os.Bundle;
-import android.app.Activity;
 import android.content.Intent;
-import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
-import android.util.DisplayMetrics;
-import android.view.View;
-import android.widget.Button;
-import android.widget.*;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBar;
 
-import android.support.v4.app.FragmentStatePagerAdapter;
-
-import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.*;
 import android.support.design.widget.*;
@@ -32,6 +19,8 @@ public class MainActivity extends AppCompatActivity {
 
     ViewPager pager;
     TabLayout tabLayout;
+
+    User loggedInUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +42,11 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setLogo(R.mipmap.ic_launcher);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
+
+
+
+        loggedInUser = (User) getIntent().getSerializableExtra("currentUser");
+
     }
 
     @Override
@@ -72,6 +66,10 @@ public class MainActivity extends AppCompatActivity {
             case R.id.show_settings:
                 Intent r = new Intent(getApplicationContext(), SettingsActivity.class);
                 startActivity(r);
+                return true;
+            case R.id.show_help:
+                Intent k = new Intent(getApplicationContext(), help.class);
+                startActivity(k);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

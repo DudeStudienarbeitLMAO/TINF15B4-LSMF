@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.example.fabian.tinf15b4_lsmf.MainActivity">
+    tools:context="com.example.fabian.tinf15b4_lsmf.activities.MainActivity">
     <android.support.design.widget.TabLayout
         android:background="@color/colorPrimary"
         android:layout_alignParentTop="true"

@@ -1,4 +1,4 @@
-package com.example.fabian.tinf15b4_lsmf;
+package com.example.fabian.tinf15b4_lsmf.activities;
 
 import android.content.Intent;
 import android.support.v7.app.*;
@@ -7,7 +7,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
 import android.app.ProgressDialog;
-import  	android.content.Context;
+
+import com.example.fabian.tinf15b4_lsmf.R;
+import com.example.fabian.tinf15b4_lsmf.apis.Ssapi;
+import com.example.fabian.tinf15b4_lsmf.modells.User;
+
 public class register extends AppCompatActivity {
 
     EditText txt_username;

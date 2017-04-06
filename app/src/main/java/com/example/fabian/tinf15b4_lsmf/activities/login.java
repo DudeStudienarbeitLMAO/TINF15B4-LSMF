@@ -1,24 +1,27 @@
-package com.example.fabian.tinf15b4_lsmf;
+package com.example.fabian.tinf15b4_lsmf.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
 import android.view.View;
 import android.content.Intent;
-import android.app.Activity;
 import android.widget.*;
-import android.util.Base64;
+
+import com.example.fabian.tinf15b4_lsmf.R;
+import com.example.fabian.tinf15b4_lsmf.apis.Ssapi;
+import com.example.fabian.tinf15b4_lsmf.modells.User;
+
 import java.security.*;
 
 public class login extends AppCompatActivity {
 
     EditText txt_name, txt_password;
     AppCompatButton btn_login;
-    TextView lbl_reset;
+    TextView lbl_reset, lbl_help;
 
     int failedLoginAttempts = 0;
 
-    Ssapi Ssapi = new Ssapi();
+    com.example.fabian.tinf15b4_lsmf.apis.Ssapi Ssapi = new Ssapi();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +29,7 @@ public class login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         txt_name = (EditText) findViewById(R.id.input_username);
-
+        lbl_help = (TextView) findViewById(R.id.link_help);
         txt_password = (EditText) findViewById(R.id.input_password);
 
         btn_login  = (AppCompatButton) findViewById(R.id.btn_login);
@@ -44,6 +47,15 @@ public class login extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 resetPassword();
+            }
+        });
+
+
+        lbl_help.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent k = new Intent(getApplicationContext(), help.class);
+                startActivity(k);
             }
         });
 
@@ -76,6 +88,7 @@ public class login extends AppCompatActivity {
         }else{
 
             Intent i = new Intent(getApplicationContext(), MainActivity.class);
+            i.putExtra("currentUser", user);
             startActivity(i);
             finish();
             // redirect to main activity
