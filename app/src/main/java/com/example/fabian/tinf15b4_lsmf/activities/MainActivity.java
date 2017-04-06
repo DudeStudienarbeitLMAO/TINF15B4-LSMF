@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayUseLogoEnabled(true);
 
 
+
         loggedInUser = (User) getIntent().getSerializableExtra("currentUser");
 
     }
