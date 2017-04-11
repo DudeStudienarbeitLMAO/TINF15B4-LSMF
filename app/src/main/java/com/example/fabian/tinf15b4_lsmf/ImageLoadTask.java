@@ -16,6 +16,7 @@ import java.net.URL;
 public class ImageLoadTask extends AsyncTask<Void, Void, Bitmap> {
     private String url;
     private ImageView imageView;
+    public static final String BASE_URL =  "https://image.tmdb.org/t/p/";
 
     public ImageLoadTask(String url, ImageView imageView) {
         this.url = url;

@@ -11,7 +11,7 @@ import java.util.List;
 
 public class IMDBAPI {
 
-    private static final String apiKey = "a58333d7dddf6bcc826dfaed7c49f20e";
+    public static final String apiKey = "a58333d7dddf6bcc826dfaed7c49f20e";
 
 
     public static Movie getMovieByID(String id){

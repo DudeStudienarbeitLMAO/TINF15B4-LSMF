@@ -23,15 +23,24 @@ public class MovieListAdapter extends ArrayAdapter {
 
     Context context1;
     ArrayList<Movie> movies = new ArrayList<Movie>();
+    boolean querying = false;
+
     public MovieListAdapter(Context context, int resource) {
         super(context, resource);
         context1 = context;
     }
 
 
-    static class DataHandler{
+    static class DataHandler {
         ImageView movieImage;
         TextView movieTitle, movieGenre, movieRating;
+    }
+
+    @Override
+    public void clear() {
+        super.clear();
+        movies.clear();
+        notifyDataSetChanged();
     }
 
 
@@ -39,6 +48,15 @@ public class MovieListAdapter extends ArrayAdapter {
     public void add(Object object) {
         super.add(object);
         movies.add((Movie) object);
+        notifyDataSetChanged();
+    }
+
+    public boolean isQuerying() {
+        return this.querying;
+    }
+
+    public void setQuerying(boolean querying) {
+        this.querying = querying;
     }
 
     @Override
@@ -58,7 +76,7 @@ public class MovieListAdapter extends ArrayAdapter {
 
         View row = convertView;
         DataHandler handler;
-        if(convertView==null){
+        if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context1.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             row = inflater.inflate(R.layout.listviewrow, parent, false);
             handler = new DataHandler();
@@ -67,7 +85,7 @@ public class MovieListAdapter extends ArrayAdapter {
             handler.movieTitle = (TextView) row.findViewById(R.id.movieTitle);
             handler.movieRating = (TextView) row.findViewById(R.id.movieRating);
             row.setTag(handler);
-        }else{
+        } else {
 
             handler = (DataHandler) row.getTag();
         }
@@ -76,8 +94,18 @@ public class MovieListAdapter extends ArrayAdapter {
 
         handler.movieTitle.setText(dataProvider.getTitle());
         handler.movieGenre.setText(dataProvider.getGenre());
-        handler.movieRating.setText(dataProvider.getRating() + "/10");
-        if(dataProvider.getPosterURL() != null)
+
+        String shortendRating = "";
+        if(dataProvider.getRating() > 10) {
+            shortendRating = "10";
+        }
+        else {
+            shortendRating = Double.toString(dataProvider.getRating()).substring(0, 3);
+        }
+
+
+        handler.movieRating.setText(shortendRating + "/10");
+        if (dataProvider.getPosterURL() != null)
             new ImageLoadTask(dataProvider.getPosterURL(), handler.movieImage).execute();
         return row;
     }
