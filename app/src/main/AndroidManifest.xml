@@ -32,12 +32,19 @@
             android:label="@string/title_activity_settings">
 
         </activity>
-        <activity android:name=".activities.help" android:label="@string/help">
+        <activity
+            android:name=".activities.AddMovie"
+            android:label="@string/title_activity_add_movie"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+        <activity android:name=".activities.help"
+            android:label="@string/help"
+            android:theme="@style/AppTheme.NoActionBar" />
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.fabian.tinf15b4_lsmf.activities.MainActivity" />
-        </activity>
     </application>
 
 </manifest>

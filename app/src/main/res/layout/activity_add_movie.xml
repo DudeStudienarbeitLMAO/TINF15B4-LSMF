@@ -1,0 +1,36 @@
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.fabian.tinf15b4_lsmf.fragments.Fragment_Recommended"
+    android:orientation="vertical"
+     android:fitsSystemWindows="true">
+
+   <LinearLayout
+       android:orientation="vertical"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
+
+      <android.support.v7.widget.Toolbar
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:background="?attr/colorPrimary"
+          android:theme="?attr/actionBarTheme"
+          android:minHeight="?attr/actionBarSize"
+          android:id="@+id/toolbarAddMovie" />
+
+      <SearchView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:id="@+id/searchBar" />
+
+      <ListView
+          android:id="@+id/queryListView"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:layout_below="@+id/toolbar3"></ListView>
+
+   </LinearLayout>
+
+
+</android.support.design.widget.CoordinatorLayout>

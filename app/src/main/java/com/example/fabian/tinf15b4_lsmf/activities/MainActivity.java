@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main_menu, menu);
+
         return true;
     }
     @Override
@@ -70,6 +71,10 @@ public class MainActivity extends AppCompatActivity {
             case R.id.show_help:
                 Intent k = new Intent(getApplicationContext(), help.class);
                 startActivity(k);
+                return true;
+            case R.id.addViewedMovie:
+                Intent s = new Intent(getApplicationContext(), AddMovie.class);
+                startActivity(s);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

@@ -18,17 +18,36 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+
+
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+    }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile files('libs/httpclient-4.5.1.jar')
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-
     compile 'com.android.support:appcompat-v7:24.2.1'
     compile 'com.android.support:support-v4:24.2.1'
     compile 'com.android.support:design:24.2.1'
     compile 'com.android.support:support-vector-drawable:24.2.1'
     testCompile 'junit:junit:4.12'
+    compile files('libs/themoviedbapi-4.3.jar')
+    compile files('libs/api-common-2.0.jar')
+    compile files('libs/commons-codec-1.9.jar')
+    compile files('libs/commons-lang3-3.4.jar')
+    compile files('libs/httpcore-4.4.3.jar')
+    compile files('libs/jackson-annotations-2.7.1.jar')
+    compile files('libs/jackson-core-2.7.1.jar')
+    compile files('libs/jackson-databind-2.7.1.jar')
+    compile files('libs/slf4j-api-1.7.16.jar')
 }
