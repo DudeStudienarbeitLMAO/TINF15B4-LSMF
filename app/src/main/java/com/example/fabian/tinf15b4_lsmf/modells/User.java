@@ -1,11 +1,13 @@
 package com.example.fabian.tinf15b4_lsmf.modells;
 
+import com.omertron.themoviedbapi.model.movie.MovieInfo;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
 public class User implements Serializable{
 
-    private  ArrayList<Movie> MovieList;
+    private  ArrayList<MovieInfo> MovieList;
     private  String UserName;
     private  String PasswordHash;
     private  String EMail;
@@ -16,15 +18,15 @@ public class User implements Serializable{
         this.EMail = email;
     }
 
-    public  ArrayList<Movie> getMovieList() {
+    public  ArrayList<MovieInfo> getMovieList() {
         return MovieList;
     }
 
-    public  void setMovieList(ArrayList<Movie> movieList) {
+    public  void setMovieList(ArrayList<MovieInfo> movieList) {
         MovieList = movieList;
     }
 
-    public void addMovie(Movie movie){ MovieList.add(movie);}
+    public void addMovie(MovieInfo movie){ MovieList.add(movie);}
 
     public  String getUserName() {
         return UserName;

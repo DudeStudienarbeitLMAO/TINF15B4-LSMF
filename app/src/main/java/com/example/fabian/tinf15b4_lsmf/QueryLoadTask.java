@@ -4,8 +4,6 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.example.fabian.tinf15b4_lsmf.adapters.MovieListAdapter;
-import com.example.fabian.tinf15b4_lsmf.apis.IMDBAPI;
-import com.example.fabian.tinf15b4_lsmf.modells.Movie;
 import com.omertron.themoviedbapi.MovieDbException;
 import com.omertron.themoviedbapi.methods.TmdbSearch;
 import com.omertron.themoviedbapi.model.movie.MovieInfo;
@@ -15,13 +13,13 @@ import com.omertron.themoviedbapi.tools.HttpTools;
 import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
 
-import java.util.Comparator;
-
 /**
  * Created by s.gerhardt on 10.04.2017.
  */
 
 public class QueryLoadTask extends AsyncTask<String, Void, ResultList<MovieInfo>> {
+
+    private static final String apiKey = "a58333d7dddf6bcc826dfaed7c49f20e";
     MovieListAdapter adapter = null;
     ResultList<MovieInfo> result = null;
     int nextMovie = 0;
@@ -49,7 +47,7 @@ public class QueryLoadTask extends AsyncTask<String, Void, ResultList<MovieInfo>
         HttpClient httpClient = new DefaultHttpClient();
 
 
-        TmdbSearch apiSearch = new TmdbSearch(IMDBAPI.apiKey, new HttpTools(httpClient));
+        TmdbSearch apiSearch = new TmdbSearch(apiKey, new HttpTools(httpClient));
 
         try {
 
@@ -92,21 +90,9 @@ public class QueryLoadTask extends AsyncTask<String, Void, ResultList<MovieInfo>
 
             MovieInfo movieInfo = result.getResults().get(i);
             Log.i(Integer.toString(i), Integer.toString(i));
-            Movie movieToAdd = new Movie();
-            movieToAdd.setRating(movieInfo.getPopularity());
-            movieToAdd.setTitle(movieInfo.getTitle());
 
-            if (movieInfo.getPosterPath() != null) {
-                String size = "w500";
-                movieToAdd.setPosterURL(ImageLoadTask.BASE_URL + size + movieInfo.getPosterPath());
 
-            }
-
-            if (movieInfo.getGenres() != null && movieInfo.getGenres().size() != 0) {
-                movieToAdd.setGenre(movieInfo.getGenres().get(0).getName());
-            }
-
-            adapter.add(movieToAdd);
+            adapter.add(movieInfo);
 
 
 

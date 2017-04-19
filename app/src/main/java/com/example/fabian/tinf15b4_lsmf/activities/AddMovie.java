@@ -14,7 +14,7 @@ import android.widget.SearchView;
 import com.example.fabian.tinf15b4_lsmf.QueryLoadTask;
 import com.example.fabian.tinf15b4_lsmf.R;
 import com.example.fabian.tinf15b4_lsmf.adapters.MovieListAdapter;
-import com.example.fabian.tinf15b4_lsmf.modells.Movie;
+
 import com.omertron.themoviedbapi.model.movie.MovieBasic;
 import com.omertron.themoviedbapi.model.movie.MovieInfo;
 import com.omertron.themoviedbapi.results.ResultList;

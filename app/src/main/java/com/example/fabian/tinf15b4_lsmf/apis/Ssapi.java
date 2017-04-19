@@ -2,9 +2,9 @@ package com.example.fabian.tinf15b4_lsmf.apis;
 
 import android.os.StrictMode;
 
-import com.example.fabian.tinf15b4_lsmf.modells.Movie;
 import com.example.fabian.tinf15b4_lsmf.modells.SSLTool;
 import com.example.fabian.tinf15b4_lsmf.modells.User;
+import com.omertron.themoviedbapi.model.movie.MovieInfo;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -95,7 +95,7 @@ public class Ssapi {
         return testSuccess;
     }
 
-    public boolean addMovie(User user, Movie movie){
+    public boolean addMovie(User user, MovieInfo movie){
         user.addMovie(movie);
 
         // webrequest an db
@@ -118,7 +118,7 @@ public class Ssapi {
         return (code==201);
     }
 
-    public ArrayList<Movie> fetchMovielist(User user){
+    public ArrayList<MovieInfo> fetchMovielist(User user){
         // TODO
         return null;
     }
