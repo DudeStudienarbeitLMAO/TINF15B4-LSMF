@@ -1,5 +1,6 @@
 package com.example.fabian.tinf15b4_lsmf;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 

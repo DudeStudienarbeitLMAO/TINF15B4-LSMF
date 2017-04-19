@@ -42,6 +42,12 @@ public class Fragment_Recommended extends Fragment {
         recommendedList.setAdapter(adapter);
 
 
+        adapter.clear();
+        adapter.setQuerying(true);
+
+        QueryLoadTask queryTask = new QueryLoadTask(adapter, "Fast and", 1);
+        queryTask.execute();
+
         return rootView;
     }
 

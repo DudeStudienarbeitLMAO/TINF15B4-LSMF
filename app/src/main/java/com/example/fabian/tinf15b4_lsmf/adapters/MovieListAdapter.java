@@ -1,6 +1,9 @@
 package com.example.fabian.tinf15b4_lsmf.adapters;
 
 import android.content.Context;
+import android.content.ContextWrapper;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +17,10 @@ import com.example.fabian.tinf15b4_lsmf.R;
 import com.omertron.themoviedbapi.model.Genre;
 import com.omertron.themoviedbapi.model.movie.MovieInfo;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,13 +30,13 @@ import java.util.List;
 
 public class MovieListAdapter extends ArrayAdapter {
 
-    Context context1;
+    Context context;
     ArrayList<MovieInfo> movies = new ArrayList<MovieInfo>();
     boolean querying = false;
 
     public MovieListAdapter(Context context, int resource) {
         super(context, resource);
-        context1 = context;
+        this.context = context;
     }
 
 
@@ -79,7 +86,7 @@ public class MovieListAdapter extends ArrayAdapter {
         View row = convertView;
         DataHandler handler;
         if (convertView == null) {
-            LayoutInflater inflater = (LayoutInflater) context1.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             row = inflater.inflate(R.layout.listviewrow, parent, false);
             handler = new DataHandler();
             handler.movieImage = (ImageView) row.findViewById(R.id.movieImage);
@@ -110,8 +117,34 @@ public class MovieListAdapter extends ArrayAdapter {
 
 
         handler.movieRating.setText(shortendRating + "/10");
-        if (dataProvider.getPosterPath() != null)
-            new ImageLoadTask(ImageLoadTask.BASE_URL + "w500" + dataProvider.getPosterPath(), handler.movieImage).execute();
+
+        String url = dataProvider.getPosterPath();
+
+
+
+        if ( url != null) {
+
+            ContextWrapper cw = new ContextWrapper(context);
+            // path to /data/data/yourapp/app_data/imageDir
+            File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
+            // Create imageDir
+            File mypath = null;
+            try {
+                mypath=new File(directory,java.net.URLEncoder.encode(ImageLoadTask.BASE_URL + "w500" + url, "ISO-8859-1"));
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+
+            if(mypath.exists()){
+
+                Bitmap bitmap = BitmapFactory.decodeFile(mypath.getAbsolutePath());
+                handler.movieImage.setImageBitmap(bitmap);
+
+
+            }else{
+            new ImageLoadTask(ImageLoadTask.BASE_URL + "w500" + dataProvider.getPosterPath(), handler.movieImage, context).execute();
+            }
+        }
         return row;
     }
 }
