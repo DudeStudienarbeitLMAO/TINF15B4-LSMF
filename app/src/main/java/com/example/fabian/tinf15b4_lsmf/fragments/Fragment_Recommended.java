@@ -42,7 +42,7 @@ public class Fragment_Recommended extends Fragment {
         s.setTitle("The Purge 3");
         s.setGenre("Horror");
         s.setRating(5.7);
-        //s.setPosterURL("http://de.web.img1.acsta.net/newsv7/16/05/20/15/50/304292.jpg");
+        s.setPosterURL("http://de.web.img1.acsta.net/newsv7/16/05/20/15/50/304292.jpg");
         recommendedMovies.add(s);
     }
 

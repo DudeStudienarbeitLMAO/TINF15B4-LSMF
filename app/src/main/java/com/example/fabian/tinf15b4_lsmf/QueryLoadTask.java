@@ -15,6 +15,8 @@ import com.omertron.themoviedbapi.tools.HttpTools;
 import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import java.util.Comparator;
+
 /**
  * Created by s.gerhardt on 10.04.2017.
  */
@@ -110,5 +112,8 @@ public class QueryLoadTask extends AsyncTask<String, Void, ResultList<MovieInfo>
 
         }
         nextMovie += moviesSizeToAdd;
+
     }
+
+
 }
