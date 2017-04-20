@@ -11,15 +11,18 @@ import android.widget.AbsListView;
 import android.widget.ListView;
 import android.widget.SearchView;
 
+import com.example.fabian.tinf15b4_lsmf.HelperFunctions;
 import com.example.fabian.tinf15b4_lsmf.QueryLoadTask;
 import com.example.fabian.tinf15b4_lsmf.R;
 import com.example.fabian.tinf15b4_lsmf.adapters.MovieListAdapter;
 
+import com.omertron.themoviedbapi.MovieDbException;
 import com.omertron.themoviedbapi.model.movie.MovieBasic;
 import com.omertron.themoviedbapi.model.movie.MovieInfo;
 import com.omertron.themoviedbapi.results.ResultList;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 /**
@@ -29,6 +32,8 @@ import java.util.ArrayList;
 
 public class AddMovie extends AppCompatActivity {
     QueryLoadTask queryTask;
+    HashMap<Integer, String> genres;
+
 
     static {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -40,6 +45,11 @@ public class AddMovie extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_movie);
 
+        try {
+            genres = HelperFunctions.mapGenres("de");
+        } catch (MovieDbException e) {
+            e.printStackTrace();
+        }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarAddMovie);
         setSupportActionBar(toolbar);

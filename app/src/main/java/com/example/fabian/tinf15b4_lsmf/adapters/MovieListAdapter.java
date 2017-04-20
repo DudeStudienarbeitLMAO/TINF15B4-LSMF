@@ -15,8 +15,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.fabian.tinf15b4_lsmf.HelperFunctions;
 import com.example.fabian.tinf15b4_lsmf.ImageLoadTask;
 import com.example.fabian.tinf15b4_lsmf.R;
+import com.omertron.themoviedbapi.MovieDbException;
 import com.omertron.themoviedbapi.model.Genre;
 import com.omertron.themoviedbapi.model.movie.MovieInfo;
 
@@ -27,6 +29,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -39,6 +42,7 @@ public class MovieListAdapter extends ArrayAdapter {
     public ArrayList<MovieInfo> movies = new ArrayList<MovieInfo>();
     boolean querying = false;
     Comparator<MovieInfo> comp;
+    HashMap<Integer, String> genreMap;
 
     public MovieListAdapter(Context context, int resource) {
         super(context, resource);
@@ -49,6 +53,11 @@ public class MovieListAdapter extends ArrayAdapter {
                 return (int) (t1.getPopularity()-movieInfo.getPopularity())*10;
             }
         };
+        try {
+            genreMap = HelperFunctions.mapGenres("de");
+        } catch (MovieDbException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -121,9 +130,9 @@ public class MovieListAdapter extends ArrayAdapter {
 
         handler.movieTitle.setText(dataProvider.getTitle());
 
-        List<Genre> lg = dataProvider.getGenres();
+        List<Integer> lg =dataProvider.getGenreIds();
         if(lg!=null && lg.size()>0)
-        handler.movieGenre.setText(lg.get(0).getName());
+         handler.movieGenre.setText(genreMap.get(lg.get(0)));
 
         String shortendRating = "";
         if(dataProvider.getPopularity() > 10) {

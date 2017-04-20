@@ -6,7 +6,9 @@ import android.util.Log;
 
 import com.example.fabian.tinf15b4_lsmf.adapters.MovieListAdapter;
 import com.omertron.themoviedbapi.MovieDbException;
+import com.omertron.themoviedbapi.methods.TmdbGenres;
 import com.omertron.themoviedbapi.methods.TmdbSearch;
+import com.omertron.themoviedbapi.model.Genre;
 import com.omertron.themoviedbapi.model.movie.MovieInfo;
 import com.omertron.themoviedbapi.results.ResultList;
 import com.omertron.themoviedbapi.tools.HttpTools;
@@ -14,18 +16,23 @@ import com.omertron.themoviedbapi.tools.HttpTools;
 import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 /**
  * Created by s.gerhardt on 10.04.2017.
  */
 
 public class QueryLoadTask extends AsyncTask<String, Void, ResultList<MovieInfo>> {
 
-    private static final String apiKey = "a58333d7dddf6bcc826dfaed7c49f20e";
+    public static final String apiKey = "a58333d7dddf6bcc826dfaed7c49f20e";
     MovieListAdapter adapter = null;
     ResultList<MovieInfo> result = null;
     int nextMovie = 0;
     String query = "";
     int nextPage = 1;
+
 
     private static final int SCROLL_QUERY_ADDING_SIZE = 20;
 
@@ -33,6 +40,7 @@ public class QueryLoadTask extends AsyncTask<String, Void, ResultList<MovieInfo>
         this.adapter = adapter;
         this.query = query;
         this.nextPage = nextPage;
+
     }
 
     public String getQuery() {
@@ -49,6 +57,7 @@ public class QueryLoadTask extends AsyncTask<String, Void, ResultList<MovieInfo>
 
 
         TmdbSearch apiSearch = new TmdbSearch(apiKey, new HttpTools(httpClient));
+
 
         try {
 

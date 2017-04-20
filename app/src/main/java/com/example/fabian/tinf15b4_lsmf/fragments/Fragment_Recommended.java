@@ -1,10 +1,17 @@
 package com.example.fabian.tinf15b4_lsmf.fragments;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import com.example.fabian.tinf15b4_lsmf.*;
 import com.example.fabian.tinf15b4_lsmf.adapters.MovieListAdapter;
+import com.omertron.themoviedbapi.MovieDbException;
+import com.omertron.themoviedbapi.methods.TmdbGenres;
+import com.omertron.themoviedbapi.model.Genre;
 import com.omertron.themoviedbapi.model.movie.MovieInfo;
+import com.omertron.themoviedbapi.tools.HttpTools;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -14,8 +21,14 @@ import android.support.v4.app.Fragment;
 
 import android.view.*;
 
+import org.apache.http.client.HttpClient;
+import org.apache.http.impl.client.DefaultHttpClient;
+
 
 public class Fragment_Recommended extends Fragment {
+
+
+
 
 
     ListView recommendedList;
@@ -27,6 +40,7 @@ public class Fragment_Recommended extends Fragment {
 
 
     }
+
 
     @Override
     public void onConfigurationChanged(Configuration newConfig){
