@@ -6,6 +6,7 @@ import com.example.fabian.tinf15b4_lsmf.*;
 import com.example.fabian.tinf15b4_lsmf.adapters.MovieListAdapter;
 import com.omertron.themoviedbapi.model.movie.MovieInfo;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
@@ -27,6 +28,12 @@ public class Fragment_Recommended extends Fragment {
 
     }
 
+    @Override
+    public void onConfigurationChanged(Configuration newConfig){
+        super.onConfigurationChanged(newConfig);
+
+        recommendedList.setAdapter(adapter);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
