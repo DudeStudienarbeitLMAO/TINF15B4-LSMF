@@ -1,6 +1,5 @@
 package com.example.fabian.tinf15b4_lsmf.activities;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v7.app.ActionBar;
@@ -12,16 +11,12 @@ import android.widget.ListView;
 import android.widget.SearchView;
 
 import com.example.fabian.tinf15b4_lsmf.HelperFunctions;
-import com.example.fabian.tinf15b4_lsmf.QueryLoadTask;
+import com.example.fabian.tinf15b4_lsmf.loadtasks.QueryLoadTask;
 import com.example.fabian.tinf15b4_lsmf.R;
 import com.example.fabian.tinf15b4_lsmf.adapters.MovieListAdapter;
 
 import com.omertron.themoviedbapi.MovieDbException;
-import com.omertron.themoviedbapi.model.movie.MovieBasic;
-import com.omertron.themoviedbapi.model.movie.MovieInfo;
-import com.omertron.themoviedbapi.results.ResultList;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 

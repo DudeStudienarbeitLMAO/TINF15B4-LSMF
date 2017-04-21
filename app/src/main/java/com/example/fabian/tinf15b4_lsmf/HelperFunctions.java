@@ -2,6 +2,7 @@ package com.example.fabian.tinf15b4_lsmf;
 
 import android.os.StrictMode;
 
+import com.example.fabian.tinf15b4_lsmf.loadtasks.QueryLoadTask;
 import com.omertron.themoviedbapi.MovieDbException;
 import com.omertron.themoviedbapi.methods.TmdbGenres;
 import com.omertron.themoviedbapi.model.Genre;
@@ -12,7 +13,6 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by fabian on 4/20/17.

@@ -4,10 +4,7 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Movie;
-import android.os.Build;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,15 +13,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.fabian.tinf15b4_lsmf.HelperFunctions;
-import com.example.fabian.tinf15b4_lsmf.ImageLoadTask;
+import com.example.fabian.tinf15b4_lsmf.enums.SortOrder;
+import com.example.fabian.tinf15b4_lsmf.loadtasks.ImageLoadTask;
 import com.example.fabian.tinf15b4_lsmf.R;
+import com.example.fabian.tinf15b4_lsmf.modells.MovieComparator;
 import com.omertron.themoviedbapi.MovieDbException;
-import com.omertron.themoviedbapi.model.Genre;
 import com.omertron.themoviedbapi.model.movie.MovieInfo;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -41,18 +37,14 @@ public class MovieListAdapter extends ArrayAdapter {
     Context context;
     public ArrayList<MovieInfo> movies = new ArrayList<MovieInfo>();
     boolean querying = false;
-    Comparator<MovieInfo> comp;
+    MovieComparator movieC = new MovieComparator(SortOrder.RATING_DESC);
+
     HashMap<Integer, String> genreMap;
 
     public MovieListAdapter(Context context, int resource) {
         super(context, resource);
         this.context = context;
-        comp = new Comparator<MovieInfo>() {
-            @Override
-            public int compare(MovieInfo movieInfo, MovieInfo t1) {
-                return (int) (t1.getPopularity()-movieInfo.getPopularity())*10;
-            }
-        };
+
         try {
             genreMap = HelperFunctions.mapGenres("de");
         } catch (MovieDbException e) {
@@ -103,7 +95,7 @@ public class MovieListAdapter extends ArrayAdapter {
 
     @Override
     public void notifyDataSetChanged() {
-        Collections.sort(movies, comp);
+        Collections.sort(movies, movieC);
         super.notifyDataSetChanged();
     }
 
