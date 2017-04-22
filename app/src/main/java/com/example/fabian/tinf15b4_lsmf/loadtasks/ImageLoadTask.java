@@ -7,6 +7,8 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.widget.ImageView;
 
+import com.example.fabian.tinf15b4_lsmf.modells.LRUCache;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -41,28 +43,8 @@ public class ImageLoadTask extends AsyncTask<Void, Void, Bitmap> {
             InputStream input = connection.getInputStream();
             Bitmap myBitmap = BitmapFactory.decodeStream(input);
 
-            ContextWrapper cw = new ContextWrapper(AppContext);
-            // path to /data/data/yourapp/app_data/imageDir
-            File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
-            // Create imageDir
-            File mypath=new File(directory,java.net.URLEncoder.encode(url, "ISO-8859-1"));
-
-            FileOutputStream fos = null;
-            try {
-                fos = new FileOutputStream(mypath);
-                // Use the compress method on the BitMap object to write image to the OutputStream
-                myBitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                try {
-                    fos.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-
-
+            String[] urlParts = url.split("/");
+            LRUCache.getInstance().saveBitmapToCache(urlParts[urlParts.length-1], myBitmap);
 
             return myBitmap;
         } catch (Exception e) {

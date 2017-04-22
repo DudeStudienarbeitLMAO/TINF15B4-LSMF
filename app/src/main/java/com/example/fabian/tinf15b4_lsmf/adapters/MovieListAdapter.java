@@ -11,11 +11,13 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.fabian.tinf15b4_lsmf.HelperFunctions;
 import com.example.fabian.tinf15b4_lsmf.enums.SortOrder;
 import com.example.fabian.tinf15b4_lsmf.loadtasks.ImageLoadTask;
 import com.example.fabian.tinf15b4_lsmf.R;
+import com.example.fabian.tinf15b4_lsmf.modells.LRUCache;
 import com.example.fabian.tinf15b4_lsmf.modells.MovieComparator;
 import com.omertron.themoviedbapi.MovieDbException;
 import com.omertron.themoviedbapi.model.movie.MovieInfo;
@@ -143,21 +145,11 @@ public class MovieListAdapter extends ArrayAdapter {
 
         if ( url != null) {
 
-            ContextWrapper cw = new ContextWrapper(context);
-            // path to /data/data/yourapp/app_data/imageDir
-            File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
-            // Create imageDir
-            File mypath = null;
-            try {
-                mypath=new File(directory,java.net.URLEncoder.encode(ImageLoadTask.BASE_URL + "w500" + url, "ISO-8859-1"));
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
+           Bitmap bmp = LRUCache.getInstance().loadBitmapFromCache(url.substring(1));
+            if(bmp!=null){
 
-            if(mypath.exists()){
 
-                Bitmap bitmap = BitmapFactory.decodeFile(mypath.getAbsolutePath());
-                handler.movieImage.setImageBitmap(bitmap);
+                handler.movieImage.setImageBitmap(bmp);
 
 
             }else{
