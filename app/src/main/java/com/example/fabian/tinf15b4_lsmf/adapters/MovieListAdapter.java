@@ -2,8 +2,10 @@ package com.example.fabian.tinf15b4_lsmf.adapters;
 
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,13 +41,26 @@ public class MovieListAdapter extends ArrayAdapter {
     Context context;
     public ArrayList<MovieInfo> movies = new ArrayList<MovieInfo>();
     boolean querying = false;
-    MovieComparator movieC = new MovieComparator(SortOrder.RATING_DESC);
+    MovieComparator movieC;
 
     HashMap<Integer, String> genreMap;
 
     public MovieListAdapter(Context context, int resource) {
         super(context, resource);
         this.context = context;
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        String sortingOrder = prefs.getString("sortingOrder", "");
+
+     if(sortingOrder.equals("1")){
+         movieC = new MovieComparator(SortOrder.RATING_DESC);
+     }else if(sortingOrder.equals("2")){
+         movieC = new MovieComparator(SortOrder.RATING_ASC);
+     }else if(sortingOrder.equals("3")){
+         movieC = new MovieComparator(SortOrder.NAME_DESC);
+     }else if(sortingOrder.equals("4")) {
+         movieC = new MovieComparator(SortOrder.NAME_ASC);
+     }
 
         try {
             genreMap = HelperFunctions.mapGenres("de");
@@ -147,11 +162,7 @@ public class MovieListAdapter extends ArrayAdapter {
 
            Bitmap bmp = LRUCache.getInstance().loadBitmapFromCache(url.substring(1));
             if(bmp!=null){
-
-
                 handler.movieImage.setImageBitmap(bmp);
-
-
             }else{
             new ImageLoadTask(ImageLoadTask.BASE_URL + "w500" + dataProvider.getPosterPath(), handler.movieImage, context).execute();
             }

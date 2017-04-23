@@ -1,12 +1,16 @@
 package com.example.fabian.tinf15b4_lsmf.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
 
@@ -16,6 +20,7 @@ import com.example.fabian.tinf15b4_lsmf.R;
 import com.example.fabian.tinf15b4_lsmf.adapters.MovieListAdapter;
 
 import com.omertron.themoviedbapi.MovieDbException;
+import com.omertron.themoviedbapi.model.movie.MovieInfo;
 
 import java.util.HashMap;
 
@@ -57,7 +62,24 @@ public class AddMovie extends AppCompatActivity {
 
         final ListView queryList = (ListView) findViewById(R.id.queryListView);
 
+
+
+
         final MovieListAdapter adapter = new MovieListAdapter(getApplicationContext(), R.layout.listviewrow);
+
+        queryList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                MovieInfo movieInfo  = (MovieInfo)adapter.getItem(i);
+                //implement movie details here
+                Intent inte = new Intent(AddMovie.this, movieDetail.class);
+                inte.putExtra("movieInfo", movieInfo);
+                startActivity(inte);
+            }
+
+        });
+
+
         queryList.setAdapter(adapter);
         queryList.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override

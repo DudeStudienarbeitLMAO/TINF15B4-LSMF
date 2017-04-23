@@ -10,13 +10,12 @@ import android.util.LruCache;
 public class LRUCache {
 
     private static LRUCache instance;
-    private LruCache<Object, Object> lru;
+    private LruCache<String, Bitmap> lru;
 
     private LRUCache() {
-
-        lru = new LruCache<Object, Object>(1024);
-
+        lru = new LruCache<String, Bitmap>(1024);
     }
+
 
     public static LRUCache getInstance() {
 
@@ -29,7 +28,7 @@ public class LRUCache {
 
     }
 
-    public LruCache<Object, Object> getCache() {
+    public LruCache<String, Bitmap> getCache() {
         return lru;
     }
 
