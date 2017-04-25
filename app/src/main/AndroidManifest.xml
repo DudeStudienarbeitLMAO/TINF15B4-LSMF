@@ -41,7 +41,7 @@
 
         <activity
             android:name=".activities.movieDetail"
-            android:label="@string/title_activity_movie_detail"
+            android:label="@string/title_activity_movie_details"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

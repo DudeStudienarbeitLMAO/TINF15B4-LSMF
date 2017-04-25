@@ -32,6 +32,7 @@
     <string name="sendregister">Submitting Registration ...</string>
     <string name="title_activity_settings">Settings</string>
     <string name="title_activity_add_movie">Add Movie</string>
+    <string name="title_activity_movie_details">Movie Details</string>
 
 
     <string name="help">Help</string>
@@ -95,7 +96,6 @@
     <string-array name="multi_select_list_preference_default_value" />
 
     <string name="pref_title_system_sync_settings">System sync settings</string>
-    <string name="title_activity_movie_detail">movieDetail</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"
 

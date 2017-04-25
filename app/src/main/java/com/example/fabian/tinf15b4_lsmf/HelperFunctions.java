@@ -20,23 +20,55 @@ import java.util.List;
 
 public class HelperFunctions {
 
-    static{
+    private static HelperFunctions instance;
+    private HashMap<Integer, String> genreMap;
+    private String mapKey;
+
+    static {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
     }
 
+    public static HelperFunctions getInstance() {
 
-    public static HashMap<Integer, String> mapGenres(String language) throws MovieDbException {
+        if (instance == null) {
+
+            instance = new HelperFunctions();
+        }
+
+        return instance;
+
+    }
+
+
+    //Get instance to save retrieved Genre mapping, so we dont have to pull again
+
+    private HashMap<Integer, String> mapGenres(String language) throws MovieDbException {
         HttpClient httpClient = new DefaultHttpClient();
         TmdbGenres tmdbGenres = new TmdbGenres(QueryLoadTask.apiKey, new HttpTools(httpClient));
         List<Genre> genreList = tmdbGenres.getGenreMovieList(language).getResults();
         HashMap<Integer, String> genreMap = new HashMap<>();
 
-        for(Genre g:genreList) {
+        for (Genre g : genreList) {
             genreMap.put(g.getId(), g.getName());
         }
 
+        this.mapKey = language;
+        this.genreMap = genreMap;
+
         return genreMap;
+    }
+
+    public HashMap<Integer, String> getGenreMap(String language) throws MovieDbException {
+        if (genreMap != null && mapKey == language) {
+            return genreMap;
+        } else {
+
+            return mapGenres(language);
+
+
+        }
+
     }
 
 

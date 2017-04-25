@@ -63,7 +63,8 @@ public class MovieListAdapter extends ArrayAdapter {
      }
 
         try {
-            genreMap = HelperFunctions.mapGenres("de");
+
+            genreMap =  HelperFunctions.getInstance().getGenreMap("de");
         } catch (MovieDbException e) {
             e.printStackTrace();
         }
@@ -112,7 +113,7 @@ public class MovieListAdapter extends ArrayAdapter {
 
     @Override
     public void notifyDataSetChanged() {
-        Collections.sort(movies, movieC);
+        //Collections.sort(movies, movieC);
         super.notifyDataSetChanged();
     }
 

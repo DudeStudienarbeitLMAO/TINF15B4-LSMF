@@ -46,7 +46,7 @@ public class AddMovie extends AppCompatActivity {
         setContentView(R.layout.activity_add_movie);
 
         try {
-            genres = HelperFunctions.mapGenres("de");
+            genres = HelperFunctions.getInstance().getGenreMap("de");
         } catch (MovieDbException e) {
             e.printStackTrace();
         }

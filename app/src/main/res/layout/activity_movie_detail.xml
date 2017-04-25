@@ -1,46 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.example.fabian.tinf15b4_lsmf.activities.movieDetail">
+    android:orientation="vertical">
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/app_bar"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/app_bar_height"
-        android:fitsSystemWindows="true"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <android.support.design.widget.CollapsingToolbarLayout
-            android:id="@+id/toolbar_layout"
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbarMovieDetail"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fitsSystemWindows="true"
-            app:contentScrim="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme" />
 
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="pin"
-                app:popupTheme="@style/AppTheme.PopupOverlay" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/toolbarMovieDetail">
 
-        </android.support.design.widget.CollapsingToolbarLayout>
-    </android.support.design.widget.AppBarLayout>
+            <ImageView
+                android:id="@+id/moviePoster"
+                android:layout_width="100dp"
+                android:layout_height="75dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:src="@mipmap/ic_movie_black_24px"
+                android:layout_marginTop="15dp" />
 
-    <include layout="@layout/content_movie_detail" />
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="15dp"
+                android:layout_toEndOf="@+id/moviePoster"
+                android:layout_toRightOf="@+id/moviePoster"
+                android:text="Titel hier du sack"
+                android:textColor="#000" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/fab_margin"
-        app:layout_anchor="@id/app_bar"
-        app:layout_anchorGravity="bottom|end"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+            <TextView
+                android:id="@+id/genre"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/title"
+                android:layout_alignLeft="@+id/title"
+                android:layout_alignRight="@+id/title"
+                android:layout_alignStart="@+id/title"
+                android:layout_below="@+id/title"
+                android:text="Genre, Jahr etc."
+                android:textColor="#acacac" />
 
+            <TextView
+                android:id="@+id/rating"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_alignEnd="@+id/moviePoster"
+                android:layout_alignParentStart="true"
+                android:layout_alignRight="@+id/moviePoster"
+                android:layout_below="@+id/moviePoster"
+                android:text="10/0"
+                android:textAlignment="center"
+                android:textColor="#000" />
+
+            <ImageView
+                android:id="@+id/btn_like"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/rating"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@+id/title"
+                android:layout_toEndOf="@+id/title"
+                android:layout_toRightOf="@+id/title"
+                app:srcCompat="@android:drawable/btn_star_big_off" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#acacac"
+            android:layout_below="@+id/movieImage"
+            ></View>
+
+
+        <include
+            layout="@layout/content_movie_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+    </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>
