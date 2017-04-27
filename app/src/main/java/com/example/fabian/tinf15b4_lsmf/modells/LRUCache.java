@@ -32,13 +32,13 @@ public class LRUCache {
         return lru;
     }
 
-    public void saveBitmapToCache(String key,Bitmap bmp){
-       this.getCache().put(key, bmp);
+    public void saveBitmapToCache(String key, Bitmap bmp) {
+        this.getCache().put(key, bmp);
     }
 
 
-    public Bitmap loadBitmapFromCache(String key){
-       return (Bitmap)getCache().get(key);
+    public Bitmap loadBitmapFromCache(String key) {
+        return (Bitmap) getCache().get(key);
     }
 
 }

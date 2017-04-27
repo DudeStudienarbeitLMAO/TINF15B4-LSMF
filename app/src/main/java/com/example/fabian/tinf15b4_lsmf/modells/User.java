@@ -5,42 +5,44 @@ import com.omertron.themoviedbapi.model.movie.MovieInfo;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class User implements Serializable{
+public class User implements Serializable {
 
-    private  ArrayList<MovieInfo> MovieList;
-    private  String UserName;
-    private  String PasswordHash;
-    private  String EMail;
+    private ArrayList<MovieInfo> MovieList;
+    private String UserName;
+    private String PasswordHash;
+    private String EMail;
 
-    public User(String userName, String passwordHash, String email){
+    public User(String userName, String passwordHash, String email) {
         this.UserName = userName;
         this.PasswordHash = passwordHash;
         this.EMail = email;
     }
 
-    public  ArrayList<MovieInfo> getMovieList() {
+    public ArrayList<MovieInfo> getMovieList() {
         return MovieList;
     }
 
-    public  void setMovieList(ArrayList<MovieInfo> movieList) {
+    public void setMovieList(ArrayList<MovieInfo> movieList) {
         MovieList = movieList;
     }
 
-    public void addMovie(MovieInfo movie){ MovieList.add(movie);}
+    public void addMovie(MovieInfo movie) {
+        MovieList.add(movie);
+    }
 
-    public  String getUserName() {
+    public String getUserName() {
         return UserName;
     }
 
-    public  void setUserName(String userName) {
+    public void setUserName(String userName) {
         this.UserName = userName;
     }
 
-    public  String getEMail() {
+    public String getEMail() {
         return EMail;
     }
 
-    public  void setEMail(String EMail) {
+    public void setEMail(String EMail) {
         this.EMail = EMail;
     }
 

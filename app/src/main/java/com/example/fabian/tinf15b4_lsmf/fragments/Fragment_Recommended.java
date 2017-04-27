@@ -1,25 +1,22 @@
 package com.example.fabian.tinf15b4_lsmf.fragments;
 
-import java.util.ArrayList;
+import android.content.res.Configuration;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ListView;
 
-import com.example.fabian.tinf15b4_lsmf.*;
+import com.example.fabian.tinf15b4_lsmf.R;
 import com.example.fabian.tinf15b4_lsmf.adapters.MovieListAdapter;
 import com.example.fabian.tinf15b4_lsmf.loadtasks.QueryLoadTask;
 import com.omertron.themoviedbapi.model.movie.MovieInfo;
 
-import android.content.res.Configuration;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.*;
-import android.support.v4.app.Fragment;
-
-import android.view.*;
+import java.util.ArrayList;
 
 
 public class Fragment_Recommended extends Fragment {
-
-
-
 
 
     ListView recommendedList;
@@ -34,7 +31,7 @@ public class Fragment_Recommended extends Fragment {
 
 
     @Override
-    public void onConfigurationChanged(Configuration newConfig){
+    public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
 
         recommendedList.setAdapter(adapter);

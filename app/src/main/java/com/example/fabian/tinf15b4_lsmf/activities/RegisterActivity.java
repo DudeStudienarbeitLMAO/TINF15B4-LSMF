@@ -1,25 +1,25 @@
 package com.example.fabian.tinf15b4_lsmf.activities;
 
-import android.content.Intent;
-import android.support.v7.app.*;
-import android.support.v7.widget.*;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.*;
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatButton;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.fabian.tinf15b4_lsmf.R;
 import com.example.fabian.tinf15b4_lsmf.apis.Ssapi;
 import com.example.fabian.tinf15b4_lsmf.modells.User;
 
-public class register extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity {
 
     EditText txt_username;
     EditText txt_email;
     EditText txt_password;
     EditText txt_passwordconfirm;
     AppCompatButton btn_register;
-
 
 
     @Override
@@ -43,7 +43,7 @@ public class register extends AppCompatActivity {
     }
 
     public void navToLogin(View view) {
-        Intent i = new Intent(getApplicationContext(), login.class);
+        Intent i = new Intent(getApplicationContext(), LoginActivity.class);
         startActivity(i);
         finish();
     }
@@ -57,13 +57,13 @@ public class register extends AppCompatActivity {
 
         btn_register.setEnabled(false);
 
-        final ProgressDialog ringProgressDialog = ProgressDialog.show(register.this, this.getResources().getString(R.string.pleasewait), this.getResources().getString(R.string.sendregister), true);
+        final ProgressDialog ringProgressDialog = ProgressDialog.show(RegisterActivity.this, this.getResources().getString(R.string.pleasewait), this.getResources().getString(R.string.sendregister), true);
 
         String name = txt_username.getText().toString();
         String email = txt_email.getText().toString();
         String password = txt_password.getText().toString();
 
-        User newUser = new User(name, login.encryptPasswordSHA512(password), email);
+        User newUser = new User(name, LoginActivity.encryptPasswordSHA512(password), email);
         ssAPI.registerUser(newUser);
 
         Toast.makeText(this, ssAPI.statusMessage, Toast.LENGTH_LONG).show();
@@ -72,7 +72,6 @@ public class register extends AppCompatActivity {
         ringProgressDialog.dismiss();
 
     }
-
 
 
     public boolean isValidData() {

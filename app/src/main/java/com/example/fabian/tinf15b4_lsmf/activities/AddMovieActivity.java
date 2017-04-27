@@ -6,7 +6,6 @@ import android.os.StrictMode;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AbsListView;
@@ -15,10 +14,9 @@ import android.widget.ListView;
 import android.widget.SearchView;
 
 import com.example.fabian.tinf15b4_lsmf.HelperFunctions;
-import com.example.fabian.tinf15b4_lsmf.loadtasks.QueryLoadTask;
 import com.example.fabian.tinf15b4_lsmf.R;
 import com.example.fabian.tinf15b4_lsmf.adapters.MovieListAdapter;
-
+import com.example.fabian.tinf15b4_lsmf.loadtasks.QueryLoadTask;
 import com.omertron.themoviedbapi.MovieDbException;
 import com.omertron.themoviedbapi.model.movie.MovieInfo;
 
@@ -30,7 +28,7 @@ import java.util.HashMap;
  */
 
 
-public class AddMovie extends AppCompatActivity {
+public class AddMovieActivity extends AppCompatActivity {
     QueryLoadTask queryTask;
     HashMap<Integer, String> genres;
 
@@ -63,16 +61,14 @@ public class AddMovie extends AppCompatActivity {
         final ListView queryList = (ListView) findViewById(R.id.queryListView);
 
 
-
-
         final MovieListAdapter adapter = new MovieListAdapter(getApplicationContext(), R.layout.listviewrow);
 
         queryList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                MovieInfo movieInfo  = (MovieInfo)adapter.getItem(i);
+                MovieInfo movieInfo = (MovieInfo) adapter.getItem(i);
                 //implement movie details here
-                Intent inte = new Intent(AddMovie.this, movieDetail.class);
+                Intent inte = new Intent(AddMovieActivity.this, MovieDetailsActivity.class);
                 inte.putExtra("movieInfo", movieInfo);
                 startActivity(inte);
             }

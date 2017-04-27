@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -16,11 +15,9 @@ import com.example.fabian.tinf15b4_lsmf.modells.LRUCache;
 import com.omertron.themoviedbapi.MovieDbException;
 import com.omertron.themoviedbapi.model.movie.MovieInfo;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
-public class movieDetail extends AppCompatActivity {
+public class MovieDetailsActivity extends AppCompatActivity {
 
 
     MovieInfo movieInfo;
@@ -34,7 +31,7 @@ public class movieDetail extends AppCompatActivity {
         TextView title = (TextView) findViewById(R.id.title);
         TextView rating = (TextView) findViewById(R.id.rating);
         TextView genre = (TextView) findViewById(R.id.genre);
-        TextView movieDesc = (TextView) findViewById(R.id.movie_desc) ;
+        TextView movieDesc = (TextView) findViewById(R.id.movie_desc);
 
         movieInfo = (MovieInfo) getIntent().getSerializableExtra("movieInfo");
 
@@ -45,12 +42,10 @@ public class movieDetail extends AppCompatActivity {
             String ratingScore;
 
 
-
-            if(movieInfo.getPopularity() > 10) {
+            if (movieInfo.getPopularity() > 10) {
                 ratingScore = "10";
-            }
-            else {
-                ratingScore = Float.toString(movieInfo.getPopularity());
+            } else {
+                ratingScore = Float.toString(movieInfo.getPopularity()).substring(0, 3);
             }
 
             rating.setText(ratingScore + "/10");

@@ -1,24 +1,17 @@
 package com.example.fabian.tinf15b4_lsmf.loadtasks;
 
-import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
 import com.example.fabian.tinf15b4_lsmf.adapters.MovieListAdapter;
 import com.omertron.themoviedbapi.MovieDbException;
-import com.omertron.themoviedbapi.methods.TmdbGenres;
 import com.omertron.themoviedbapi.methods.TmdbSearch;
-import com.omertron.themoviedbapi.model.Genre;
 import com.omertron.themoviedbapi.model.movie.MovieInfo;
 import com.omertron.themoviedbapi.results.ResultList;
 import com.omertron.themoviedbapi.tools.HttpTools;
 
 import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 /**
  * Created by s.gerhardt on 10.04.2017.
@@ -47,7 +40,7 @@ public class QueryLoadTask extends AsyncTask<String, Void, ResultList<MovieInfo>
         return this.query;
     }
 
-    public int getNextPage(){
+    public int getNextPage() {
         return this.nextPage;
     }
 
@@ -81,7 +74,7 @@ public class QueryLoadTask extends AsyncTask<String, Void, ResultList<MovieInfo>
 
     }
 
-    public void extendQueryView () {
+    public void extendQueryView() {
         int moviesSizeToAdd = SCROLL_QUERY_ADDING_SIZE;
         int querySizeLeft = result.getResults().size() - nextMovie;
 
@@ -103,7 +96,6 @@ public class QueryLoadTask extends AsyncTask<String, Void, ResultList<MovieInfo>
 
 
             adapter.add(movieInfo);
-
 
 
         }

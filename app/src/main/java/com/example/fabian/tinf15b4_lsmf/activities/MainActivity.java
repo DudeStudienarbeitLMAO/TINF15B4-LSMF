@@ -1,20 +1,20 @@
 package com.example.fabian.tinf15b4_lsmf.activities;
 
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
-import com.example.fabian.tinf15b4_lsmf.*;
+import com.example.fabian.tinf15b4_lsmf.R;
 import com.example.fabian.tinf15b4_lsmf.adapters.PagerAdapter;
 import com.example.fabian.tinf15b4_lsmf.modells.User;
 
-import android.os.Bundle;
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.view.ViewPager;
-
-import android.view.Menu;
-import android.view.*;
-import android.support.design.widget.*;
 public class MainActivity extends AppCompatActivity {
 
     ViewPager pager;
@@ -44,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayUseLogoEnabled(true);
 
 
-
         loggedInUser = (User) getIntent().getSerializableExtra("currentUser");
 
     }
@@ -56,12 +55,13 @@ public class MainActivity extends AppCompatActivity {
 
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.show_about:
-                Intent i = new Intent(getApplicationContext(), activity_about.class);
+                Intent i = new Intent(getApplicationContext(), AboutActivity.class);
                 startActivity(i);
                 return true;
             case R.id.show_settings:
@@ -69,11 +69,11 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(r);
                 return true;
             case R.id.show_help:
-                Intent k = new Intent(getApplicationContext(), help.class);
+                Intent k = new Intent(getApplicationContext(), HelpActivity.class);
                 startActivity(k);
                 return true;
             case R.id.addViewedMovie:
-                Intent s = new Intent(getApplicationContext(), AddMovie.class);
+                Intent s = new Intent(getApplicationContext(), AddMovieActivity.class);
                 startActivity(s);
                 return true;
             default:

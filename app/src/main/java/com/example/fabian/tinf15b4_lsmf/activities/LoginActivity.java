@@ -1,19 +1,21 @@
 package com.example.fabian.tinf15b4_lsmf.activities;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.view.View;
-import android.content.Intent;
-import android.widget.*;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.fabian.tinf15b4_lsmf.R;
 import com.example.fabian.tinf15b4_lsmf.apis.Ssapi;
 import com.example.fabian.tinf15b4_lsmf.modells.User;
 
-import java.security.*;
+import java.security.MessageDigest;
 
-public class login extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     EditText txt_name, txt_password;
     AppCompatButton btn_login;
@@ -32,7 +34,7 @@ public class login extends AppCompatActivity {
         lbl_help = (TextView) findViewById(R.id.link_help);
         txt_password = (EditText) findViewById(R.id.input_password);
 
-        btn_login  = (AppCompatButton) findViewById(R.id.btn_login);
+        btn_login = (AppCompatButton) findViewById(R.id.btn_login);
         lbl_reset = (TextView) findViewById(R.id.link_resetpw);
 
         btn_login.setOnClickListener(new View.OnClickListener() {
@@ -54,23 +56,22 @@ public class login extends AppCompatActivity {
         lbl_help.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent k = new Intent(getApplicationContext(), help.class);
+                Intent k = new Intent(getApplicationContext(), HelpActivity.class);
                 startActivity(k);
             }
         });
 
     }
 
-    public void navToRegister(View view)
-    {
-        Intent i = new Intent(getApplicationContext(), register.class);
+    public void navToRegister(View view) {
+        Intent i = new Intent(getApplicationContext(), RegisterActivity.class);
         startActivity(i);
         finish();
 
     }
 
 
-    public void login(){
+    public void login() {
 
         String username = txt_name.getText().toString();
         String password = txt_password.getText().toString();
@@ -81,11 +82,11 @@ public class login extends AppCompatActivity {
 
         User user = new User(username, hash, "");
 
-        if(!Ssapi.testConnection(user)){
+        if (!Ssapi.testConnection(user)) {
             failedLoginAttempts++;
             Toast.makeText(this, getResources().getString(R.string.loginfail), Toast.LENGTH_LONG).show();
 
-        }else{
+        } else {
 
             Intent i = new Intent(getApplicationContext(), MainActivity.class);
             i.putExtra("currentUser", user);
@@ -95,23 +96,23 @@ public class login extends AppCompatActivity {
         }
 
 
-        if(failedLoginAttempts>=3){
+        if (failedLoginAttempts >= 3) {
             lbl_reset.setVisibility(View.VISIBLE);
         }
 
     }
 
-    public void resetPassword(){
+    public void resetPassword() {
         //redirect to reset password form
     }
 
 
     public static String encryptPasswordSHA512(String password) {
-        MessageDigest md=null;
+        MessageDigest md = null;
 
         try {
-             md = MessageDigest.getInstance("SHA-512");
-        }catch (Exception ex){
+            md = MessageDigest.getInstance("SHA-512");
+        } catch (Exception ex) {
 
         }
         md.update(password.getBytes());

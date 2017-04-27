@@ -1,10 +1,8 @@
 package com.example.fabian.tinf15b4_lsmf.adapters;
 
 import android.content.Context;
-import android.content.ContextWrapper;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -13,22 +11,17 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.fabian.tinf15b4_lsmf.HelperFunctions;
+import com.example.fabian.tinf15b4_lsmf.R;
 import com.example.fabian.tinf15b4_lsmf.enums.SortOrder;
 import com.example.fabian.tinf15b4_lsmf.loadtasks.ImageLoadTask;
-import com.example.fabian.tinf15b4_lsmf.R;
 import com.example.fabian.tinf15b4_lsmf.modells.LRUCache;
 import com.example.fabian.tinf15b4_lsmf.modells.MovieComparator;
 import com.omertron.themoviedbapi.MovieDbException;
 import com.omertron.themoviedbapi.model.movie.MovieInfo;
 
-import java.io.File;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
@@ -52,19 +45,19 @@ public class MovieListAdapter extends ArrayAdapter {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         String sortingOrder = prefs.getString("sortingOrder", "");
 
-     if(sortingOrder.equals("1")){
-         movieC = new MovieComparator(SortOrder.RATING_DESC);
-     }else if(sortingOrder.equals("2")){
-         movieC = new MovieComparator(SortOrder.RATING_ASC);
-     }else if(sortingOrder.equals("3")){
-         movieC = new MovieComparator(SortOrder.NAME_DESC);
-     }else if(sortingOrder.equals("4")) {
-         movieC = new MovieComparator(SortOrder.NAME_ASC);
-     }
+        if (sortingOrder.equals("1")) {
+            movieC = new MovieComparator(SortOrder.RATING_DESC);
+        } else if (sortingOrder.equals("2")) {
+            movieC = new MovieComparator(SortOrder.RATING_ASC);
+        } else if (sortingOrder.equals("3")) {
+            movieC = new MovieComparator(SortOrder.NAME_DESC);
+        } else if (sortingOrder.equals("4")) {
+            movieC = new MovieComparator(SortOrder.NAME_ASC);
+        }
 
         try {
 
-            genreMap =  HelperFunctions.getInstance().getGenreMap("de");
+            genreMap = HelperFunctions.getInstance().getGenreMap("de");
         } catch (MovieDbException e) {
             e.printStackTrace();
         }
@@ -140,15 +133,14 @@ public class MovieListAdapter extends ArrayAdapter {
 
         handler.movieTitle.setText(dataProvider.getTitle());
 
-        List<Integer> lg =dataProvider.getGenreIds();
-        if(lg!=null && lg.size()>0)
-         handler.movieGenre.setText(genreMap.get(lg.get(0)));
+        List<Integer> lg = dataProvider.getGenreIds();
+        if (lg != null && lg.size() > 0)
+            handler.movieGenre.setText(genreMap.get(lg.get(0)));
 
         String shortendRating = "";
-        if(dataProvider.getPopularity() > 10) {
+        if (dataProvider.getPopularity() > 10) {
             shortendRating = "10";
-        }
-        else {
+        } else {
             shortendRating = Double.toString(dataProvider.getPopularity()).substring(0, 3);
         }
 
@@ -158,14 +150,13 @@ public class MovieListAdapter extends ArrayAdapter {
         String url = dataProvider.getPosterPath();
 
 
+        if (url != null) {
 
-        if ( url != null) {
-
-           Bitmap bmp = LRUCache.getInstance().loadBitmapFromCache(url.substring(1));
-            if(bmp!=null){
+            Bitmap bmp = LRUCache.getInstance().loadBitmapFromCache(url.substring(1));
+            if (bmp != null) {
                 handler.movieImage.setImageBitmap(bmp);
-            }else{
-            new ImageLoadTask(ImageLoadTask.BASE_URL + "w500" + dataProvider.getPosterPath(), handler.movieImage, context).execute();
+            } else {
+                new ImageLoadTask(ImageLoadTask.BASE_URL + "w500" + dataProvider.getPosterPath(), handler.movieImage, context).execute();
             }
         }
         return row;
