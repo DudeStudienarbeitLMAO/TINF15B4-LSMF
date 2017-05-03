@@ -1,9 +1,12 @@
-package com.example.fabian.tinf15b4_lsmf;
+package com.example.fabian.tinf15b4_lsmf.loadtasks;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.widget.ImageView;
+
+import com.example.fabian.tinf15b4_lsmf.modells.LRUCache;
 
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -16,11 +19,13 @@ import java.net.URL;
 public class ImageLoadTask extends AsyncTask<Void, Void, Bitmap> {
     private String url;
     private ImageView imageView;
-    public static final String BASE_URL =  "https://image.tmdb.org/t/p/";
+    private Context AppContext;
+    public static final String BASE_URL = "https://image.tmdb.org/t/p/";
 
-    public ImageLoadTask(String url, ImageView imageView) {
+    public ImageLoadTask(String url, ImageView imageView, Context con) {
         this.url = url;
         this.imageView = imageView;
+        this.AppContext = con;
     }
 
     @Override
@@ -33,6 +38,10 @@ public class ImageLoadTask extends AsyncTask<Void, Void, Bitmap> {
             connection.connect();
             InputStream input = connection.getInputStream();
             Bitmap myBitmap = BitmapFactory.decodeStream(input);
+
+            String[] urlParts = url.split("/");
+            LRUCache.getInstance().saveBitmapToCache(urlParts[urlParts.length - 1], myBitmap);
+
             return myBitmap;
         } catch (Exception e) {
             e.printStackTrace();

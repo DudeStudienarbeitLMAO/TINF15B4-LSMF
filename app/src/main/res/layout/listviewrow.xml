@@ -29,7 +29,7 @@
         android:id="@+id/movieGenre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Dank"
+        android:text=""
         android:layout_marginTop="5dp"
         android:layout_toRightOf="@id/movieImage"
         android:textColor="#acacac"

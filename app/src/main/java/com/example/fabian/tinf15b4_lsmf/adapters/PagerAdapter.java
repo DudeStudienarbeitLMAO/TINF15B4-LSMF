@@ -14,8 +14,9 @@ import com.example.fabian.tinf15b4_lsmf.fragments.Fragment_Recommended;
 import com.example.fabian.tinf15b4_lsmf.fragments.Fragment_Viewed;
 
 
-public class PagerAdapter extends FragmentStatePagerAdapter{
+public class PagerAdapter extends FragmentStatePagerAdapter {
     Context context;
+
     public PagerAdapter(FragmentManager fm, Context context) {
         super(fm);
         this.context = context;
@@ -24,13 +25,13 @@ public class PagerAdapter extends FragmentStatePagerAdapter{
     @Override
     public Fragment getItem(int position) {
 
-        Fragment frag=null;
-        switch (position){
+        Fragment frag = null;
+        switch (position) {
             case 0:
-                frag=new Fragment_Recommended();
+                frag = new Fragment_Recommended();
                 break;
             case 1:
-                frag=new Fragment_Viewed();
+                frag = new Fragment_Viewed();
                 break;
 
         }
@@ -44,13 +45,13 @@ public class PagerAdapter extends FragmentStatePagerAdapter{
 
     @Override
     public CharSequence getPageTitle(int position) {
-        String title=" ";
-        switch (position){
+        String title = " ";
+        switch (position) {
             case 0:
-                title= context.getResources().getString(R.string.recommended);
+                title = context.getResources().getString(R.string.recommended);
                 break;
             case 1:
-                title=context.getResources().getString(R.string.viewed);
+                title = context.getResources().getString(R.string.viewed);
                 break;
 
         }

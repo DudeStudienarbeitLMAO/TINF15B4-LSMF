@@ -10,7 +10,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.MainActivity" >
+        <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,33 +18,31 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.activity_about"
+            android:name=".activities.AboutActivity"
             android:label="@string/about"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activities.login" >
-
-            </activity>
-        <activity android:name=".activities.register">
-
-        </activity>
+        <activity android:name=".activities.LoginActivity"></activity>
+        <activity android:name=".activities.RegisterActivity"></activity>
         <activity
             android:name=".activities.SettingsActivity"
-            android:label="@string/title_activity_settings">
-
-        </activity>
+            android:label="@string/title_activity_settings"></activity>
         <activity
-            android:name=".activities.AddMovie"
+            android:name=".activities.AddMovieActivity"
             android:label="@string/title_activity_add_movie"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
-        <activity android:name=".activities.help"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".activities.HelpActivity"
             android:label="@string/help"
             android:theme="@style/AppTheme.NoActionBar" />
 
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.fabian.tinf15b4_lsmf.activities.MainActivity" />
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="com.example.fabian.tinf15b4_lsmf.activities.MainActivity" />
+
+        <activity
+            android:name=".activities.MovieDetailsActivity"
+            android:label="@string/title_activity_movie_details"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
