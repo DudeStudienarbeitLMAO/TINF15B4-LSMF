@@ -16,7 +16,7 @@ import com.example.fabian.tinf15b4_lsmf.HelperFunctions;
 import com.example.fabian.tinf15b4_lsmf.R;
 import com.example.fabian.tinf15b4_lsmf.enums.SortOrder;
 import com.example.fabian.tinf15b4_lsmf.loadtasks.ImageLoadTask;
-import com.example.fabian.tinf15b4_lsmf.modells.LRUCache;
+import com.example.fabian.tinf15b4_lsmf.modells.ImageCache;
 import com.example.fabian.tinf15b4_lsmf.modells.MovieComparator;
 import com.omertron.themoviedbapi.MovieDbException;
 import com.omertron.themoviedbapi.model.movie.MovieInfo;
@@ -152,11 +152,11 @@ public class MovieListAdapter extends ArrayAdapter {
 
         if (url != null) {
 
-            Bitmap bmp = LRUCache.getInstance().loadBitmapFromCache(url.substring(1));
+            Bitmap bmp = ImageCache.getInstance().loadBitmapFromCache(dataProvider.getId());
             if (bmp != null) {
                 handler.movieImage.setImageBitmap(bmp);
             } else {
-                new ImageLoadTask(ImageLoadTask.BASE_URL + "w500" + dataProvider.getPosterPath(), handler.movieImage, context).execute();
+                new ImageLoadTask(ImageLoadTask.BASE_URL + "w500" + dataProvider.getPosterPath(), handler.movieImage, dataProvider.getId(), context).execute();
             }
         }
         return row;

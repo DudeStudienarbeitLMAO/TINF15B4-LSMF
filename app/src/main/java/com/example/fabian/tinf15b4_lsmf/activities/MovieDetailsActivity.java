@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -11,7 +12,9 @@ import android.widget.TextView;
 
 import com.example.fabian.tinf15b4_lsmf.HelperFunctions;
 import com.example.fabian.tinf15b4_lsmf.R;
-import com.example.fabian.tinf15b4_lsmf.modells.LRUCache;
+import com.example.fabian.tinf15b4_lsmf.apis.Ssapi;
+import com.example.fabian.tinf15b4_lsmf.modells.ImageCache;
+import com.example.fabian.tinf15b4_lsmf.modells.LikedMovieCache;
 import com.omertron.themoviedbapi.MovieDbException;
 import com.omertron.themoviedbapi.model.movie.MovieInfo;
 
@@ -21,6 +24,8 @@ public class MovieDetailsActivity extends AppCompatActivity {
 
 
     MovieInfo movieInfo;
+    boolean likedMovie;
+    boolean likeChanged = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +54,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
             }
 
             rating.setText(ratingScore + "/10");
-            moviePoster.setImageBitmap(LRUCache.getInstance().getCache().get(movieInfo.getPosterPath().substring(1)));
+            moviePoster.setImageBitmap(ImageCache.getInstance().getCache().get(movieInfo.getId()));
 
             List<Integer> lg = movieInfo.getGenreIds();
             if (lg != null && lg.size() > 0) {
@@ -75,9 +80,12 @@ public class MovieDetailsActivity extends AppCompatActivity {
 
         final ImageView btnLike = (ImageView) findViewById(R.id.btn_like);
 
+        Log.i(Integer.toString(LikedMovieCache.getInstance().getCache().size()), Integer.toString(LikedMovieCache.getInstance().getCache().size()));
+
+        //Only liked movies here
+        likedMovie = (LikedMovieCache.getInstance().loadMovieFromCache(movieInfo.getId()) != null);
         //Search for movie in liked movies list as cond
-        if (false) {
-            //If User already likes movie
+        if (likedMovie) {
             btnLike.setImageResource(android.R.drawable.btn_star_big_on);
         } else {
             btnLike.setImageResource(android.R.drawable.btn_star_big_off);
@@ -87,17 +95,16 @@ public class MovieDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (v.getId() == R.id.btn_like) {
-                    if (false) {
-                        //If User already liked movie
-                        //Remove from liked moviees list
-
-                        btnLike.setImageResource(android.R.drawable.btn_star_big_off);
-                    } else {
-                        //Save to liked movies list
+                    likedMovie = !likedMovie;
+                    if (likedMovie) {
 
                         btnLike.setImageResource(android.R.drawable.btn_star_big_on);
+                    } else {
+
+                        btnLike.setImageResource(android.R.drawable.btn_star_big_off);
 
                     }
+                    likeChanged = !likeChanged;
                 }
             }
         });
@@ -109,6 +116,17 @@ public class MovieDetailsActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 // app icon in action bar clicked; goto parent activity.
+                if (likeChanged) {
+                    if (likedMovie) {
+                        Ssapi ssapi = new Ssapi();
+                        ssapi.insertLikedMovie(MainActivity.loggedInUser, movieInfo);
+                        LikedMovieCache.getInstance().saveMovieToCache(movieInfo.getId(), movieInfo);
+                    } else {
+                        Ssapi ssapi = new Ssapi();
+                        ssapi.removeLikedMovie(MainActivity.loggedInUser, movieInfo);
+                        LikedMovieCache.getInstance().getCache().remove(movieInfo.getId());
+                    }
+                }
                 this.finish();
                 return true;
             default:

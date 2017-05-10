@@ -47,8 +47,6 @@ public class QueryLoadTask extends AsyncTask<String, Void, ResultList<MovieInfo>
     @Override
     protected ResultList<MovieInfo> doInBackground(String... params) {
         HttpClient httpClient = new DefaultHttpClient();
-
-
         TmdbSearch apiSearch = new TmdbSearch(apiKey, new HttpTools(httpClient));
 
 

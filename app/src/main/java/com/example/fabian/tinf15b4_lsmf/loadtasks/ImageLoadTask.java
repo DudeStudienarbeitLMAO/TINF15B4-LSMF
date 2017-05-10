@@ -6,7 +6,7 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.widget.ImageView;
 
-import com.example.fabian.tinf15b4_lsmf.modells.LRUCache;
+import com.example.fabian.tinf15b4_lsmf.modells.ImageCache;
 
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -20,10 +20,12 @@ public class ImageLoadTask extends AsyncTask<Void, Void, Bitmap> {
     private String url;
     private ImageView imageView;
     private Context AppContext;
+    private int movieID;
     public static final String BASE_URL = "https://image.tmdb.org/t/p/";
 
-    public ImageLoadTask(String url, ImageView imageView, Context con) {
+    public ImageLoadTask(String url, ImageView imageView, int movieID, Context con) {
         this.url = url;
+        this.movieID = movieID;
         this.imageView = imageView;
         this.AppContext = con;
     }
@@ -39,8 +41,7 @@ public class ImageLoadTask extends AsyncTask<Void, Void, Bitmap> {
             InputStream input = connection.getInputStream();
             Bitmap myBitmap = BitmapFactory.decodeStream(input);
 
-            String[] urlParts = url.split("/");
-            LRUCache.getInstance().saveBitmapToCache(urlParts[urlParts.length - 1], myBitmap);
+            ImageCache.getInstance().saveBitmapToCache(movieID, myBitmap);
 
             return myBitmap;
         } catch (Exception e) {

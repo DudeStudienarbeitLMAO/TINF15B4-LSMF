@@ -3,6 +3,7 @@ package com.example.fabian.tinf15b4_lsmf.apis;
 import android.os.StrictMode;
 
 import com.example.fabian.tinf15b4_lsmf.modells.SSLTool;
+import com.example.fabian.tinf15b4_lsmf.modells.SsapiResult;
 import com.example.fabian.tinf15b4_lsmf.modells.User;
 import com.omertron.themoviedbapi.model.movie.MovieInfo;
 
@@ -14,7 +15,6 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Locale;
@@ -78,10 +78,10 @@ public class Ssapi {
     }
 
     public boolean testConnection(User user) {
-        String methodaddress = String.format("SSAPI.php?method=isAuthorized&user=%s&password=%s", user.getUserName(), user.getPasswordHash());
+        String method = String.format("SSAPI.php?method=isAuthorized&user=%s&password=%s", user.getUserName(), user.getPasswordHash());
         String response = "";
         boolean testSuccess = false;
-        response = sendWebRequest(baseaddress + methodaddress);
+        response = sendWebRequest(baseaddress + method);
         if (response.isEmpty()) {
             return false;
         }
@@ -102,39 +102,36 @@ public class Ssapi {
         return testSuccess;
     }
 
-    public boolean addMovie(User user, MovieInfo movie) {
-        user.addMovie(movie);
+    public SsapiResult registerUser(User user) {
+        String method = "SSAPI.php?method=register&user=" + user.getUserName() + "&password=" + user.getPasswordHash() + "&params=[%22" + user.getEMail() + "%22]";
 
-        // webrequest an db
-
-        return false;
-    }
-
-    public boolean registerUser(User user) {
-        JSONArray jsa = null;
-        int code = 0;
-        try {
-            jsa = new JSONArray(sendWebRequest("https://cduc.su/SSAPI.php?method=register&user=" + user.getUserName() + "&password=" + user.getPasswordHash() + "&params=[%22" + user.getEMail() + "%22]"));
-            if (jsa == null) {
-                return false;
-            }
-            code = Integer.parseInt(jsa.get(0).toString());
-            statusMessage = statusCodes.get(code);
-
-
-        } catch (Exception ex) {
-        }
-        return (code == 201);
-    }
-
-    public ArrayList<MovieInfo> fetchMovielist(User user) {
-        // TODO
-        return null;
+        SsapiResult result = fetchFromDB(baseaddress + method);
+        return result;
     }
 
     public boolean resetPassword(String email) {
 
         return false;
+    }
+
+    private SsapiResult fetchFromDB(String url) {
+        SsapiResult result = null;
+        try {
+            JSONArray jsa = new JSONArray(sendWebRequest(url));
+            if (jsa == null) {
+                return result;
+            }
+
+            int code = Integer.parseInt(jsa.get(0).toString());
+            statusMessage = statusCodes.get(code);
+
+            result = new SsapiResult(jsa, code, statusMessage);
+
+        } catch (Exception ex) {
+
+        }
+
+        return result;
     }
 
     private String sendWebRequest(String url) {
@@ -162,4 +159,27 @@ public class Ssapi {
         }
         return response;
     }
+
+    public SsapiResult getLikedMovies(User user) {
+        String method = "SSAPI.php?method=getMovies&user=" + user.getUserName() + "&password=" + user.getPasswordHash();
+
+        SsapiResult result = fetchFromDB(baseaddress + method);
+        return result;
+    }
+
+    public SsapiResult insertLikedMovie(User user, MovieInfo movie) {
+        String method = "SSAPI.php?method=likeMovie&user=" + user.getUserName() + "&password=" + user.getPasswordHash() + "&params=[" + movie.getId() + "]";
+
+        SsapiResult result = fetchFromDB(baseaddress + method);
+        return result;
+
+    }
+
+    public SsapiResult removeLikedMovie(User user, MovieInfo movie) {
+        String method = "SSAPI.php?method=removeMovie&user=" + user.getUserName() + "&password=" + user.getPasswordHash() + "&params=[" + movie.getId() + "]";
+
+        SsapiResult result = fetchFromDB(baseaddress + method);
+        return result;
+    }
+
 }
