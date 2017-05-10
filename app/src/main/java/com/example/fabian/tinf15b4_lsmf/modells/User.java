@@ -1,56 +1,59 @@
 package com.example.fabian.tinf15b4_lsmf.modells;
 
-import com.omertron.themoviedbapi.model.movie.MovieInfo;
-
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 public class User implements Serializable {
 
-    private ArrayList<MovieInfo> MovieList;
-    private String UserName;
-    private String PasswordHash;
-    private String EMail;
+    private String userName;
+    private String passwordHash;
+    private String eMail;
+    private List<Integer> likedMovies = new ArrayList<>();
 
     public User(String userName, String passwordHash, String email) {
-        this.UserName = userName;
-        this.PasswordHash = passwordHash;
-        this.EMail = email;
-    }
-
-    public ArrayList<MovieInfo> getMovieList() {
-        return MovieList;
-    }
-
-    public void setMovieList(ArrayList<MovieInfo> movieList) {
-        MovieList = movieList;
-    }
-
-    public void addMovie(MovieInfo movie) {
-        MovieList.add(movie);
+        this.userName = userName;
+        this.passwordHash = passwordHash;
+        this.eMail = email;
     }
 
     public String getUserName() {
-        return UserName;
+        return userName;
     }
 
     public void setUserName(String userName) {
-        this.UserName = userName;
+        this.userName = userName;
     }
 
     public String getEMail() {
-        return EMail;
+        return eMail;
     }
 
-    public void setEMail(String EMail) {
-        this.EMail = EMail;
+    public void setEMail(String eMail) {
+        this.eMail = eMail;
     }
 
     public String getPasswordHash() {
-        return PasswordHash;
+        return passwordHash;
     }
 
     public void setPasswordHash(String passwordHash) {
-        PasswordHash = passwordHash;
+        this.passwordHash = passwordHash;
+    }
+
+    public List<Integer> getLikedMovies() {
+        return likedMovies;
+    }
+
+    public void setLikedMovies(List<Integer> likedMovies) {
+        this.likedMovies = likedMovies;
+    }
+
+    public void addLikedMovie(int movieID) {
+        this.likedMovies.add(movieID);
+    }
+
+    public void removeLikedMovie(int movieID) {
+        this.likedMovies.remove((Object) movieID);
     }
 }

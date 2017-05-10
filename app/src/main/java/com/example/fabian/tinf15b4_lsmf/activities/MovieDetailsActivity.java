@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -14,7 +13,7 @@ import com.example.fabian.tinf15b4_lsmf.HelperFunctions;
 import com.example.fabian.tinf15b4_lsmf.R;
 import com.example.fabian.tinf15b4_lsmf.apis.Ssapi;
 import com.example.fabian.tinf15b4_lsmf.modells.ImageCache;
-import com.example.fabian.tinf15b4_lsmf.modells.LikedMovieCache;
+import com.example.fabian.tinf15b4_lsmf.modells.User;
 import com.omertron.themoviedbapi.MovieDbException;
 import com.omertron.themoviedbapi.model.movie.MovieInfo;
 
@@ -80,10 +79,8 @@ public class MovieDetailsActivity extends AppCompatActivity {
 
         final ImageView btnLike = (ImageView) findViewById(R.id.btn_like);
 
-        Log.i(Integer.toString(LikedMovieCache.getInstance().getCache().size()), Integer.toString(LikedMovieCache.getInstance().getCache().size()));
-
         //Only liked movies here
-        likedMovie = (LikedMovieCache.getInstance().loadMovieFromCache(movieInfo.getId()) != null);
+        likedMovie = MainActivity.session.getUser().getLikedMovies().contains(movieInfo.getId());
         //Search for movie in liked movies list as cond
         if (likedMovie) {
             btnLike.setImageResource(android.R.drawable.btn_star_big_on);
@@ -117,14 +114,14 @@ public class MovieDetailsActivity extends AppCompatActivity {
             case android.R.id.home:
                 // app icon in action bar clicked; goto parent activity.
                 if (likeChanged) {
+                    Ssapi ssapi = MainActivity.session.getSsapi();
+                    User user = MainActivity.session.getUser();
                     if (likedMovie) {
-                        Ssapi ssapi = new Ssapi();
-                        ssapi.insertLikedMovie(MainActivity.loggedInUser, movieInfo);
-                        LikedMovieCache.getInstance().saveMovieToCache(movieInfo.getId(), movieInfo);
+                        ssapi.insertLikedMovie(user, movieInfo);
+                        user.addLikedMovie(movieInfo.getId());
                     } else {
-                        Ssapi ssapi = new Ssapi();
-                        ssapi.removeLikedMovie(MainActivity.loggedInUser, movieInfo);
-                        LikedMovieCache.getInstance().getCache().remove(movieInfo.getId());
+                        ssapi.removeLikedMovie(user, movieInfo);
+                        user.removeLikedMovie(movieInfo.getId());
                     }
                 }
                 this.finish();
