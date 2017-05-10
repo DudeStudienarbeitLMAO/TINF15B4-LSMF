@@ -1,11 +1,9 @@
-package com.example.fabian.tinf15b4_lsmf;
+package com.example.fabian.tinf15b4_lsmf.loadtasks;
 
 import android.os.AsyncTask;
 import android.util.Log;
 
 import com.example.fabian.tinf15b4_lsmf.adapters.MovieListAdapter;
-import com.example.fabian.tinf15b4_lsmf.apis.IMDBAPI;
-import com.example.fabian.tinf15b4_lsmf.modells.Movie;
 import com.omertron.themoviedbapi.MovieDbException;
 import com.omertron.themoviedbapi.methods.TmdbSearch;
 import com.omertron.themoviedbapi.model.movie.MovieInfo;
@@ -15,18 +13,19 @@ import com.omertron.themoviedbapi.tools.HttpTools;
 import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
 
-import java.util.Comparator;
-
 /**
  * Created by s.gerhardt on 10.04.2017.
  */
 
 public class QueryLoadTask extends AsyncTask<String, Void, ResultList<MovieInfo>> {
+
+    public static final String apiKey = "a58333d7dddf6bcc826dfaed7c49f20e";
     MovieListAdapter adapter = null;
     ResultList<MovieInfo> result = null;
     int nextMovie = 0;
     String query = "";
     int nextPage = 1;
+
 
     private static final int SCROLL_QUERY_ADDING_SIZE = 20;
 
@@ -34,13 +33,14 @@ public class QueryLoadTask extends AsyncTask<String, Void, ResultList<MovieInfo>
         this.adapter = adapter;
         this.query = query;
         this.nextPage = nextPage;
+
     }
 
     public String getQuery() {
         return this.query;
     }
 
-    public int getNextPage(){
+    public int getNextPage() {
         return this.nextPage;
     }
 
@@ -49,7 +49,8 @@ public class QueryLoadTask extends AsyncTask<String, Void, ResultList<MovieInfo>
         HttpClient httpClient = new DefaultHttpClient();
 
 
-        TmdbSearch apiSearch = new TmdbSearch(IMDBAPI.apiKey, new HttpTools(httpClient));
+        TmdbSearch apiSearch = new TmdbSearch(apiKey, new HttpTools(httpClient));
+
 
         try {
 
@@ -73,7 +74,7 @@ public class QueryLoadTask extends AsyncTask<String, Void, ResultList<MovieInfo>
 
     }
 
-    public void extendQueryView () {
+    public void extendQueryView() {
         int moviesSizeToAdd = SCROLL_QUERY_ADDING_SIZE;
         int querySizeLeft = result.getResults().size() - nextMovie;
 
@@ -92,22 +93,9 @@ public class QueryLoadTask extends AsyncTask<String, Void, ResultList<MovieInfo>
 
             MovieInfo movieInfo = result.getResults().get(i);
             Log.i(Integer.toString(i), Integer.toString(i));
-            Movie movieToAdd = new Movie();
-            movieToAdd.setRating(movieInfo.getPopularity());
-            movieToAdd.setTitle(movieInfo.getTitle());
 
-            if (movieInfo.getPosterPath() != null) {
-                String size = "w500";
-                movieToAdd.setPosterURL(ImageLoadTask.BASE_URL + size + movieInfo.getPosterPath());
 
-            }
-
-            if (movieInfo.getGenres() != null && movieInfo.getGenres().size() != 0) {
-                movieToAdd.setGenre(movieInfo.getGenres().get(0).getName());
-            }
-
-            adapter.add(movieToAdd);
-
+            adapter.add(movieInfo);
 
 
         }

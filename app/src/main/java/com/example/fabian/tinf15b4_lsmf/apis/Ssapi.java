@@ -2,41 +2,46 @@ package com.example.fabian.tinf15b4_lsmf.apis;
 
 import android.os.StrictMode;
 
-import com.example.fabian.tinf15b4_lsmf.modells.Movie;
 import com.example.fabian.tinf15b4_lsmf.modells.SSLTool;
 import com.example.fabian.tinf15b4_lsmf.modells.User;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.*;
-import java.net.*;
-import java.io.*;
+import com.omertron.themoviedbapi.model.movie.MovieInfo;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Locale;
+
 public class Ssapi {
 
     // TODO: Move network activity to new thread -- in the meantime use this work-around
-    static{
+    static {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
     }
 
-    private  String baseaddress = "https://cduc.su/";
-    private  HashMap<Integer, String> statusCodes  = new HashMap<Integer, String>();
+    private String baseaddress = "https://cduc.su/";
+    private HashMap<Integer, String> statusCodes = new HashMap<Integer, String>();
     public String statusMessage = "";
-    public Ssapi(){
+
+    public Ssapi() {
         JSONArray jsonArray = null;
         System.out.println(Locale.getDefault().getDisplayLanguage());
-        switch (Locale.getDefault().getDisplayLanguage()){
+        switch (Locale.getDefault().getDisplayLanguage()) {
             case "Deutsch":
 
                 try {
                     jsonArray = new JSONArray(sendWebRequest(baseaddress + "statuscode.php?language=de"));
 
-                }catch(Exception ex){}
+                } catch (Exception ex) {
+                }
                 break;
             case "English":
                 try {
@@ -49,7 +54,7 @@ public class Ssapi {
                 try {
                     jsonArray = new JSONArray(sendWebRequest(baseaddress + "statuscode.php?language=de"));
 
-                }catch(Exception ex){
+                } catch (Exception ex) {
                     ex.printStackTrace();
                 }
                 break;
@@ -67,26 +72,28 @@ public class Ssapi {
                 }
             }
 
-        }catch(Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
 
-    public boolean testConnection(User user){
+    public boolean testConnection(User user) {
         String methodaddress = String.format("SSAPI.php?method=isAuthorized&user=%s&password=%s", user.getUserName(), user.getPasswordHash());
         String response = "";
         boolean testSuccess = false;
         response = sendWebRequest(baseaddress + methodaddress);
-        if(response.isEmpty()){return false;}
-        int statuscode = Integer.parseInt(response.substring(1,4));
-        switch (statuscode){
-            case 200 :
+        if (response.isEmpty()) {
+            return false;
+        }
+        int statuscode = Integer.parseInt(response.substring(1, 4));
+        switch (statuscode) {
+            case 200:
                 testSuccess = true;
                 break;
-            case 400 :
-            case 410 :
-            case 401 :
-            case 402 :
+            case 400:
+            case 410:
+            case 401:
+            case 402:
             default:
                 testSuccess = false;
                 break;
@@ -95,7 +102,7 @@ public class Ssapi {
         return testSuccess;
     }
 
-    public boolean addMovie(User user, Movie movie){
+    public boolean addMovie(User user, MovieInfo movie) {
         user.addMovie(movie);
 
         // webrequest an db
@@ -103,37 +110,39 @@ public class Ssapi {
         return false;
     }
 
-    public boolean registerUser(User user){
+    public boolean registerUser(User user) {
         JSONArray jsa = null;
-        int code=0;
+        int code = 0;
         try {
             jsa = new JSONArray(sendWebRequest("https://cduc.su/SSAPI.php?method=register&user=" + user.getUserName() + "&password=" + user.getPasswordHash() + "&params=[%22" + user.getEMail() + "%22]"));
-            if(jsa==null){return false;}
-            code =  Integer.parseInt(jsa.get(0).toString());
+            if (jsa == null) {
+                return false;
+            }
+            code = Integer.parseInt(jsa.get(0).toString());
             statusMessage = statusCodes.get(code);
 
 
-
-        }catch(Exception ex){}
-        return (code==201);
+        } catch (Exception ex) {
+        }
+        return (code == 201);
     }
 
-    public ArrayList<Movie> fetchMovielist(User user){
+    public ArrayList<MovieInfo> fetchMovielist(User user) {
         // TODO
         return null;
     }
 
-    public boolean resetPassword(String email){
+    public boolean resetPassword(String email) {
 
         return false;
     }
 
-    private String sendWebRequest(String url){
+    private String sendWebRequest(String url) {
         // TODO: REMOVE B4 PRODUCTION, DUDE
         SSLTool.disableCertificateValidation();
         URL api;
         BufferedReader in;
-        String response="";
+        String response = "";
         try {
             api = new URL(url);
 
@@ -147,8 +156,8 @@ public class Ssapi {
             while ((inputLine = in.readLine()) != null)
                 response += inputLine;
 
-                in.close();
-        }catch(Exception ex){
+            in.close();
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
         return response;

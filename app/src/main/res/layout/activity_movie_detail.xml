@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbarMovieDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/toolbarMovieDetail">
+
+            <ImageView
+                android:id="@+id/moviePoster"
+                android:layout_width="100dp"
+                android:layout_height="75dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:src="@mipmap/ic_movie_black_24px"
+                android:layout_marginTop="15dp" />
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="15dp"
+                android:layout_toEndOf="@+id/moviePoster"
+                android:layout_toRightOf="@+id/moviePoster"
+                android:text="Titel hier du sack"
+                android:textColor="#000" />
+
+            <TextView
+                android:id="@+id/genre"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/title"
+                android:layout_alignLeft="@+id/title"
+                android:layout_alignRight="@+id/title"
+                android:layout_alignStart="@+id/title"
+                android:layout_below="@+id/title"
+                android:text="Genre, Jahr etc."
+                android:textColor="#acacac" />
+
+            <TextView
+                android:id="@+id/rating"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_alignEnd="@+id/moviePoster"
+                android:layout_alignParentStart="true"
+                android:layout_alignRight="@+id/moviePoster"
+                android:layout_below="@+id/moviePoster"
+                android:text="10/0"
+                android:textAlignment="center"
+                android:textColor="#000" />
+
+            <ImageView
+                android:id="@+id/btn_like"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/rating"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@+id/title"
+                android:layout_toEndOf="@+id/title"
+                android:layout_toRightOf="@+id/title"
+                app:srcCompat="@android:drawable/btn_star_big_off" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#acacac"
+            android:layout_below="@+id/movieImage"
+            ></View>
+
+
+        <include
+            layout="@layout/content_movie_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+    </LinearLayout>
+</android.support.design.widget.CoordinatorLayout>

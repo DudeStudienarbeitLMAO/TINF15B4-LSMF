@@ -34,5 +34,7 @@
     <string name="setttings">Einstellungen</string>
 
 
+    <string name="title_activity_add_movie">Film hinzufügen</string>
+
     <string name="help">Hilfe</string>
 </resources>

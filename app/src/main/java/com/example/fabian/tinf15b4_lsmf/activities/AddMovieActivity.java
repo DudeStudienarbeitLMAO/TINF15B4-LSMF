@@ -1,25 +1,26 @@
 package com.example.fabian.tinf15b4_lsmf.activities;
 
-import android.os.AsyncTask;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
 
-import com.example.fabian.tinf15b4_lsmf.QueryLoadTask;
+import com.example.fabian.tinf15b4_lsmf.HelperFunctions;
 import com.example.fabian.tinf15b4_lsmf.R;
 import com.example.fabian.tinf15b4_lsmf.adapters.MovieListAdapter;
-import com.example.fabian.tinf15b4_lsmf.modells.Movie;
-import com.omertron.themoviedbapi.model.movie.MovieBasic;
+import com.example.fabian.tinf15b4_lsmf.loadtasks.QueryLoadTask;
+import com.omertron.themoviedbapi.MovieDbException;
 import com.omertron.themoviedbapi.model.movie.MovieInfo;
-import com.omertron.themoviedbapi.results.ResultList;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 
 /**
@@ -27,8 +28,10 @@ import java.util.ArrayList;
  */
 
 
-public class AddMovie extends AppCompatActivity {
+public class AddMovieActivity extends AppCompatActivity {
     QueryLoadTask queryTask;
+    HashMap<Integer, String> genres;
+
 
     static {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -40,6 +43,11 @@ public class AddMovie extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_movie);
 
+        try {
+            genres = HelperFunctions.getInstance().getGenreMap("de");
+        } catch (MovieDbException e) {
+            e.printStackTrace();
+        }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarAddMovie);
         setSupportActionBar(toolbar);
@@ -52,7 +60,22 @@ public class AddMovie extends AppCompatActivity {
 
         final ListView queryList = (ListView) findViewById(R.id.queryListView);
 
+
         final MovieListAdapter adapter = new MovieListAdapter(getApplicationContext(), R.layout.listviewrow);
+
+        queryList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                MovieInfo movieInfo = (MovieInfo) adapter.getItem(i);
+                //implement movie details here
+                Intent inte = new Intent(AddMovieActivity.this, MovieDetailsActivity.class);
+                inte.putExtra("movieInfo", movieInfo);
+                startActivity(inte);
+            }
+
+        });
+
+
         queryList.setAdapter(adapter);
         queryList.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
