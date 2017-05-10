@@ -27,6 +27,7 @@ public class Ssapi {
         StrictMode.setThreadPolicy(policy);
     }
 
+    //test
     private String baseaddress = "https://cduc.su/";
     private HashMap<Integer, String> statusCodes = new HashMap<Integer, String>();
     public String statusMessage = "";
