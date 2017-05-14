@@ -30,7 +30,6 @@ import java.util.HashMap;
 
 public class AddMovieActivity extends AppCompatActivity {
     QueryLoadTask queryTask;
-    HashMap<Integer, String> genres;
 
 
     static {
@@ -42,12 +41,6 @@ public class AddMovieActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_movie);
-
-        try {
-            genres = HelperFunctions.getInstance().getGenreMap("de");
-        } catch (MovieDbException e) {
-            e.printStackTrace();
-        }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarAddMovie);
         setSupportActionBar(toolbar);
@@ -109,7 +102,7 @@ public class AddMovieActivity extends AppCompatActivity {
         });
 
 
-        final SearchView searchBar = (SearchView) findViewById(R.id.searchBar);
+        SearchView searchBar = (SearchView) findViewById(R.id.searchBar);
         searchBar.setIconifiedByDefault(false);
         searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 

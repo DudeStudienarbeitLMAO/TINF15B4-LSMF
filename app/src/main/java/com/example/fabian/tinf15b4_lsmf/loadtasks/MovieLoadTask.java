@@ -3,6 +3,7 @@ package com.example.fabian.tinf15b4_lsmf.loadtasks;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.example.fabian.tinf15b4_lsmf.adapters.MovieListAdapter;
 import com.example.fabian.tinf15b4_lsmf.modells.LikedMovieCache;
 import com.omertron.themoviedbapi.MovieDbException;
 import com.omertron.themoviedbapi.methods.TmdbMovies;
@@ -21,11 +22,22 @@ import java.util.List;
 
 public class MovieLoadTask extends AsyncTask<Integer, Void, List<MovieInfo>> {
     private List<Integer> movieIDs;
+    MovieListAdapter adapter = null;
     private List<MovieInfo> result;
+    int nextMovie = 0;
 
-    public MovieLoadTask(List<Integer> movieIDs) {
+
+    private static final int SCROLL_LIKES_ADDING_SIZE = 20;
+
+    public MovieLoadTask(MovieListAdapter adapter, List<Integer> movieIDs, int nextMovie) {
+        this.nextMovie = nextMovie;
         this.movieIDs = movieIDs;
+        this.adapter = adapter;
 
+    }
+
+    public int getNextMovie() {
+        return nextMovie;
     }
 
     @Override
@@ -39,14 +51,28 @@ public class MovieLoadTask extends AsyncTask<Integer, Void, List<MovieInfo>> {
             result = new ArrayList<>();
             MovieInfo movie = null;
 
-            for (int movieID : movieIDs) {
-                movie = apiMovies.getMovieInfo(movieID, "de", null);
-                result.add(movie);
-                if(movie == null) {
-                    Log.i("NULL", "NULL");
-                }
-                cache.saveMovieToCache(movie.getId(), movie);
+            int moviesSizeToAdd = SCROLL_LIKES_ADDING_SIZE;
+            int querySizeLeft = movieIDs.size() - nextMovie;
+
+
+            if (querySizeLeft < moviesSizeToAdd) {
+                moviesSizeToAdd = querySizeLeft;
             }
+
+            for (int i = 0; i < moviesSizeToAdd; i++) {
+                int movieID = movieIDs.get(i + nextMovie);
+                movie = cache.getCache().get(movieID);
+                if (movie == null) {
+
+                    movie = apiMovies.getMovieInfo(movieID, "de", null);
+                    cache.saveMovieToCache(movie.getId(), movie);
+                }
+                result.add(movie);
+
+
+            }
+
+            nextMovie += moviesSizeToAdd;
 
         } catch (MovieDbException e) {
             e.printStackTrace();
@@ -54,4 +80,18 @@ public class MovieLoadTask extends AsyncTask<Integer, Void, List<MovieInfo>> {
 
         return result;
     }
+
+    @Override
+    protected void onPostExecute(List<MovieInfo> result) {
+        super.onPostExecute(result);
+        if (result != null && result.size() > 0) {
+            for (MovieInfo movie : result) {
+                adapter.add(movie);
+            }
+        }
+
+        adapter.setQuerying(false);
+
+    }
+
 }

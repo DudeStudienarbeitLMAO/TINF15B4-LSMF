@@ -1,6 +1,5 @@
 package com.example.fabian.tinf15b4_lsmf.loadtasks;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -19,15 +18,13 @@ import java.net.URL;
 public class ImageLoadTask extends AsyncTask<Void, Void, Bitmap> {
     private String url;
     private ImageView imageView;
-    private Context AppContext;
     private int movieID;
     public static final String BASE_URL = "https://image.tmdb.org/t/p/";
 
-    public ImageLoadTask(String url, ImageView imageView, int movieID, Context con) {
+    public ImageLoadTask(String url, ImageView imageView, int movieID) {
         this.url = url;
         this.movieID = movieID;
         this.imageView = imageView;
-        this.AppContext = con;
     }
 
     @Override

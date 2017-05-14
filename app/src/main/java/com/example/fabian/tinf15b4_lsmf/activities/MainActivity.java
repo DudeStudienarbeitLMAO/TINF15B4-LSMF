@@ -62,11 +62,14 @@ public class MainActivity extends AppCompatActivity {
         SsapiResult result = ssapi.getLikedMovies(user);
         List<Integer> likedMovieIDs = new ArrayList<>();
 
-        for (int i = 0; i < result.getContent().length(); i++) {
-            try {
-                likedMovieIDs.add(result.getContent().getInt(i));
-            } catch (JSONException e) {
-                e.printStackTrace();
+        if(result != null) {
+
+            for (int i = 0; i < result.getContent().length(); i++) {
+                try {
+                    likedMovieIDs.add(result.getContent().getInt(i));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         }
 

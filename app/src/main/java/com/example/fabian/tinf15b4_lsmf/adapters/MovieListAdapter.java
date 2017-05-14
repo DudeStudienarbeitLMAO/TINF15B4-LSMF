@@ -3,8 +3,10 @@ package com.example.fabian.tinf15b4_lsmf.adapters;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.Movie;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +21,7 @@ import com.example.fabian.tinf15b4_lsmf.loadtasks.ImageLoadTask;
 import com.example.fabian.tinf15b4_lsmf.modells.ImageCache;
 import com.example.fabian.tinf15b4_lsmf.modells.MovieComparator;
 import com.omertron.themoviedbapi.MovieDbException;
+import com.omertron.themoviedbapi.model.Genre;
 import com.omertron.themoviedbapi.model.movie.MovieInfo;
 
 import java.util.ArrayList;
@@ -133,9 +136,15 @@ public class MovieListAdapter extends ArrayAdapter {
 
         handler.movieTitle.setText(dataProvider.getTitle());
 
-        List<Integer> lg = dataProvider.getGenreIds();
-        if (lg != null && lg.size() > 0)
-            handler.movieGenre.setText(genreMap.get(lg.get(0)));
+        List<Integer> genreIDs = dataProvider.getGenreIds();
+        List<Genre> genres = dataProvider.getGenres();
+
+        if (genreIDs != null && genreIDs.size() > 0) {
+            handler.movieGenre.setText(genreMap.get(genreIDs.get(0)));
+        }
+        else if(genres != null && genres.size() > 0) {
+            handler.movieGenre.setText(genres.get(0).getName());
+        }
 
         String shortendRating = "";
         if (dataProvider.getPopularity() > 10) {
@@ -156,7 +165,7 @@ public class MovieListAdapter extends ArrayAdapter {
             if (bmp != null) {
                 handler.movieImage.setImageBitmap(bmp);
             } else {
-                new ImageLoadTask(ImageLoadTask.BASE_URL + "w500" + dataProvider.getPosterPath(), handler.movieImage, dataProvider.getId(), context).execute();
+                new ImageLoadTask(ImageLoadTask.BASE_URL + "w500" + dataProvider.getPosterPath(), handler.movieImage, dataProvider.getId()).execute();
             }
         }
         return row;
