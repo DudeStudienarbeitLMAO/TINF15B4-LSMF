@@ -13,14 +13,10 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
 
-import com.example.fabian.tinf15b4_lsmf.HelperFunctions;
 import com.example.fabian.tinf15b4_lsmf.R;
 import com.example.fabian.tinf15b4_lsmf.adapters.MovieListAdapter;
 import com.example.fabian.tinf15b4_lsmf.loadtasks.QueryLoadTask;
-import com.omertron.themoviedbapi.MovieDbException;
 import com.omertron.themoviedbapi.model.movie.MovieInfo;
-
-import java.util.HashMap;
 
 
 /**

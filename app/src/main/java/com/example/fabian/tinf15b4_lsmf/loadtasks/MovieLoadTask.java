@@ -1,7 +1,6 @@
 package com.example.fabian.tinf15b4_lsmf.loadtasks;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import com.example.fabian.tinf15b4_lsmf.adapters.MovieListAdapter;
 import com.example.fabian.tinf15b4_lsmf.modells.LikedMovieCache;
