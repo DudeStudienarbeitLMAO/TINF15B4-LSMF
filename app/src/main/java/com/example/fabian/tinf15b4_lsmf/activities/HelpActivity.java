@@ -10,13 +10,14 @@ import com.example.fabian.tinf15b4_lsmf.R;
 
 public class HelpActivity extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarHelp);
         setSupportActionBar(toolbar);
-
+        //t
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
