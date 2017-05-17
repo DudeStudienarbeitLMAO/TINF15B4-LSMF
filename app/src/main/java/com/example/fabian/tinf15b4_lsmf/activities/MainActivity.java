@@ -25,8 +25,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    ViewPager pager;
-    TabLayout tabLayout;
+    private ViewPager pager;
+    private  TabLayout tabLayout;
     public static Session session;
 
     @Override

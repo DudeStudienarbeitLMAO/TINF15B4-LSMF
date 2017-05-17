@@ -35,9 +35,11 @@ public class MovieComparator implements Comparator<MovieInfo> {
 
             case NAME_DESC:
                 return t1.getTitle().compareTo(movieInfo.getTitle());
+            default:
+                return (int) (t1.getPopularity() - movieInfo.getPopularity()) * 10;
 
         }
-        return -1;
+
     }
 
 

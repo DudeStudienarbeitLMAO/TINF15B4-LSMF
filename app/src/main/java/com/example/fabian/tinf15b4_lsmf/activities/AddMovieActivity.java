@@ -25,7 +25,7 @@ import com.omertron.themoviedbapi.model.movie.MovieInfo;
 
 
 public class AddMovieActivity extends AppCompatActivity {
-    QueryLoadTask queryTask;
+    private QueryLoadTask queryTask;
 
 
     static {

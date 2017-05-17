@@ -32,12 +32,12 @@ import java.util.List;
 
 public class MovieListAdapter extends ArrayAdapter {
 
-    Context context;
-    public ArrayList<MovieInfo> movies = new ArrayList<MovieInfo>();
-    boolean querying = false;
-    MovieComparator movieC;
+    private Context context;
+    private ArrayList<MovieInfo> movies = new ArrayList<MovieInfo>();
+    private boolean querying = false;
+    private MovieComparator movieC;
 
-    HashMap<Integer, String> genreMap;
+    private HashMap<Integer, String> genreMap;
 
     public MovieListAdapter(Context context, int resource) {
         super(context, resource);
@@ -66,8 +66,8 @@ public class MovieListAdapter extends ArrayAdapter {
 
 
     static class DataHandler {
-        ImageView movieImage;
-        TextView movieTitle, movieGenre, movieRating;
+        private ImageView movieImage;
+        private TextView movieTitle, movieGenre, movieRating;
     }
 
     @Override
