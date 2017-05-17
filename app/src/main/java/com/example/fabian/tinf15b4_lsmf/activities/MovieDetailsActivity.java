@@ -23,9 +23,9 @@ import java.util.List;
 public class MovieDetailsActivity extends AppCompatActivity {
 
 
-    MovieInfo movieInfo;
-    boolean likedMovie;
-    boolean likeChanged = false;
+    private MovieInfo movieInfo;
+    private boolean likedMovie;
+    private  boolean likeChanged = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

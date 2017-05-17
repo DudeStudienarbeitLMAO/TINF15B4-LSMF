@@ -81,8 +81,9 @@ public class AddMovieActivity extends AppCompatActivity {
 
                     //If we reach bottom of the list
                     if (queryList.getLastVisiblePosition() == queryList.getAdapter().getCount() - 1 &&
-                            queryList.getChildAt(queryList.getChildCount() - 1).getBottom() <= queryList.getHeight()) {
-                        if (!adapter.isQuerying()) {
+                            queryList.getChildAt(queryList.getChildCount() - 1).getBottom() <= queryList.getHeight()&&
+                            !adapter.isQuerying()) {
+
                             adapter.setQuerying(true);
                             String query = queryTask.getQuery();
                             int nextPage = queryTask.getNextPage();
@@ -90,7 +91,7 @@ public class AddMovieActivity extends AppCompatActivity {
                             //Extend list with next Page results
                             queryTask = new QueryLoadTask(adapter, query, nextPage);
                             queryTask.execute();
-                        }
+
 
                     }
                 }

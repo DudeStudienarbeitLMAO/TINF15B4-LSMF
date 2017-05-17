@@ -60,7 +60,7 @@ public class HelperFunctions {
     }
 
     public HashMap<Integer, String> getGenreMap(String language) throws MovieDbException {
-        if (genreMap != null && mapKey == language) {
+        if (genreMap != null && language.equals(this.mapKey)) {
             return genreMap;
         } else {
 

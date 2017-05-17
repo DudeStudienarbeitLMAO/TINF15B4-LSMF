@@ -22,14 +22,11 @@ import java.util.List;
 
 
 public class Fragment_Viewed extends Fragment {
-    ListView likedMoviesList;
-    MovieLoadTask loadTask;
-    List<Integer> likedMovieIDs = new ArrayList<>();
-    MovieListAdapter adapter;
+    private ListView likedMoviesList;
+    private MovieLoadTask loadTask;
+    private List<Integer> likedMovieIDs = new ArrayList<>();
+    private MovieListAdapter adapter;
 
-    public Fragment_Viewed() {
-        // Required empty public constructor
-    }
 
     @Override
     public void onResume() {

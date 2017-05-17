@@ -20,10 +20,10 @@ import org.apache.http.impl.client.DefaultHttpClient;
 public class QueryLoadTask extends AsyncTask<String, Void, ResultList<MovieInfo>> {
 
     public static final String apiKey = "a58333d7dddf6bcc826dfaed7c49f20e";
-    MovieListAdapter adapter = null;
-    ResultList<MovieInfo> result = null;
-    String query = "";
-    int nextPage = 1;
+    private  MovieListAdapter adapter = null;
+    private  ResultList<MovieInfo> result = null;
+    private    String query = "";
+    private int nextPage = 1;
 
     public QueryLoadTask(MovieListAdapter adapter, String query, int nextPage) {
         this.adapter = adapter;

@@ -46,13 +46,13 @@ public class MovieListAdapter extends ArrayAdapter {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         String sortingOrder = prefs.getString("sortingOrder", "");
 
-        if (sortingOrder.equals("1")) {
+        if ("1".equals(sortingOrder)) {
             movieC = new MovieComparator(SortOrder.RATING_DESC);
-        } else if (sortingOrder.equals("2")) {
+        } else if ("2".equals(sortingOrder)) {
             movieC = new MovieComparator(SortOrder.RATING_ASC);
-        } else if (sortingOrder.equals("3")) {
+        } else if ("3".equals(sortingOrder)) {
             movieC = new MovieComparator(SortOrder.NAME_DESC);
-        } else if (sortingOrder.equals("4")) {
+        } else if ("4".equals(sortingOrder)) {
             movieC = new MovieComparator(SortOrder.NAME_ASC);
         }
 

@@ -53,7 +53,8 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
             case 1:
                 title = context.getResources().getString(R.string.viewed);
                 break;
-
+            default:
+                break;
         }
 
         return title;

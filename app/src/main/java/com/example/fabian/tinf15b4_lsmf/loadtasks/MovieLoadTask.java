@@ -21,9 +21,9 @@ import java.util.List;
 
 public class MovieLoadTask extends AsyncTask<Integer, Void, List<MovieInfo>> {
     private List<Integer> movieIDs;
-    MovieListAdapter adapter = null;
+    private MovieListAdapter adapter = null;
     private List<MovieInfo> result;
-    int nextMovie = 0;
+    private int nextMovie = 0;
 
 
     private static final int SCROLL_LIKES_ADDING_SIZE = 20;
