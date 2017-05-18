@@ -122,14 +122,11 @@ public class MovieDetailsActivity extends AppCompatActivity {
             case android.R.id.home:
                 // app icon in action bar clicked; goto parent activity.
                 if (likeChanged) {
-                    Ssapi ssapi = MainActivity.session.getSsapi();
-                    User user = MainActivity.session.getUser();
+
                     if (likedMovie) {
-                        ssapi.insertLikedMovie(user, movieInfo);
-                        user.addLikedMovie(movieInfo.getId());
+                       MainActivity.session.insertLikedMovie(movieInfo);
                     } else {
-                        ssapi.removeLikedMovie(user, movieInfo);
-                        user.removeLikedMovie(movieInfo.getId());
+                        MainActivity.session.removeLikedMovie(movieInfo);
                     }
                 }
                 this.finish();
