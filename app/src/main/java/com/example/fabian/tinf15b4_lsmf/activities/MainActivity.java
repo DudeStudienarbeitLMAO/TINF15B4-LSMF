@@ -13,14 +13,21 @@ import android.view.MenuItem;
 
 import com.example.fabian.tinf15b4_lsmf.R;
 import com.example.fabian.tinf15b4_lsmf.adapters.PagerAdapter;
+import com.example.fabian.tinf15b4_lsmf.apis.Ssapi;
+import com.example.fabian.tinf15b4_lsmf.modells.Session;
+import com.example.fabian.tinf15b4_lsmf.modells.SsapiResult;
 import com.example.fabian.tinf15b4_lsmf.modells.User;
+
+import org.json.JSONException;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    ViewPager pager;
-    TabLayout tabLayout;
-
-    User loggedInUser;
+    private ViewPager pager;
+    private  TabLayout tabLayout;
+    public static Session session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +51,31 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayUseLogoEnabled(true);
 
 
-        loggedInUser = (User) getIntent().getSerializableExtra("currentUser");
+
+
+        User user = new User("Tester", "b0412597dcea813655574dc54a5b74967cf85317f0332a2591be7953a016f8de56200eb37d5ba593b1e4aa27cea5ca27100f94dccd5b04bae5cadd4454dba67d", null);
+        Ssapi ssapi = new Ssapi();
+
+        session = new Session(ssapi, user);
+
+
+        SsapiResult result = ssapi.getLikedMovies(user);
+        List<Integer> likedMovieIDs = new ArrayList<>();
+
+        if(result != null) {
+
+            for (int i = 0; i < result.getContent().length(); i++) {
+                try {
+                    likedMovieIDs.add(result.getContent().getInt(i));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        user.setLikedMovies(likedMovieIDs);
+
+        //loggedInUser = (User) getIntent().getSerializableExtra("currentUser");
 
     }
 

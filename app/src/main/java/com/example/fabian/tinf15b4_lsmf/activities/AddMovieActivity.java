@@ -13,14 +13,10 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
 
-import com.example.fabian.tinf15b4_lsmf.HelperFunctions;
 import com.example.fabian.tinf15b4_lsmf.R;
 import com.example.fabian.tinf15b4_lsmf.adapters.MovieListAdapter;
 import com.example.fabian.tinf15b4_lsmf.loadtasks.QueryLoadTask;
-import com.omertron.themoviedbapi.MovieDbException;
 import com.omertron.themoviedbapi.model.movie.MovieInfo;
-
-import java.util.HashMap;
 
 
 /**
@@ -29,8 +25,7 @@ import java.util.HashMap;
 
 
 public class AddMovieActivity extends AppCompatActivity {
-    QueryLoadTask queryTask;
-    HashMap<Integer, String> genres;
+    private QueryLoadTask queryTask;
 
 
     static {
@@ -42,12 +37,6 @@ public class AddMovieActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_movie);
-
-        try {
-            genres = HelperFunctions.getInstance().getGenreMap("de");
-        } catch (MovieDbException e) {
-            e.printStackTrace();
-        }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarAddMovie);
         setSupportActionBar(toolbar);
@@ -92,8 +81,9 @@ public class AddMovieActivity extends AppCompatActivity {
 
                     //If we reach bottom of the list
                     if (queryList.getLastVisiblePosition() == queryList.getAdapter().getCount() - 1 &&
-                            queryList.getChildAt(queryList.getChildCount() - 1).getBottom() <= queryList.getHeight()) {
-                        if (!adapter.isQuerying()) {
+                            queryList.getChildAt(queryList.getChildCount() - 1).getBottom() <= queryList.getHeight()&&
+                            !adapter.isQuerying()) {
+
                             adapter.setQuerying(true);
                             String query = queryTask.getQuery();
                             int nextPage = queryTask.getNextPage();
@@ -101,7 +91,7 @@ public class AddMovieActivity extends AppCompatActivity {
                             //Extend list with next Page results
                             queryTask = new QueryLoadTask(adapter, query, nextPage);
                             queryTask.execute();
-                        }
+
 
                     }
                 }
@@ -109,7 +99,7 @@ public class AddMovieActivity extends AppCompatActivity {
         });
 
 
-        final SearchView searchBar = (SearchView) findViewById(R.id.searchBar);
+        SearchView searchBar = (SearchView) findViewById(R.id.searchBar);
         searchBar.setIconifiedByDefault(false);
         searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 

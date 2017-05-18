@@ -15,7 +15,7 @@ import com.example.fabian.tinf15b4_lsmf.fragments.Fragment_Viewed;
 
 
 public class PagerAdapter extends FragmentStatePagerAdapter {
-    Context context;
+    private Context context;
 
     public PagerAdapter(FragmentManager fm, Context context) {
         super(fm);
@@ -33,7 +33,8 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
             case 1:
                 frag = new Fragment_Viewed();
                 break;
-
+            default:
+                break;
         }
         return frag;
     }
@@ -53,7 +54,8 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
             case 1:
                 title = context.getResources().getString(R.string.viewed);
                 break;
-
+            default:
+                break;
         }
 
         return title;

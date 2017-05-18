@@ -19,15 +19,11 @@ import java.util.ArrayList;
 public class Fragment_Recommended extends Fragment {
 
 
-    ListView recommendedList;
-    ArrayList<MovieInfo> recommendedMovies = new ArrayList<MovieInfo>();
-    MovieListAdapter adapter;
+    private ListView recommendedList;
+    private ArrayList<MovieInfo> recommendedMovies = new ArrayList<MovieInfo>();
+    private MovieListAdapter adapter;
 
 
-    public Fragment_Recommended() {
-
-
-    }
 
 
     @Override

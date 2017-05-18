@@ -17,13 +17,13 @@ import java.security.MessageDigest;
 
 public class LoginActivity extends AppCompatActivity {
 
-    EditText txt_name, txt_password;
-    AppCompatButton btn_login;
-    TextView lbl_reset, lbl_help;
+  private  EditText txt_name, txt_password;
+    private  AppCompatButton btn_login;
+    private    TextView lbl_reset, lbl_help;
 
-    int failedLoginAttempts = 0;
+    private  int failedLoginAttempts = 0;
 
-    com.example.fabian.tinf15b4_lsmf.apis.Ssapi Ssapi = new Ssapi();
+    Ssapi Ssapi = new Ssapi();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -16,9 +16,10 @@ import com.example.fabian.tinf15b4_lsmf.HelperFunctions;
 import com.example.fabian.tinf15b4_lsmf.R;
 import com.example.fabian.tinf15b4_lsmf.enums.SortOrder;
 import com.example.fabian.tinf15b4_lsmf.loadtasks.ImageLoadTask;
-import com.example.fabian.tinf15b4_lsmf.modells.LRUCache;
+import com.example.fabian.tinf15b4_lsmf.modells.ImageCache;
 import com.example.fabian.tinf15b4_lsmf.modells.MovieComparator;
 import com.omertron.themoviedbapi.MovieDbException;
+import com.omertron.themoviedbapi.model.Genre;
 import com.omertron.themoviedbapi.model.movie.MovieInfo;
 
 import java.util.ArrayList;
@@ -31,12 +32,12 @@ import java.util.List;
 
 public class MovieListAdapter extends ArrayAdapter {
 
-    Context context;
-    public ArrayList<MovieInfo> movies = new ArrayList<MovieInfo>();
-    boolean querying = false;
-    MovieComparator movieC;
+    private Context context;
+    private ArrayList<MovieInfo> movies = new ArrayList<MovieInfo>();
+    private boolean querying = false;
+    private MovieComparator movieC;
 
-    HashMap<Integer, String> genreMap;
+    private HashMap<Integer, String> genreMap;
 
     public MovieListAdapter(Context context, int resource) {
         super(context, resource);
@@ -45,13 +46,13 @@ public class MovieListAdapter extends ArrayAdapter {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         String sortingOrder = prefs.getString("sortingOrder", "");
 
-        if (sortingOrder.equals("1")) {
+        if ("1".equals(sortingOrder)) {
             movieC = new MovieComparator(SortOrder.RATING_DESC);
-        } else if (sortingOrder.equals("2")) {
+        } else if ("2".equals(sortingOrder)) {
             movieC = new MovieComparator(SortOrder.RATING_ASC);
-        } else if (sortingOrder.equals("3")) {
+        } else if ("3".equals(sortingOrder)) {
             movieC = new MovieComparator(SortOrder.NAME_DESC);
-        } else if (sortingOrder.equals("4")) {
+        } else if ("4".equals(sortingOrder)) {
             movieC = new MovieComparator(SortOrder.NAME_ASC);
         }
 
@@ -65,8 +66,8 @@ public class MovieListAdapter extends ArrayAdapter {
 
 
     static class DataHandler {
-        ImageView movieImage;
-        TextView movieTitle, movieGenre, movieRating;
+        private ImageView movieImage;
+        private TextView movieTitle, movieGenre, movieRating;
     }
 
     @Override
@@ -133,9 +134,15 @@ public class MovieListAdapter extends ArrayAdapter {
 
         handler.movieTitle.setText(dataProvider.getTitle());
 
-        List<Integer> lg = dataProvider.getGenreIds();
-        if (lg != null && lg.size() > 0)
-            handler.movieGenre.setText(genreMap.get(lg.get(0)));
+        List<Integer> genreIDs = dataProvider.getGenreIds();
+        List<Genre> genres = dataProvider.getGenres();
+
+        if (genreIDs != null && genreIDs.size() > 0) {
+            handler.movieGenre.setText(genreMap.get(genreIDs.get(0)));
+        }
+        else if(genres != null && genres.size() > 0) {
+            handler.movieGenre.setText(genres.get(0).getName());
+        }
 
         String shortendRating = "";
         if (dataProvider.getPopularity() > 10) {
@@ -152,11 +159,11 @@ public class MovieListAdapter extends ArrayAdapter {
 
         if (url != null) {
 
-            Bitmap bmp = LRUCache.getInstance().loadBitmapFromCache(url.substring(1));
+            Bitmap bmp = ImageCache.getInstance().loadBitmapFromCache(dataProvider.getId());
             if (bmp != null) {
                 handler.movieImage.setImageBitmap(bmp);
             } else {
-                new ImageLoadTask(ImageLoadTask.BASE_URL + "w500" + dataProvider.getPosterPath(), handler.movieImage, context).execute();
+                new ImageLoadTask(ImageLoadTask.BASE_URL + "w500" + dataProvider.getPosterPath(), handler.movieImage, dataProvider.getId()).execute();
             }
         }
         return row;

@@ -15,11 +15,11 @@ import com.example.fabian.tinf15b4_lsmf.modells.User;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    EditText txt_username;
-    EditText txt_email;
-    EditText txt_password;
-    EditText txt_passwordconfirm;
-    AppCompatButton btn_register;
+    private EditText txt_username;
+    private EditText txt_email;
+    private EditText txt_password;
+    private EditText txt_passwordconfirm;
+    private AppCompatButton btn_register;
 
 
     @Override
