@@ -12,11 +12,16 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.fabian.tinf15b4_lsmf.activities.AddMovieActivity;
+import com.example.fabian.tinf15b4_lsmf.activities.MainActivity;
 import com.example.fabian.tinf15b4_lsmf.activities.MovieDetailsActivity;
+import com.example.fabian.tinf15b4_lsmf.apis.Ssapi;
+import com.example.fabian.tinf15b4_lsmf.modells.Session;
+import com.example.fabian.tinf15b4_lsmf.modells.User;
 import com.omertron.themoviedbapi.MovieDbException;
 import com.omertron.themoviedbapi.model.movie.MovieInfo;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,6 +29,7 @@ import org.junit.runner.RunWith;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.pressKey;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static com.example.fabian.tinf15b4_lsmf.activities.MainActivity.session;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -37,6 +43,13 @@ public class SeeMovieDetailsTest {
     @Rule
     public ActivityTestRule<AddMovieActivity> mActivityRule
             = new ActivityTestRule<>(AddMovieActivity.class);
+
+    @BeforeClass
+    public static void setUpUser(){
+        User user = new User("Tester", "b0412597dcea813655574dc54a5b74967cf85317f0332a2591be7953a016f8de56200eb37d5ba593b1e4aa27cea5ca27100f94dccd5b04bae5cadd4454dba67d", null);
+        Ssapi ssapi = new Ssapi();
+        MainActivity.session = new Session(ssapi, user);
+    }
 
     @Before
     public void prepareQueryList() throws InterruptedException {
@@ -103,6 +116,6 @@ public class SeeMovieDetailsTest {
         assertEquals(desc.getText(),expectedDesc);
         assertEquals(title.getText(), expectedTitle);
         assertEquals(rating.getText(), expectedRating);
-        assertEquals(genre.getText(), expectedGenre);
+        assertEquals(genre.getText().toString(), expectedGenre);
     }
 }
