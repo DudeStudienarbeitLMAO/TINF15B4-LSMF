@@ -10,7 +10,6 @@ public class User implements Serializable {
     private String passwordHash;
     private String eMail;
     private List<Integer> likedMovies = new ArrayList<>();
-    private boolean likedMoviesChanged = false;
 
     public User(String userName, String passwordHash, String email) {
         this.userName = userName;
@@ -52,15 +51,10 @@ public class User implements Serializable {
 
     public void addLikedMovie(int movieID) {
         this.likedMovies.add(movieID);
-        likedMoviesChanged = true;
     }
 
     public void removeLikedMovie(int movieID) {
         this.likedMovies.remove((Object) movieID);
-        likedMoviesChanged = true;
     }
 
-    public boolean wasMovieListChanged() {
-        return likedMoviesChanged;
-    }
 }

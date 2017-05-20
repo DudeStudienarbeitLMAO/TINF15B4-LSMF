@@ -5,11 +5,16 @@
     tools:context="com.example.fabian.tinf15b4_lsmf.fragments.Fragment_Recommended">
 
 
-   <ListView
-       android:id="@+id/recommendedListView"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"></ListView>
+    <ListView
+        android:id="@+id/recommendedListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></ListView>
 
+    <ProgressBar
+        android:id="@+id/progressBarRecommended"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 
 </FrameLayout>

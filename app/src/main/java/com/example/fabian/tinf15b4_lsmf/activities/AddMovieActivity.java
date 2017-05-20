@@ -56,7 +56,6 @@ public class AddMovieActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 MovieInfo movieInfo = (MovieInfo) adapter.getItem(i);
-                //implement movie details here
                 Intent inte = new Intent(AddMovieActivity.this, MovieDetailsActivity.class);
                 inte.putExtra("movieInfo", movieInfo);
                 startActivity(inte);
