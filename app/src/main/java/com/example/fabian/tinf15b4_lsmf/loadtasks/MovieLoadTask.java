@@ -72,6 +72,7 @@ public class MovieLoadTask extends AsyncTask<Integer, Void, List<MovieInfo>> {
                     continue;
                 }
             }
+            result.add(movie);
 
 
         }
