@@ -52,7 +52,7 @@ public class HelpListAdapter extends BaseExpandableListAdapter {
         TextView expandedListTextView = (TextView) convertView
                 .findViewById(R.id.expandedListItem);
         expandedListTextView.setText(expandedListText);
-        expandedListTextView.setTextSize(20.0f);
+        expandedListTextView.setTextSize(15.0f);
         return convertView;
     }
 
@@ -88,7 +88,6 @@ public class HelpListAdapter extends BaseExpandableListAdapter {
         }
         TextView listTitleTextView = (TextView) convertView
                 .findViewById(R.id.listTitle);
-        listTitleTextView.setTypeface(null, Typeface.BOLD);
         listTitleTextView.setText(listTitle);
         listTitleTextView.setTextSize(25.0f);
         return convertView;
