@@ -118,7 +118,7 @@ public class MovieListAdapter extends ArrayAdapter {
         DataHandler handler;
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            row = inflater.inflate(R.layout.listviewrow, parent, false);
+            row = inflater.inflate(R.layout.movie_list_view_row, parent, false);
             handler = new DataHandler();
             handler.movieImage = (ImageView) row.findViewById(R.id.movieImage);
             handler.movieGenre = (TextView) row.findViewById(R.id.movieGenre);
