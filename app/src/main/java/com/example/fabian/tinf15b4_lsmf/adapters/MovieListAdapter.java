@@ -3,6 +3,7 @@ package com.example.fabian.tinf15b4_lsmf.adapters;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.preference.Preference;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -23,6 +24,7 @@ import com.omertron.themoviedbapi.model.Genre;
 import com.omertron.themoviedbapi.model.movie.MovieInfo;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -30,7 +32,7 @@ import java.util.List;
  * Created by fabian on 4/5/17.
  */
 
-public class MovieListAdapter extends ArrayAdapter {
+public class MovieListAdapter extends ArrayAdapter implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     private Context context;
     private ArrayList<MovieInfo> movies = new ArrayList<MovieInfo>();
@@ -38,14 +40,10 @@ public class MovieListAdapter extends ArrayAdapter {
     private MovieComparator movieC;
 
     private HashMap<Integer, String> genreMap;
+    SharedPreferences prefs;
 
-    public MovieListAdapter(Context context, int resource) {
-        super(context, resource);
-        this.context = context;
-
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        String sortingOrder = prefs.getString("sortingOrder", "");
-
+    public void updateSorting(){
+        String sortingOrder = prefs.getString("sortingOrder", "DEFAULT");
         if ("1".equals(sortingOrder)) {
             movieC = new MovieComparator(SortOrder.RATING_DESC);
         } else if ("2".equals(sortingOrder)) {
@@ -56,12 +54,29 @@ public class MovieListAdapter extends ArrayAdapter {
             movieC = new MovieComparator(SortOrder.NAME_ASC);
         }
 
+    }
+
+    public MovieListAdapter(Context context, int resource) {
+        super(context, resource);
+        this.context = context;
+
+        prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        prefs.registerOnSharedPreferenceChangeListener(this);
+
+        updateSorting();
+
         try {
 
             genreMap = HelperFunctions.getInstance().getGenreMap("de");
         } catch (MovieDbException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
+        updateSorting();
+        Collections.sort(movies,movieC);
     }
 
 
@@ -83,6 +98,7 @@ public class MovieListAdapter extends ArrayAdapter {
         super.add(object);
         movies.add((MovieInfo) object);
         notifyDataSetChanged();
+        Collections.sort(movies, movieC);
     }
 
     public boolean isQuerying() {
@@ -107,7 +123,7 @@ public class MovieListAdapter extends ArrayAdapter {
 
     @Override
     public void notifyDataSetChanged() {
-        //Collections.sort(movies, movieC);
+
         super.notifyDataSetChanged();
     }
 
@@ -145,10 +161,11 @@ public class MovieListAdapter extends ArrayAdapter {
         }
 
         String shortendRating = "";
-        if (dataProvider.getPopularity() > 10) {
+
+        if (dataProvider.getVoteAverage() > 10) {
             shortendRating = "10";
         } else {
-            shortendRating = Double.toString(dataProvider.getPopularity()).substring(0, 3);
+            shortendRating = Double.toString(dataProvider.getVoteAverage()).substring(0, 3);
         }
 
 
