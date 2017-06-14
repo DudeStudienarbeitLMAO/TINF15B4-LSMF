@@ -53,7 +53,8 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        User user = new User("Tester", "b0412597dcea813655574dc54a5b74967cf85317f0332a2591be7953a016f8de56200eb37d5ba593b1e4aa27cea5ca27100f94dccd5b04bae5cadd4454dba67d", null);
+
+        User user = (User) getIntent().getSerializableExtra("currentUser");
         Ssapi ssapi = new Ssapi();
 
         session = new Session(ssapi, user);
@@ -75,7 +76,6 @@ public class MainActivity extends AppCompatActivity {
 
         user.setLikedMovies(likedMovieIDs);
 
-        //loggedInUser = (User) getIntent().getSerializableExtra("currentUser");
 
     }
 

@@ -23,8 +23,11 @@ import com.omertron.themoviedbapi.model.Genre;
 import com.omertron.themoviedbapi.model.movie.MovieInfo;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+
+import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 
 /**
  * Created by fabian on 4/5/17.
@@ -43,7 +46,7 @@ public class MovieListAdapter extends ArrayAdapter {
         super(context, resource);
         this.context = context;
 
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences prefs = getDefaultSharedPreferences(context);
         String sortingOrder = prefs.getString("sortingOrder", "");
 
         if ("1".equals(sortingOrder)) {
@@ -54,6 +57,8 @@ public class MovieListAdapter extends ArrayAdapter {
             movieC = new MovieComparator(SortOrder.NAME_DESC);
         } else if ("4".equals(sortingOrder)) {
             movieC = new MovieComparator(SortOrder.NAME_ASC);
+        }else{
+            movieC = new MovieComparator(SortOrder.RATING_DESC);
         }
 
         try {
@@ -107,7 +112,7 @@ public class MovieListAdapter extends ArrayAdapter {
 
     @Override
     public void notifyDataSetChanged() {
-        //Collections.sort(movies, movieC);
+        Collections.sort(movies, movieC);
         super.notifyDataSetChanged();
     }
 

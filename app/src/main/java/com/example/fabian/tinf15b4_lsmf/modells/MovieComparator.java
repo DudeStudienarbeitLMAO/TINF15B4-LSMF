@@ -1,5 +1,7 @@
 package com.example.fabian.tinf15b4_lsmf.modells;
 
+import android.util.Log;
+
 import com.example.fabian.tinf15b4_lsmf.enums.SortOrder;
 import com.omertron.themoviedbapi.model.movie.MovieInfo;
 
@@ -7,9 +9,6 @@ import java.util.Comparator;
 
 import static com.example.fabian.tinf15b4_lsmf.enums.SortOrder.RATING_DESC;
 
-/**
- * Created by fabian on 4/21/17.
- */
 
 
 public class MovieComparator implements Comparator<MovieInfo> {
