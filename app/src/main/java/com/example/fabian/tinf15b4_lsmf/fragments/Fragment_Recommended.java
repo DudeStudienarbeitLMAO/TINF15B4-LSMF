@@ -67,7 +67,7 @@ public class Fragment_Recommended extends Fragment implements MovieLikesChangedL
 
         recommendedList = (ListView) rootView.findViewById(R.id.recommendedListView);
 
-        adapter = new MovieListAdapter(getActivity().getApplicationContext(), R.layout.listviewrow);
+        adapter = new MovieListAdapter(getActivity().getApplicationContext(), R.layout.movie_list_view_row);
 
 
         recommendedList.setOnItemClickListener(new AdapterView.OnItemClickListener() {

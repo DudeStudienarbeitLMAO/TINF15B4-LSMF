@@ -66,7 +66,7 @@ public class Fragment_Viewed extends Fragment implements MovieLikesChangedListen
 
         likedMoviesList = (ListView) rootView.findViewById(R.id.likedListView);
 
-        adapter = new MovieListAdapter(getActivity().getApplicationContext(), R.layout.listviewrow);
+        adapter = new MovieListAdapter(getActivity().getApplicationContext(), R.layout.movie_list_view_row);
 
 
         likedMoviesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {

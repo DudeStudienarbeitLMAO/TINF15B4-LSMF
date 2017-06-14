@@ -3,6 +3,7 @@ package com.example.fabian.tinf15b4_lsmf.adapters;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.preference.Preference;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -33,7 +34,7 @@ import static android.preference.PreferenceManager.getDefaultSharedPreferences;
  * Created by fabian on 4/5/17.
  */
 
-public class MovieListAdapter extends ArrayAdapter {
+public class MovieListAdapter extends ArrayAdapter implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     private Context context;
     private ArrayList<MovieInfo> movies = new ArrayList<MovieInfo>();
@@ -41,7 +42,9 @@ public class MovieListAdapter extends ArrayAdapter {
     private MovieComparator movieC;
 
     private HashMap<Integer, String> genreMap;
+    SharedPreferences prefs;
 
+<<<<<<< HEAD
     public MovieListAdapter(Context context, int resource) {
         super(context, resource);
         this.context = context;
@@ -49,6 +52,10 @@ public class MovieListAdapter extends ArrayAdapter {
         SharedPreferences prefs = getDefaultSharedPreferences(context);
         String sortingOrder = prefs.getString("sortingOrder", "");
 
+=======
+    public void updateSorting(){
+        String sortingOrder = prefs.getString("sortingOrder", "DEFAULT");
+>>>>>>> 644f2201ed4c8fb4c49388969419ad0a076a6f6a
         if ("1".equals(sortingOrder)) {
             movieC = new MovieComparator(SortOrder.RATING_DESC);
         } else if ("2".equals(sortingOrder)) {
@@ -61,12 +68,29 @@ public class MovieListAdapter extends ArrayAdapter {
             movieC = new MovieComparator(SortOrder.RATING_DESC);
         }
 
+    }
+
+    public MovieListAdapter(Context context, int resource) {
+        super(context, resource);
+        this.context = context;
+
+        prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        prefs.registerOnSharedPreferenceChangeListener(this);
+
+        updateSorting();
+
         try {
 
             genreMap = HelperFunctions.getInstance().getGenreMap("de");
         } catch (MovieDbException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
+        updateSorting();
+        Collections.sort(movies,movieC);
     }
 
 
@@ -88,6 +112,7 @@ public class MovieListAdapter extends ArrayAdapter {
         super.add(object);
         movies.add((MovieInfo) object);
         notifyDataSetChanged();
+        Collections.sort(movies, movieC);
     }
 
     public boolean isQuerying() {
@@ -112,7 +137,11 @@ public class MovieListAdapter extends ArrayAdapter {
 
     @Override
     public void notifyDataSetChanged() {
+<<<<<<< HEAD
         Collections.sort(movies, movieC);
+=======
+
+>>>>>>> 644f2201ed4c8fb4c49388969419ad0a076a6f6a
         super.notifyDataSetChanged();
     }
 
@@ -123,7 +152,7 @@ public class MovieListAdapter extends ArrayAdapter {
         DataHandler handler;
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            row = inflater.inflate(R.layout.listviewrow, parent, false);
+            row = inflater.inflate(R.layout.movie_list_view_row, parent, false);
             handler = new DataHandler();
             handler.movieImage = (ImageView) row.findViewById(R.id.movieImage);
             handler.movieGenre = (TextView) row.findViewById(R.id.movieGenre);
@@ -150,10 +179,11 @@ public class MovieListAdapter extends ArrayAdapter {
         }
 
         String shortendRating = "";
-        if (dataProvider.getPopularity() > 10) {
+
+        if (dataProvider.getVoteAverage() > 10) {
             shortendRating = "10";
         } else {
-            shortendRating = Double.toString(dataProvider.getPopularity()).substring(0, 3);
+            shortendRating = Double.toString(dataProvider.getVoteAverage()).substring(0, 3);
         }
 
 

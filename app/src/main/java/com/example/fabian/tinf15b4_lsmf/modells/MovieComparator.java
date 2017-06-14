@@ -22,17 +22,20 @@ public class MovieComparator implements Comparator<MovieInfo> {
 
     @Override
     public int compare(MovieInfo movieInfo, MovieInfo t1) {
+        float first =  t1.getVoteAverage();
+        float second =  movieInfo.getVoteAverage();
+
         switch (sortOrder) {
             case RATING_DESC:
-                return (int) (t1.getPopularity() - movieInfo.getPopularity()) * 10;
+                return (int) (first - second) * 10;
 
             case RATING_ASC:
-                return (int) (movieInfo.getPopularity() - t1.getPopularity()) * 10;
-
-            case NAME_ASC:
-                return movieInfo.getTitle().compareTo(t1.getTitle());
+                return (int) (second - first) * 10;
 
             case NAME_DESC:
+                return movieInfo.getTitle().compareTo(t1.getTitle());
+
+            case NAME_ASC:
                 return t1.getTitle().compareTo(movieInfo.getTitle());
             default:
                 return (int) (t1.getPopularity() - movieInfo.getPopularity()) * 10;
