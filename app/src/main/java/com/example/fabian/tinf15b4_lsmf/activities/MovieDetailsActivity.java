@@ -47,7 +47,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
             String ratingScore;
 
 
-            if (movieInfo.getVoteAverage() > 10) {
+            if (movieInfo.getVoteAverage() >= 10) {
                 ratingScore = "10";
             } else {
                 ratingScore = Float.toString(movieInfo.getVoteAverage()).substring(0, 3);
@@ -70,7 +70,11 @@ public class MovieDetailsActivity extends AppCompatActivity {
                 genre.setText(genres.get(0).getName());
             }
 
-            genre.append(", " + movieInfo.getReleaseDate().substring(0, 4));
+            if(movieInfo.getReleaseDate() != null) {
+                if(movieInfo.getReleaseDate().length() >= 4) {
+                    genre.append(", " + movieInfo.getReleaseDate().substring(0, 4));
+                }
+            }
 
             movieDesc.setText(movieInfo.getOverview());
 

@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.preference.Preference;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -170,10 +171,10 @@ public class MovieListAdapter extends ArrayAdapter implements SharedPreferences.
 
         String shortendRating = "";
 
-        if (dataProvider.getVoteAverage() > 10) {
+        if (dataProvider.getVoteAverage() >= 10) {
             shortendRating = "10";
         } else {
-            shortendRating = Double.toString(dataProvider.getVoteAverage()).substring(0, 3);
+            shortendRating = Float.toString(dataProvider.getVoteAverage()).substring(0, 3);
         }
 
 
