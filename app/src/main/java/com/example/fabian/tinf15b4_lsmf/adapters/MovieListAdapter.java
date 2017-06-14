@@ -44,18 +44,10 @@ public class MovieListAdapter extends ArrayAdapter implements SharedPreferences.
     private HashMap<Integer, String> genreMap;
     SharedPreferences prefs;
 
-<<<<<<< HEAD
-    public MovieListAdapter(Context context, int resource) {
-        super(context, resource);
-        this.context = context;
 
-        SharedPreferences prefs = getDefaultSharedPreferences(context);
-        String sortingOrder = prefs.getString("sortingOrder", "");
-
-=======
     public void updateSorting(){
         String sortingOrder = prefs.getString("sortingOrder", "DEFAULT");
->>>>>>> 644f2201ed4c8fb4c49388969419ad0a076a6f6a
+
         if ("1".equals(sortingOrder)) {
             movieC = new MovieComparator(SortOrder.RATING_DESC);
         } else if ("2".equals(sortingOrder)) {
@@ -137,11 +129,9 @@ public class MovieListAdapter extends ArrayAdapter implements SharedPreferences.
 
     @Override
     public void notifyDataSetChanged() {
-<<<<<<< HEAD
-        Collections.sort(movies, movieC);
-=======
 
->>>>>>> 644f2201ed4c8fb4c49388969419ad0a076a6f6a
+        Collections.sort(movies, movieC);
+
         super.notifyDataSetChanged();
     }
 
