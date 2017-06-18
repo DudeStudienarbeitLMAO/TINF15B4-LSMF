@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.preference.Preference;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,8 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
+import static android.preference.PreferenceManager.getDefaultSharedPreferences;
+
 /**
  * Created by fabian on 4/5/17.
  */
@@ -43,8 +46,10 @@ public class MovieListAdapter extends ArrayAdapter  {
     private HashMap<Integer, String> genreMap;
     SharedPreferences prefs;
 
+
     public void updateSorting(){
         String sortingOrder = prefs.getString("sortingOrder", "DEFAULT");
+
         if ("1".equals(sortingOrder)) {
             movieC = new MovieComparator(SortOrder.RATING_DESC);
         } else if ("2".equals(sortingOrder)) {
@@ -53,6 +58,8 @@ public class MovieListAdapter extends ArrayAdapter  {
             movieC = new MovieComparator(SortOrder.NAME_DESC);
         } else if ("4".equals(sortingOrder)) {
             movieC = new MovieComparator(SortOrder.NAME_ASC);
+        }else{
+            movieC = new MovieComparator(SortOrder.RATING_DESC);
         }
 
     }
@@ -118,6 +125,7 @@ public class MovieListAdapter extends ArrayAdapter  {
 
     @Override
     public void notifyDataSetChanged() {
+
         super.notifyDataSetChanged();
     }
 
@@ -162,10 +170,10 @@ public class MovieListAdapter extends ArrayAdapter  {
 
         String shortendRating = "";
 
-        if (dataProvider.getVoteAverage() > 10) {
+        if (dataProvider.getVoteAverage() >= 10) {
             shortendRating = "10";
         } else {
-            shortendRating = Double.toString(dataProvider.getVoteAverage()).substring(0, 3);
+            shortendRating = Float.toString(dataProvider.getVoteAverage()).substring(0, 3);
         }
 
 

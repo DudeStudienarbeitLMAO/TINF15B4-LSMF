@@ -1,5 +1,6 @@
 package com.example.fabian.tinf15b4_lsmf.apis;
 
+import android.app.DownloadManager;
 import android.os.StrictMode;
 
 import com.example.fabian.tinf15b4_lsmf.modells.SSLTool;
@@ -7,12 +8,20 @@ import com.example.fabian.tinf15b4_lsmf.modells.SsapiResult;
 import com.example.fabian.tinf15b4_lsmf.modells.User;
 import com.omertron.themoviedbapi.model.movie.MovieInfo;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Reader;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.HashMap;
@@ -47,7 +56,7 @@ public class Ssapi {
             case "English":
                 try {
                     jsonArray = new JSONArray(sendWebRequest(baseaddress + "statuscode.php?language=en"));
-                } catch (JSONException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
                 break;
@@ -78,7 +87,7 @@ public class Ssapi {
         }
     }
 
-    public boolean testConnection(User user) {
+    public boolean testConnection(User user) throws IOException {
         String method = String.format("SSAPI.php?method=isAuthorized&user=%s&password=%s", user.getUserName(), user.getPasswordHash());
         String response = "";
         boolean testSuccess = false;
@@ -135,7 +144,22 @@ public class Ssapi {
         return result;
     }
 
-    private String sendWebRequest(String url) {
+
+    public static String readInputStreamAsString(InputStream in)
+            throws IOException {
+
+        BufferedInputStream bis = new BufferedInputStream(in);
+        ByteArrayOutputStream buf = new ByteArrayOutputStream();
+        int result = bis.read();
+        while(result != -1) {
+            byte b = (byte)result;
+            buf.write(b);
+            result = bis.read();
+        }
+        return buf.toString();
+    }
+
+    private String sendWebRequest(String url) throws IOException {
         // TODO: REMOVE B4 PRODUCTION, DUDE
         SSLTool.disableCertificateValidation();
         URL api;
@@ -160,6 +184,8 @@ public class Ssapi {
         }
         return response;
     }
+
+
 
     public SsapiResult getLikedMovies(User user) {
         String method = "SSAPI.php?method=getMovies&user=" + user.getUserName() + "&password=" + user.getPasswordHash();

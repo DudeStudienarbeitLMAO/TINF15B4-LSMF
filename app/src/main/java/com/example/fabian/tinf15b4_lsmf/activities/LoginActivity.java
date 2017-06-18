@@ -16,6 +16,7 @@ import com.example.fabian.tinf15b4_lsmf.R;
 import com.example.fabian.tinf15b4_lsmf.apis.Ssapi;
 import com.example.fabian.tinf15b4_lsmf.modells.User;
 
+import java.io.IOException;
 import java.security.MessageDigest;
 
 public class LoginActivity extends AppCompatActivity {
@@ -44,7 +45,11 @@ public class LoginActivity extends AppCompatActivity {
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                login();
+                try {
+                    login();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -83,7 +88,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-    public void login() {
+    public void login() throws IOException {
 
         String username = txt_name.getText().toString();
         String password = txt_password.getText().toString();
