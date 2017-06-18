@@ -136,5 +136,6 @@ public class Fragment_Viewed extends Fragment implements MovieLikesChangedListen
     @Override
     public void loadingTaskFinished() {
         progressSpinner.setVisibility(View.GONE);
+        adapter.sort();
     }
 }

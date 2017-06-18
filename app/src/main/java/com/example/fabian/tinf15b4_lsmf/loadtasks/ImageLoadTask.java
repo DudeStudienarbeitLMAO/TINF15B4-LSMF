@@ -1,8 +1,11 @@
 package com.example.fabian.tinf15b4_lsmf.loadtasks;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.widget.ImageView;
 
 import com.example.fabian.tinf15b4_lsmf.modells.ImageCache;
@@ -19,28 +22,35 @@ public class ImageLoadTask extends AsyncTask<Void, Void, Bitmap> {
     private String url;
     private ImageView imageView;
     private int movieID;
+
     public static final String BASE_URL = "https://image.tmdb.org/t/p/";
 
     public ImageLoadTask(String url, ImageView imageView, int movieID) {
         this.url = url;
         this.movieID = movieID;
         this.imageView = imageView;
+
     }
 
     @Override
     protected Bitmap doInBackground(Void... params) {
         try {
-            URL urlConnection = new URL(url);
-            HttpURLConnection connection = (HttpURLConnection) urlConnection
-                    .openConnection();
-            connection.setDoInput(true);
-            connection.connect();
-            InputStream input = connection.getInputStream();
-            Bitmap myBitmap = BitmapFactory.decodeStream(input);
 
-            ImageCache.getInstance().saveBitmapToCache(movieID, myBitmap);
+                URL urlConnection = new URL(url);
+                HttpURLConnection connection = (HttpURLConnection) urlConnection
+                        .openConnection();
+                connection.setDoInput(true);
+                connection.connect();
+                InputStream input = connection.getInputStream();
+                Bitmap myBitmap = BitmapFactory.decodeStream(input);
 
-            return myBitmap;
+                ImageCache.getInstance().saveBitmapToCache(movieID, myBitmap);
+                return myBitmap;
+
+
+
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }

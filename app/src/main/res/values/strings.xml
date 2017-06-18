@@ -60,6 +60,8 @@
     </string-array>
 
 
+    <string name="pref_load_images">Download Movie Posters</string>
+
     <!-- Example settings for Data & Sync -->
     <string name="pref_header_data_sync">Data &amp; sync</string>
 

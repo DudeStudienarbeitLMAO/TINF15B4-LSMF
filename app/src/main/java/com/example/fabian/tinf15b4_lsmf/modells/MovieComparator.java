@@ -28,10 +28,10 @@ public class MovieComparator implements Comparator<MovieInfo> {
 
         switch (sortOrder) {
             case RATING_DESC:
-                return (int) (first - second) * 10;
+                return (int) (first - second)*100;
 
             case RATING_ASC:
-                return (int) (second - first) * 10;
+                return (int) (second - first)*100;
 
             case NAME_DESC:
                 return movieInfo.getTitle().compareTo(t1.getTitle());
@@ -39,7 +39,7 @@ public class MovieComparator implements Comparator<MovieInfo> {
             case NAME_ASC:
                 return t1.getTitle().compareTo(movieInfo.getTitle());
             default:
-                return (int) (t1.getPopularity() - movieInfo.getPopularity()) * 10;
+                return (int) (t1.getPopularity() - movieInfo.getPopularity())*100;
 
         }
 

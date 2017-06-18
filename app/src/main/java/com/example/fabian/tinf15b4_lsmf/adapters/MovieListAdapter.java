@@ -25,6 +25,7 @@ import com.omertron.themoviedbapi.model.movie.MovieInfo;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
@@ -32,7 +33,7 @@ import java.util.List;
  * Created by fabian on 4/5/17.
  */
 
-public class MovieListAdapter extends ArrayAdapter implements SharedPreferences.OnSharedPreferenceChangeListener {
+public class MovieListAdapter extends ArrayAdapter  {
 
     private Context context;
     private ArrayList<MovieInfo> movies = new ArrayList<MovieInfo>();
@@ -61,7 +62,6 @@ public class MovieListAdapter extends ArrayAdapter implements SharedPreferences.
         this.context = context;
 
         prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        prefs.registerOnSharedPreferenceChangeListener(this);
 
         updateSorting();
 
@@ -73,11 +73,6 @@ public class MovieListAdapter extends ArrayAdapter implements SharedPreferences.
         }
     }
 
-    @Override
-    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
-        updateSorting();
-        Collections.sort(movies,movieC);
-    }
 
 
     static class DataHandler {
@@ -98,8 +93,8 @@ public class MovieListAdapter extends ArrayAdapter implements SharedPreferences.
         super.add(object);
         movies.add((MovieInfo) object);
         notifyDataSetChanged();
-        Collections.sort(movies, movieC);
     }
+
 
     public boolean isQuerying() {
         return this.querying;
@@ -123,8 +118,13 @@ public class MovieListAdapter extends ArrayAdapter implements SharedPreferences.
 
     @Override
     public void notifyDataSetChanged() {
-
         super.notifyDataSetChanged();
+    }
+
+    public void sort(){
+        updateSorting();
+        //Collections.sort(movies, movieC);
+        movies.sort(movieC);
     }
 
     @Override
@@ -180,7 +180,11 @@ public class MovieListAdapter extends ArrayAdapter implements SharedPreferences.
             if (bmp != null) {
                 handler.movieImage.setImageBitmap(bmp);
             } else {
-                new ImageLoadTask(ImageLoadTask.BASE_URL + "w500" + dataProvider.getPosterPath(), handler.movieImage, dataProvider.getId()).execute();
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+                Boolean loadImgs = prefs.getBoolean("loadImages", false );
+                if(loadImgs) {
+                    new ImageLoadTask(ImageLoadTask.BASE_URL + "w500" + dataProvider.getPosterPath(), handler.movieImage, dataProvider.getId()).execute();
+                }
             }
         }
         return row;

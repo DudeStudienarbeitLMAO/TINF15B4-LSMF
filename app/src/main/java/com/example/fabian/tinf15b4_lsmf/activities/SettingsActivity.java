@@ -12,6 +12,8 @@ import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
+import android.preference.SwitchPreference;
+import android.provider.ContactsContract;
 import android.support.v7.app.ActionBar;
 import android.view.MenuItem;
 
@@ -98,10 +100,18 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
 
         // Trigger the listener immediately with the preference's
         // current value.
-        sBindPreferenceSummaryToValueListener.onPreferenceChange(preference,
-                PreferenceManager
-                        .getDefaultSharedPreferences(preference.getContext())
-                        .getString(preference.getKey(), ""));
+
+        if (!(preference instanceof SwitchPreference)){
+            sBindPreferenceSummaryToValueListener.onPreferenceChange(preference,
+                    PreferenceManager
+                            .getDefaultSharedPreferences(preference.getContext())
+                            .getString(preference.getKey(), ""));
+        }else{
+            sBindPreferenceSummaryToValueListener.onPreferenceChange(preference,
+                    PreferenceManager
+                            .getDefaultSharedPreferences(preference.getContext()).getBoolean(preference.getKey(),false));
+        }
+
     }
 
     @Override
@@ -192,7 +202,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             // to their values. When their values change, their summaries are
             // updated to reflect the new value, per the Android Design
             // guidelines.
-            bindPreferenceSummaryToValue(findPreference("sync_frequency"));
+           bindPreferenceSummaryToValue(findPreference("loadImages"));
         }
 
         @Override
