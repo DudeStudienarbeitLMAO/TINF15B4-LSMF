@@ -2,7 +2,9 @@ package com.example.fabian.tinf15b4_lsmf.activities;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
@@ -106,6 +108,14 @@ public class MainActivity extends AppCompatActivity {
             case R.id.addViewedMovie:
                 Intent s = new Intent(getApplicationContext(), AddMovieActivity.class);
                 startActivity(s);
+                return true;
+            case R.id.logout:
+               SharedPreferences.Editor e = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext()).edit();
+                e.putString("username", "");
+                e.putString("userhash", "");
+                e.commit();
+                Intent t = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(t);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
