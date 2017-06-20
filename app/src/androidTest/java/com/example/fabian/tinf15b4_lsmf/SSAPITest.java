@@ -12,6 +12,8 @@ import org.json.JSONException;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.io.IOException;
+
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
@@ -67,7 +69,7 @@ public class SSAPITest {
     }
 
     @Test
-    public void userIsValid(){
+    public void userIsValid() throws IOException {
         assertTrue(testSession.getSsapi().testConnection(testSession.getUser()));
     }
 

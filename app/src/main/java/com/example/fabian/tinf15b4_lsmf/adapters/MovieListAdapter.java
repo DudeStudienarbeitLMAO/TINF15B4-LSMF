@@ -44,7 +44,7 @@ public class MovieListAdapter extends ArrayAdapter  {
     private MovieComparator movieC;
 
     private HashMap<Integer, String> genreMap;
-    SharedPreferences prefs;
+    private SharedPreferences prefs;
 
 
     public void updateSorting(){

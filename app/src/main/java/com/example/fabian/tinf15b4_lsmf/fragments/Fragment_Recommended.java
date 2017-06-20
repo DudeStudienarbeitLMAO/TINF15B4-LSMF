@@ -96,13 +96,13 @@ public class Fragment_Recommended extends Fragment implements MovieLikesChangedL
                 if (recommendedList != null && view.getId() == recommendedList.getId() && recommendedList.getChildCount() > 0) {
 
                     //If we reach bottom of the list
-                    if (recommendedList.getLastVisiblePosition() == recommendedList.getAdapter().getCount() - 1 &&
+                    if (!adapter.isQuerying() && recommendedList.getLastVisiblePosition() == recommendedList.getAdapter().getCount() - 1 &&
                             recommendedList.getChildAt(recommendedList.getChildCount() - 1).getBottom() <= recommendedList.getHeight()) {
-                        if (!adapter.isQuerying()) {
+
                             adapter.setQuerying(true);
                             loadTask.extendRecommendations();
 
-                        }
+
 
                     }
 

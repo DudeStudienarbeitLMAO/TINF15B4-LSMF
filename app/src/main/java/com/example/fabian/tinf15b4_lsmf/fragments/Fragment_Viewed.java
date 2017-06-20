@@ -95,16 +95,16 @@ public class Fragment_Viewed extends Fragment implements MovieLikesChangedListen
                 if (likedMoviesList != null && view.getId() == likedMoviesList.getId() && likedMoviesList.getChildCount() > 0) {
 
                     //If we reach bottom of the list
-                    if (likedMoviesList.getLastVisiblePosition() == likedMoviesList.getAdapter().getCount() - 1 &&
+                    if (!adapter.isQuerying() &&likedMoviesList.getLastVisiblePosition() == likedMoviesList.getAdapter().getCount() - 1 &&
                             likedMoviesList.getChildAt(likedMoviesList.getChildCount() - 1).getBottom() <= likedMoviesList.getHeight()) {
-                        if (!adapter.isQuerying()) {
+
                             adapter.setQuerying(true);
                             int nextMovie = loadTask.getNextMovie();
 
                             //Extend list with next Page results
                             loadTask = new MovieLoadTask(adapter, likedMovieIDs, nextMovie);
                             loadTask.execute();
-                        }
+
 
                     }
 

@@ -93,10 +93,10 @@ public class SeeMovieDetailsTest {
 
         String ratingScore;
 
-        if (selectedMovie.getPopularity() > 10) {
+        if (selectedMovie.getVoteAverage() > 10) {
             ratingScore = "10";
         } else {
-            ratingScore = Float.toString(selectedMovie.getPopularity()).substring(0, 3);
+            ratingScore = Float.toString(selectedMovie.getVoteAverage()).substring(0, 3);
         }
 
         String expectedDesc = selectedMovie.getOverview();

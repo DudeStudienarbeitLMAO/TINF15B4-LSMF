@@ -26,8 +26,8 @@ public class LoginActivity extends AppCompatActivity {
     private    TextView lbl_reset, lbl_help;
     private CheckBox cbremember;
     private  int failedLoginAttempts = 0;
-    SharedPreferences prefs;
-    Ssapi Ssapi = new Ssapi();
+    private SharedPreferences prefs;
+    private Ssapi Ssapi = new Ssapi();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
