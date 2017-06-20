@@ -3,8 +3,10 @@ package com.example.fabian.tinf15b4_lsmf.adapters;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.preference.Preference;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,14 +25,18 @@ import com.omertron.themoviedbapi.model.Genre;
 import com.omertron.themoviedbapi.model.movie.MovieInfo;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+
+import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 
 /**
  * Created by fabian on 4/5/17.
  */
 
-public class MovieListAdapter extends ArrayAdapter {
+public class MovieListAdapter extends ArrayAdapter  {
 
     private Context context;
     private ArrayList<MovieInfo> movies = new ArrayList<MovieInfo>();
@@ -38,13 +44,11 @@ public class MovieListAdapter extends ArrayAdapter {
     private MovieComparator movieC;
 
     private HashMap<Integer, String> genreMap;
+    SharedPreferences prefs;
 
-    public MovieListAdapter(Context context, int resource) {
-        super(context, resource);
-        this.context = context;
 
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        String sortingOrder = prefs.getString("sortingOrder", "");
+    public void updateSorting(){
+        String sortingOrder = prefs.getString("sortingOrder", "DEFAULT");
 
         if ("1".equals(sortingOrder)) {
             movieC = new MovieComparator(SortOrder.RATING_DESC);
@@ -54,7 +58,19 @@ public class MovieListAdapter extends ArrayAdapter {
             movieC = new MovieComparator(SortOrder.NAME_DESC);
         } else if ("4".equals(sortingOrder)) {
             movieC = new MovieComparator(SortOrder.NAME_ASC);
+        }else{
+            movieC = new MovieComparator(SortOrder.RATING_DESC);
         }
+
+    }
+
+    public MovieListAdapter(Context context, int resource) {
+        super(context, resource);
+        this.context = context;
+
+        prefs = PreferenceManager.getDefaultSharedPreferences(context);
+
+        updateSorting();
 
         try {
 
@@ -63,6 +79,7 @@ public class MovieListAdapter extends ArrayAdapter {
             e.printStackTrace();
         }
     }
+
 
 
     static class DataHandler {
@@ -84,6 +101,7 @@ public class MovieListAdapter extends ArrayAdapter {
         movies.add((MovieInfo) object);
         notifyDataSetChanged();
     }
+
 
     public boolean isQuerying() {
         return this.querying;
@@ -107,8 +125,14 @@ public class MovieListAdapter extends ArrayAdapter {
 
     @Override
     public void notifyDataSetChanged() {
-        //Collections.sort(movies, movieC);
+
         super.notifyDataSetChanged();
+    }
+
+    public void sort(){
+        updateSorting();
+        //Collections.sort(movies, movieC);
+        movies.sort(movieC);
     }
 
     @Override
@@ -118,7 +142,7 @@ public class MovieListAdapter extends ArrayAdapter {
         DataHandler handler;
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            row = inflater.inflate(R.layout.listviewrow, parent, false);
+            row = inflater.inflate(R.layout.movie_list_view_row, parent, false);
             handler = new DataHandler();
             handler.movieImage = (ImageView) row.findViewById(R.id.movieImage);
             handler.movieGenre = (TextView) row.findViewById(R.id.movieGenre);
@@ -145,10 +169,11 @@ public class MovieListAdapter extends ArrayAdapter {
         }
 
         String shortendRating = "";
-        if (dataProvider.getPopularity() > 10) {
+
+        if (dataProvider.getVoteAverage() >= 10) {
             shortendRating = "10";
         } else {
-            shortendRating = Double.toString(dataProvider.getPopularity()).substring(0, 3);
+            shortendRating = Float.toString(dataProvider.getVoteAverage()).substring(0, 3);
         }
 
 
@@ -163,7 +188,11 @@ public class MovieListAdapter extends ArrayAdapter {
             if (bmp != null) {
                 handler.movieImage.setImageBitmap(bmp);
             } else {
-                new ImageLoadTask(ImageLoadTask.BASE_URL + "w500" + dataProvider.getPosterPath(), handler.movieImage, dataProvider.getId()).execute();
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+                Boolean loadImgs = prefs.getBoolean("loadImages", false );
+                if(loadImgs) {
+                    new ImageLoadTask(ImageLoadTask.BASE_URL + "w500" + dataProvider.getPosterPath(), handler.movieImage, dataProvider.getId()).execute();
+                }
             }
         }
         return row;

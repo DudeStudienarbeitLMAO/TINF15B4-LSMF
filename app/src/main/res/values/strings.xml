@@ -60,6 +60,8 @@
     </string-array>
 
 
+    <string name="pref_load_images">Download Movie Posters</string>
+
     <!-- Example settings for Data & Sync -->
     <string name="pref_header_data_sync">Data &amp; sync</string>
 
@@ -94,6 +96,8 @@
     </string-array>
 
     <string-array name="multi_select_list_preference_default_value" />
+
+    <string name="logout">Log out</string>
 
     <string name="pref_title_system_sync_settings">System sync settings</string>
     <string name="large_text">

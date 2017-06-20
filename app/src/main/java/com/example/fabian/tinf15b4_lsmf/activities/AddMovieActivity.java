@@ -50,13 +50,12 @@ public class AddMovieActivity extends AppCompatActivity {
         final ListView queryList = (ListView) findViewById(R.id.queryListView);
 
 
-        final MovieListAdapter adapter = new MovieListAdapter(getApplicationContext(), R.layout.listviewrow);
+        final MovieListAdapter adapter = new MovieListAdapter(getApplicationContext(), R.layout.movie_list_view_row);
 
         queryList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 MovieInfo movieInfo = (MovieInfo) adapter.getItem(i);
-                //implement movie details here
                 Intent inte = new Intent(AddMovieActivity.this, MovieDetailsActivity.class);
                 inte.putExtra("movieInfo", movieInfo);
                 startActivity(inte);

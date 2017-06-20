@@ -21,7 +21,10 @@
                 android:id="@+id/show_about"
                 app:showAsAction="never"
                 android:title="@string/about"/>
-
+        <item
+        android:id="@+id/logout"
+        app:showAsAction="never"
+        android:title="@string/logout"/>
 
 
 

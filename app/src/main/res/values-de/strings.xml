@@ -44,6 +44,7 @@
     <string name="help">Hilfe</string>
 
 
+    <string name="logout">Ausloggen</string>
 
 
     <string name="pref_sortingOrderTitle">Sortierung der Filme</string>
@@ -61,6 +62,8 @@
         <item>3</item>
         <item>4</item>
     </string-array>
+
+    <string name="pref_load_images">Posterbilder downloaden</string>
 
 
     <!-- Example settings for Data & Sync -->
